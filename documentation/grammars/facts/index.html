@@ -100,26 +100,26 @@
         public static bool IsSo = false;
 <pre><code>    public FactFixture()
     {
-        this[&amp;quot;CheckIsSo&amp;quot;] = Fact(&amp;quot;Check is so&amp;quot;)
-            .VerifiedBy(() =&amp;gt; IsSo);
+        this[&quot;CheckIsSo&quot;] = Fact(&quot;Check is so&quot;)
+            .VerifiedBy(() =&gt; IsSo);
 
-        this[&amp;quot;CheckIsNotSo&amp;quot;] = Fact(&amp;quot;Check is not so&amp;quot;)
-            .VerifiedBy(() =&amp;gt; !IsSo);
+        this[&quot;CheckIsNotSo&quot;] = Fact(&quot;Check is not so&quot;)
+            .VerifiedBy(() =&gt; !IsSo);
 
-        this[&amp;quot;SetState&amp;quot;] 
-            = Do&amp;lt;string&amp;gt;(&amp;quot;Set state to {state}&amp;quot;, (text, c) =&amp;gt; c.State.Store(&amp;quot;state&amp;quot;, text));
-
-
-        this[&amp;quot;StateIsTexas&amp;quot;] =
-            Fact(&amp;quot;Check that the state is Texas&amp;quot;)
-            .VerifiedBy(c =&amp;gt; c.State.Retrieve&amp;lt;string&amp;gt;(&amp;quot;state&amp;quot;) == &amp;quot;Texas&amp;quot;);
+        this[&quot;SetState&quot;] 
+            = Do&lt;string&gt;(&quot;Set state to {state}&quot;, (text, c) =&gt; c.State.Store(&quot;state&quot;, text));
 
 
-        this[&amp;quot;ServiceIsOn&amp;quot;] = Fact(&amp;quot;Check service is on&amp;quot;)
-            .VerifiedBy&amp;lt;CheckService&amp;gt;(s =&amp;gt; s.On);
+        this[&quot;StateIsTexas&quot;] =
+            Fact(&quot;Check that the state is Texas&quot;)
+            .VerifiedBy(c =&gt; c.State.Retrieve&lt;string&gt;(&quot;state&quot;) == &quot;Texas&quot;);
 
-        this[&amp;quot;ServiceIsOff&amp;quot;] = Fact(&amp;quot;Check service is off&amp;quot;)
-            .VerifiedBy&amp;lt;CheckService&amp;gt;(s =&amp;gt; !s.On);
+
+        this[&quot;ServiceIsOn&quot;] = Fact(&quot;Check service is on&quot;)
+            .VerifiedBy&lt;CheckService&gt;(s =&gt; s.On);
+
+        this[&quot;ServiceIsOff&quot;] = Fact(&quot;Check service is off&quot;)
+            .VerifiedBy&lt;CheckService&gt;(s =&gt; !s.On);
     }
 }
 </code></pre>
