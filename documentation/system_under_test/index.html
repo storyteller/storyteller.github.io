@@ -93,6 +93,43 @@
 			      		<!--Title:Connecting Storyteller to the System under Test-->
 <!--Url:system_under_test-->
 <p>TODO(Write some content!)</p>
+<div><pre><code class="language-csharp">
+    public interface ISystem : IDisposable
+    {
+        IExecutionContext CreateContext();
+<pre><code>    CellHandling Start();
+}
+</code></pre>
+<p></code></pre></div></p>
+<div><pre><code class="language-csharp">
+    public interface IExecutionContext : IDisposable
+    {
+        void AfterExecution(ISpecContext context);
+        T GetService<T>();
+    }
+</code></pre></div>
+<div><pre><code class="language-csharp">
+    public class CellHandling
+    {
+        public CellHandling(EquivalenceChecker equivalence, Conversions conversions)
+        {
+            Equivalence = equivalence;
+            Conversions = conversions;
+        }
+<pre><code>    public EquivalenceChecker Equivalence { get; private set; }
+    public Conversions Conversions { get; private set; }
+
+    public readonly Cache&lt;string, OptionList&gt; Lists = new Cache&lt;string, OptionList&gt;(key =&gt; new OptionList(key)); 
+
+    public static CellHandling Basic()
+    {
+        return new CellHandling(new EquivalenceChecker(), new Conversions());
+    }
+}
+</code></pre>
+<p></code></pre></div></p>
+<h2>Using the Built-In ISystem</h2>
+<h2>Custom ISystem's</h2>
 
 
 			      	</div>

@@ -96,7 +96,7 @@
 <p>Let's say that you need to be write some specifications for a new batch process (hey, they do still exist and it was the first thing I thought of when I was writing this page). At some point in the specification you need to kick off the batch job and wait for it to complete before you execute any assertions against the outcome.</p>
 <h2>Explicit Actions</h2>
 <p>You can explicitly state when the action is happening in your specification with an explicit action method grammar like this below:</p>
-<pre><code class="language-csharp">
+<div><pre><code class="language-csharp">
     public class ExplicitExecutionFixture : Fixture
     {
         public ExplicitExecutionFixture()
@@ -110,14 +110,14 @@
     }
 }
 </code></pre>
-<p></code></pre></p>
+<p></code></pre></div></p>
 <p>Which would lead to a specification like this:</p>
-<p data-path="Actions/Explicit Action" data-spec="{&quot;title&quot;:&quot;Explicit Action&quot;,&quot;path&quot;:&quot;Actions/Explicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Kick off the batch process manually&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;b9e0ab0e-5aba-4a3a-ae8d-f51b7d656e11&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;273d31e2-1177-4c1b-91f5-db124c2d81bc&quot;},{&quot;text&quot;:&quot;Do whatever assertions you need to verify the system behavior here.&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;4895cc9e-cffe-4e3d-9c47-b472397a4792&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;92d3e6a1-9851-4c93-b16e-920aa024359f&quot;}],&quot;id&quot;:&quot;84dbbfa8-14c7-4034-9b85-4bbb9504ba0f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Batch Process #1&quot;,&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Start the Batch Process&quot;,&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p data-path="Actions/Explicit Action" data-spec="{&quot;title&quot;:&quot;Explicit Action&quot;,&quot;path&quot;:&quot;Actions/Explicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Kick off the batch process manually&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;b9e0ab0e-5aba-4a3a-ae8d-f51b7d656e11&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;9b2c9b40-27fc-43c9-95bb-6ac0e4813a4c&quot;},{&quot;text&quot;:&quot;Do whatever assertions you need to verify the system behavior here.&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;4895cc9e-cffe-4e3d-9c47-b472397a4792&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;92d3e6a1-9851-4c93-b16e-920aa024359f&quot;}],&quot;id&quot;:&quot;84dbbfa8-14c7-4034-9b85-4bbb9504ba0f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Batch Process #1&quot;,&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Start the Batch Process&quot;,&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
 <h2>Implicit Actions</h2>
 <div class="alert alert-info" role="alert">Any exceptions thrown in the `SetUp()` or `TearDown()` methods would be surfaced into the generated results html. </div>
 <p>Quite frequently, our teams find that specications read much more cleanly if actions like kicking off a batch process or navigating a browser to a certain page or starting up an embedded web server are handled implicitly off stage.</p>
 <p>In the case of the batch process, you might opt to handle kicking off the batch process in the <code>SetUp()</code> method of your Fixture class like this:</p>
-<pre><code class="language-csharp">
+<div><pre><code class="language-csharp">
     public class BatchProcessFixture : Fixture
     {
         public BatchProcessFixture()
@@ -130,7 +130,7 @@
     }
 }
 </code></pre>
-<p></code></pre></p>
+<p></code></pre></div></p>
 <p>Which leads to a specification like this below:</p>
 <p data-path="Actions/Implicit Action" data-spec="{&quot;title&quot;:&quot;Implicit Action&quot;,&quot;path&quot;:&quot;Actions/Implicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;BatchProcess&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Do whatever assertions you need to do to verify that the batch process ran correctly&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;c44a9e3f-b0f9-4294-9c93-fc6a95bd0d09&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;806cb1df-c29b-40bd-863f-2adf13e03b94&quot;}],&quot;id&quot;:&quot;c3805c4e-a83c-4fe7-8d81-1ac15f6d5f06&quot;}" data-fixtures="[{&quot;title&quot;:&quot;After the batch process finishes&quot;,&quot;key&quot;:&quot;BatchProcess&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.BatchProcessFixture&quot;,&quot;grammars&quot;:[],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
 <p>Storyteller supports both styles, but the Storyteller team recommends making your specifications as declarative as possible both to make the specifications quicker to author and easier to understand later. Don't fall into the trap of trying to use Storyteller like an xUnit tool.</p>
