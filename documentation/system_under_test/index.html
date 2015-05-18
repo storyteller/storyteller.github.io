@@ -93,22 +93,22 @@
 			      		<!--Title:Connecting Storyteller to the System under Test-->
 <!--Url:system_under_test-->
 <p>TODO(Write some content!)</p>
-<div><pre><code class="language-csharp">
+<pre><code class="language-csharp">
     public interface ISystem : IDisposable
     {
         IExecutionContext CreateContext();
 <pre><code>    CellHandling Start();
 }
 </code></pre>
-<p></code></pre></div></p>
-<div><pre><code class="language-csharp">
+<p></code></pre></p>
+<pre><code class="language-csharp">
     public interface IExecutionContext : IDisposable
     {
         void AfterExecution(ISpecContext context);
         T GetService<T>();
     }
-</code></pre></div>
-<div><pre><code class="language-csharp">
+</code></pre>
+<pre><code class="language-csharp">
     public class CellHandling
     {
         public CellHandling(EquivalenceChecker equivalence, Conversions conversions)
@@ -127,7 +127,7 @@
     }
 }
 </code></pre>
-<p></code></pre></div></p>
+<p></code></pre></p>
 <h2>Using the Built-In ISystem</h2>
 <h2>Custom ISystem's</h2>
 
