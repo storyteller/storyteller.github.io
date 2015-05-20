@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Managing State during Execution</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/darthfubumvc/storyteller2"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav">
+		        <li>
+		          <a href="/getting_started">Get Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		        <li>
+
+
+		        </li>
+		      </ul>
+
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><a href="/documentation/engine/grammars" title="Grammars">Previous</a></li>
+		      	<li><a href="/documentation/best_practices" title="Automated Testing Best Practices">Next</a></li>
+		      </ul>
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li class="active">Managing State during Execution</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/best_practices">Automated Testing Best Practices</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars">Grammars</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Managing State during Execution</h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Managing State during Execution-->
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong> Only one instance of each Fixture class is created and shared across all specification executions in a Storyteller process -- so please use caution when storing specification state with any private fields or properties inside <code>Fixture</code> classes</div>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> The API for storing and retrieving state across <code>Fixture</code> objects is a breaking change in 3.0 from earlier versions. This was done to conceptually untangle state management from any running application container. </div>
+<p>While many if not most specifications will be authored with the grammars in a single <code>Fixture</code>, it is very possible and frequently desirable to use multiple <code>Fixture</code> sections within a specification body. Fortunately, Storyteller has a mechanism in <code>Fixture's</code> to store and retrieve object state within the execution of a specification.</p>
+<h2>Using Fixture.Context.State</h2>
+<p>The Fixture class exposes a state bag reachable by <code>Fixture.Context.State</code> with the signature below:</p>
+<pre><code class="language-csharp">
+    public interface IState
+    {
+        void Store<T>(T value);
+        void Store<T>(string key, T value);
+        T Retrieve<T>();
+        T Retrieve<T>(string key);
+    }
+</code></pre>
+<p>The <code>Context</code> property on <code>Fixture</code> is available during specification execution and refers to the currently executing specification. This object is shared by all <code>Fixture</code> objects being used during the execution of a specification.</p>
+<p>The <code>State</code> object bag can store and retrieve data by either type or by the combination of type and a string name.</p>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Any objects stored inside a <code>State</code> object that implement the <code>IDisposable</code> interface will be disposed by Storyteller at the end of executing the specification. </div>
+<h2>An Example of Passing State Between Fixtures</h2>
+<p>Here is a typical usage of the state bag. Let's say that you are working on an invoicing application where your invoices are made up of many details that are themselves complicated.</p>
+<pre><code class="language-csharp">
+    public class Invoice
+    {
+        public readonly IList<InvoiceDetail> Details 
+            = new List<InvoiceDetail>();
+    }
+</code></pre>
+<p>Pretend that the class below is much more complicated than it really is;-).</p>
+<pre><code class="language-csharp">
+    public class InvoiceDetail
+    {
+        public double Amount { get; set; }
+        public DateTime Date { get; set; }
+        public string Name { get; set; }
+        public string Part { get; set; }
+    }
+</code></pre>
+<p>With Storyteller's mantra of self-contained specifications in mind, you need some <code>Fixture's</code> to construct new <code>Invoice</code> and <code>InvoiceDetail</code> objects. If an <code>InvoiceDetail</code> was sufficiently complicated, I would probably choose to:</p>
+<ol>
+<li>Create a <code>Fixture</code> completely dedicated to creating a single detail</li>
+<li>Create a <code>Fixture</code> to set up the state of a single <code>Invoice</code></li>
+<li>Use the invoice detail <code>Fixture</code> as an <a href="/documentation/engine/grammars/embedded_section">embedded section</a> within a <code>Fixture</code> for the <code>Invoice</code> setup.</li>
+</ol>
+<p>The missing piece of the list above is how to attach the <code>InvoiceDetail</code> objects created inside the embedded section to the new <code>Invoice</code> object created by the parent <code>Fixture</code>, and that is where the <code>Context.State</code> becomes useful.</p>
+<p>First, here's what the <code>Fixture</code> for the parent <code>Invoice</code> setup might look like:</p>
+<pre><code class="language-csharp">
+    [Hidden]
+    public class InvoiceFixture : Fixture
+    {
+        public override void SetUp()
+        {
+            // The ISpecContext *is* available during SetUp()
+            Context.State.Store(new Invoice());
+        }
+<pre><code>    public IGrammar AddDetail()
+    {
+        return Embed&lt;InvoiceDetailFixture&gt;(&quot;with invoice detail:&quot;);
+    }
+}
+</code></pre>
+<p></code></pre></p>
+<p>Notice how it creates a new <code>Invoice</code> object in its <code>SetUp()</code> method and stores that in the contextual state? The next piece is the <code>Fixture</code> to set up a detail:</p>
+<pre><code class="language-csharp">
+    [Hidden]
+    public class InvoiceDetailFixture : Fixture
+    {
+        public void TheDetailIs(double amount, DateTime date, string name, string part)
+        {
+            // Build a new detail
+            var detail = new InvoiceDetail
+            {
+                Amount = amount, Date = date, Name = name, Part = part
+            };
+<pre><code>        // Add the new detail to the current Invoice
+        Context.State.Retrieve&lt;Invoice&gt;().Details.Add(detail);
+    }
+
+    // And many more grammars for all the optional properties of a
+    // real world invoice detail
+}
+</code></pre>
+<p></code></pre></p>
+<p>An <code>InvoiceDetail</code> object is created in the <code>TheDetailIs</code> grammar method and immediately added to the <code>Invoice</code> object retrieved from contextual state that was put there by the <code>InvoiceFixture</code> in its <code>SetUp()</code> method.</p>
+<h2>The &quot;Current Object&quot;</h2>
+<p>Some of the built in grammar types in Storyteller quietly depend on a special property slot that is reachable from any <code>Fixture</code> class as <code>Fixture.Context.State.CurrentObject</code>, or a shorthand <code>CurrentObject</code> that gets to the same data.</p>
+<pre><code class="language-csharp">
+        [FormatAs("When the system receives a new invoice")]
+        public void WithNewInvoice()
+        {
+            // Other grammars, built in grammars,
+            // and other fixtures can now share and
+            // use *this* particular Invoice object
+            CurrentObject = new Invoice();
+<pre><code>        // The code above is just shorthand for this below:
+        // Context.State.CurrentObject = new Invoice();
+    }
+</code></pre>
+<p></code></pre></p>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars">Grammars</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/best_practices">Automated Testing Best Practices</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

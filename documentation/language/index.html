@@ -51,8 +51,8 @@
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
-		      	<li><a href="/documentation/system_under_test" title="Connecting Storyteller to the System under Test">Previous</a></li>
-		      	<li><a href="/documentation/fixtures" title="Fixtures">Next</a></li>
+		      	<li><a href="/documentation/lifecycle" title="The Specification Lifecycle">Previous</a></li>
+		      	<li><a href="/documentation/system_state" title="Setting up System State">Next</a></li>
 		      </ul>
 		    </nav>
 
@@ -78,8 +78,8 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/fixtures">Fixtures</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/system_under_test">Connecting Storyteller to the System under Test</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/system_state">Setting up System State</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/lifecycle">The Specification Lifecycle</a></p>
 
 		        </ul>
 		      </div><!--/left-->
@@ -94,6 +94,19 @@
 			      		<!--Title:Crafting the Specification Language-->
 <!--Url:language-->
 <p>TODO(Write some content!)</p>
+<ul>
+<li>Design the language up front</li>
+<li>Guide the user a little bit</li>
+<li>make the language be declarative, in terms of the business need and functionality, try to hide technical concers like &quot;start the web server&quot; and &quot;delete all the files&quot;</li>
+<li>avoid imperative coding, don't treat Storyteller like an overweight xUnit tool</li>
+</ul>
+<h2>Flow versus Table Style Specifications</h2>
+<p>-- put a spec here</p>
+<h2>Comments</h2>
+<p>From the very beginning, Storyteller has allowed users to embed purely textual prose before or after grammar steps into the specification documents. If you take the approach of using Storyteller to create system specifications as living documentation rather than just using Storyteller as an integration testing tool, comments are an invaluable tool to provide better explanations and descriptions of the desired system behavior.</p>
+<p>The specification below uses several comments to identify test cases.</p>
+<p data-path="Calculator/Using Sentences" data-spec="{&quot;title&quot;:&quot;Using Sentences&quot;,&quot;path&quot;:&quot;Calculator/Using Sentences&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Calculator&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Punching in values to the calculator&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;9290656a-2ba9-495e-b0e4-a3961df7fa65&quot;},{&quot;key&quot;:&quot;StartWith&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;3&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;1d5ed31b-e857-4ea0-aedc-d3e4844aa60d&quot;},{&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;2&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;56b56aa6-260d-4ab1-a146-8859cd738864&quot;},{&quot;text&quot;:&quot;Check the current value on the calculator screen&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;70fa2976-93e8-4432-90a1-daea42c77b93&quot;},{&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;6&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;12f4925e-b343-41ab-822f-524954b53839&quot;},{&quot;text&quot;:&quot;You can use more than one input for a sentence&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;3ffefa75-5ce9-4e3c-a706-b92ba3f91e70&quot;},{&quot;key&quot;:&quot;AddingNumbersTogether&quot;,&quot;cells&quot;:{&quot;x&quot;:&quot;2&quot;,&quot;y&quot;:&quot;3&quot;,&quot;returnValue&quot;:&quot;5&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;3d6b62dd-cb44-4f5d-a394-a63b36cc292f&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;f753bec2-a16c-48aa-a64d-c3791d5cbdd2&quot;}],&quot;id&quot;:&quot;17e4de49-522f-48f5-81d6-b41749174441&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Calculator&quot;,&quot;key&quot;:&quot;Calculator&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CalculatorFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Start with {value}&quot;,&quot;key&quot;:&quot;StartWith&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Add {value}&quot;,&quot;key&quot;:&quot;Add&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Subtract {value}&quot;,&quot;key&quot;:&quot;Subtract&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Multiply by {value}&quot;,&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Divide by {value}&quot;,&quot;key&quot;:&quot;DivideBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The value should be {value}&quot;,&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Adding {x} to {y} should equal {returnValue}&quot;,&quot;key&quot;:&quot;AddingNumbersTogether&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;returnValue&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;The sum of two columns should be&quot;,&quot;key&quot;:&quot;AddingNumbersTogetherAsTable&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;For X={X} and Y={Y}, the Sum should be {Sum} and the Product should be {Product}&quot;,&quot;key&quot;:&quot;SumAndProduct&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;Sum and Product Operations&quot;,&quot;key&quot;:&quot;Operations&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p>Right now, comments are only pure text. If there is sufficient demand, Storyteller may add support for markdown in comments and possibly the ability to embed snippets of code or server supplied information in comments.</p>
 
 
 			      	</div>
@@ -102,12 +115,12 @@
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/system_under_test">Connecting Storyteller to the System under Test</a>
+				        	<strong>Previous: </strong><a href="/documentation/lifecycle">The Specification Lifecycle</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/fixtures">Fixtures</a>
+				        	<strong>Next: </strong><a href="/documentation/system_state">Setting up System State</a>
 
 				        </span>
 			      	</nav>

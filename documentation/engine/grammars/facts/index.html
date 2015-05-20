@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Asserting Facts</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/darthfubumvc/storyteller2"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav">
+		        <li>
+		          <a href="/getting_started">Get Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		        <li>
+
+
+		        </li>
+		      </ul>
+
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><a href="/documentation/engine/grammars/actions" title="Carrying out Actions">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/assertions" title="Asserting Values">Next</a></li>
+		      </ul>
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Asserting Facts</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/assertions">Asserting Values</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/actions">Carrying out Actions</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Asserting Facts</h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Asserting Facts-->
+<!--Url:facts-->
+<p>Frequently you'll want to simply make an assertion that an expected fact about your system is true. Storyteller provides a variation on the basic Sentence grammar that lets you simply assert on a single boolean condition.</p>
+<h2>As a Fixture Method</h2>
+<p>The easiest implementation is to use a grammar method on your Fixture classes that returns a boolean value <strong>without adding the return value into the Sentence format</strong> like these methods below:</p>
+<pre><code class="language-csharp">
+        public void ThisLineAlwaysThrowsExceptions()
+        {
+            throw new DivideByZeroException("You can't do this!");
+        }
+<pre><code>    [FormatAs(&quot;This line is always true&quot;)]
+    public bool ThisLineIsAlwaysTrue()
+    {
+        return true;
+    }
+
+    [FormatAs(&quot;This line is always false&quot;)]
+    public bool ThisLineIsAlwaysFalse()
+    {
+        return false;
+    }
+</code></pre>
+<p></code></pre></p>
+<h2>As a Lambda Declaration</h2>
+<p>You also have the option of declaring a Fact grammar programmatically on a <code>Fixture</code> class as in this code below:</p>
+<pre><code class="language-csharp">
+        public FactFixture()
+        {
+            this["AnotherTruth"] 
+                = Fact("The thing is activated").VerifiedBy(() => true);
+        }
+</code></pre>
+<h2>Providing more Context on Failures</h2>
+<p>For a success, simply turning the line green and tabulating the <em>rights</em> is good enough. For detected failures, you may want to add more contextual information to the specification output to help you solve any failures. While you can always throw an exception to get the extra information into the results, a cleaner, more controlled way is to use the <code>StoryTellerAssert</code> class to add contextual information without all the overhead of a stacktrace.</p>
+<p>Below is a sample:</p>
+<pre><code class="language-csharp">
+        [FormatAs("The confirmation email was sent")]
+        public bool TheConfirmationEmailWasSent()
+        {
+            StoryTellerAssert
+                .Fail(true, "The email server is not reachable");
+<pre><code>        return true;
+    }
+</code></pre>
+<p></code></pre></p>
+<p>See <a href="/documentation/instrumentation">Instrumenting and Performance Logging</a></p>
+<h2>Facts in Action</h2>
+<p>If you were to use all the fact grammars shown above, the output would look like this below:</p>
+<p data-path="Facts/Facts in Action" data-spec="{&quot;title&quot;:&quot;Facts in Action&quot;,&quot;path&quot;:&quot;Facts/Facts in Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Fact&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;AnotherTruth&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;12cbbf11-6f63-446a-9134-a3de288aa3a1&quot;},{&quot;key&quot;:&quot;ThisLineIsAlwaysTrue&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;13fe6590-0ce9-4337-81e4-12adebbc5f99&quot;},{&quot;key&quot;:&quot;ThisLineIsAlwaysFalse&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;7c866c88-15a4-4860-80e1-24a9ac4fa5e5&quot;},{&quot;key&quot;:&quot;ThisLineAlwaysThrowsExceptions&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;09d80f2b-80a0-4de6-ab88-86d4b756d61f&quot;},{&quot;key&quot;:&quot;TheConfirmationEmailWasSent&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;063fc250-534f-451a-9ee9-88871912c80d&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;eac95bfe-f1a4-4d53-bfa8-f0bc620332e6&quot;}],&quot;id&quot;:&quot;98769c4b-6fd5-43aa-bf01-0ea75439437b&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Fact&quot;,&quot;key&quot;:&quot;Fact&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.FactFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;The thing is activated&quot;,&quot;key&quot;:&quot;AnotherTruth&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:null,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;ThisLineAlwaysThrowsExceptions()&quot;,&quot;key&quot;:&quot;ThisLineAlwaysThrowsExceptions&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;This line is always true&quot;,&quot;key&quot;:&quot;ThisLineIsAlwaysTrue&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:null,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;This line is always false&quot;,&quot;key&quot;:&quot;ThisLineIsAlwaysFalse&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:null,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The confirmation email was sent&quot;,&quot;key&quot;:&quot;TheConfirmationEmailWasSent&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:null,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;success&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;12cbbf11-6f63-446a-9134-a3de288aa3a1&quot;,&quot;spec&quot;:&quot;98769c4b-6fd5-43aa-bf01-0ea75439437b&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;success&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;13fe6590-0ce9-4337-81e4-12adebbc5f99&quot;,&quot;spec&quot;:&quot;98769c4b-6fd5-43aa-bf01-0ea75439437b&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;failed&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;7c866c88-15a4-4860-80e1-24a9ac4fa5e5&quot;,&quot;spec&quot;:&quot;98769c4b-6fd5-43aa-bf01-0ea75439437b&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;error&quot;,&quot;error&quot;:&quot;System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.DivideByZeroException: You can&#39;t do this!\r\n   at Samples.Fixtures.FactFixture.ThisLineAlwaysThrowsExceptions() in z:\\code\\Storyteller\\src\\Samples\\Fixtures\\FactFixture.cs:line 19\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.&lt;Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38&quot;,&quot;cells&quot;:[],&quot;id&quot;:&quot;09d80f2b-80a0-4de6-ab88-86d4b756d61f&quot;,&quot;spec&quot;:&quot;98769c4b-6fd5-43aa-bf01-0ea75439437b&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;error&quot;,&quot;error&quot;:&quot;The email server is not reachable&quot;,&quot;cells&quot;:[],&quot;id&quot;:&quot;063fc250-534f-451a-9ee9-88871912c80d&quot;,&quot;spec&quot;:&quot;98769c4b-6fd5-43aa-bf01-0ea75439437b&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;}]" class="spec-result"></p>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/actions">Carrying out Actions</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/assertions">Asserting Values</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

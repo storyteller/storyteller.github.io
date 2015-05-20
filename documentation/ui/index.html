@@ -51,8 +51,8 @@
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
-		      	<li><a href="/documentation/system_state" title="Setting up System State">Previous</a></li>
-		      	<li><a href="/documentation/ui/spec-explorer" title="The Specification Explorer">Next</a></li>
+		      	<li><a href="/documentation/application" title="Storyteller Architecture">Previous</a></li>
+		      	<li><a href="/documentation/ui/shell" title="The Application Shell">Next</a></li>
 		      </ul>
 		    </nav>
 
@@ -78,8 +78,8 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/ui/spec-explorer">The Specification Explorer</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/system_state">Setting up System State</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/ui/shell">The Application Shell</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/application">Storyteller Architecture</a></p>
 
 		        </ul>
 		      </div><!--/left-->
@@ -94,6 +94,12 @@
 			      		<!--Title:The User Interface-->
 <!--Url:ui-->
 <p>TODO(Write some content!)</p>
+<ul class="table-of-contents"><li><a href="/documentation/ui/shell">The Application Shell</a></li><li><a href="/documentation/ui/spec-explorer">The Specification Explorer</a></li><li><a href="/documentation/ui/spec-editor">The Specification Editor</a></li></ul>
+<section class="command-section"><h4><span id="open" class="section-header">st open</span><i class="command-description">OpenCommand</i></h4></section>
+WRITE SOMETHING HERE
+<div class="single-command-usage"><em>st open</em><path> [-b, --build <build>] [-p, --profile <profile>] [-t, --timeout <timeout>] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config <confi>]</div>
+<table class="table"><thead><tr><th colspan="2">Arguments</th></tr></thead><tbody><tr><td class="command-arg-name">path</td><td class="command-arg-description">Path to the StoryTeller project file or the project directory</td></tr></tbody></table>
+<table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-b, --build &lt;build&gt;]</td><td class="command-flag-description">Specify a build target to force Storyteller to choose that profile. By default, ST will use &#39;Debug&#39;</td></tr><tr><td class="command-flag-usage">[-p, --profile &lt;profile&gt;]</td><td class="command-flag-description">Storyteller test mode profile for systems like Serenity that use this</td></tr><tr><td class="command-flag-usage">[-t, --timeout &lt;timeout&gt;]</td><td class="command-flag-description">Optional. Default project timeout in seconds.</td></tr><tr><td class="command-flag-usage">[-l, --lifecycle Acceptance|Regression|Any]</td><td class="command-flag-description">Optional. Only runs tests with desired lifecyle</td></tr><tr><td class="command-flag-usage">[-z, --teamcity]</td><td class="command-flag-description">Optional. Applies extra logging to see progress within TeamCity during CI runs</td></tr><tr><td class="command-flag-usage">[-c, --config &lt;confi&gt;]</td><td class="command-flag-description">Optional. Override the config file selection of the Storyteller test running AppDomain</td></tr></tbody></table>
 
 
 			      	</div>
@@ -102,12 +108,12 @@
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/system_state">Setting up System State</a>
+				        	<strong>Previous: </strong><a href="/documentation/application">Storyteller Architecture</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/ui/spec-explorer">The Specification Explorer</a>
+				        	<strong>Next: </strong><a href="/documentation/ui/shell">The Application Shell</a>
 
 				        </span>
 			      	</nav>
