@@ -35,12 +35,16 @@
 		    </div>
 		    <nav class="collapse navbar-collapse" role="navigation">
 		      <ul class="nav navbar-nav">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
 		        <li>
-		          <a href="/getting_started">Get Started</a>
+		          <a href="/documentation/getting_started">Getting Started</a>
 		        </li>
 		        <li>
 		          <a href="/documentation">Documentation</a>
 		        </li>
+		        <li>
 		        <li>
 <a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
@@ -92,6 +96,18 @@
 
 			      	<div id="main-pane">
 			      		<!--Title:The Specification Lifecycle-->
+<div class="alert alert-info" role="alert">
+I grew up in the era of Saturday morning cartoons and I vividly remember the old Schoolhouse Rock videos. If you are of my generation, just think about a bill singing about becoming a law and I think you'll get the gist of this subject pretty well.
+</div>
+<div class="alert alert-warning" role="alert">
+This idea of a "lifecycle" and how it impacts Storyteller as a regression testing tool has confused and tripped up teams in the past. Please make sure you understand why and how this is used within Storyteller.
+</div>
+<p>Years ago I worked in a shop that was one of the pioneers of Extreme Programming. One of the processes we used on some projects was to treat our business facing automated acceptance tests as having two states in the iteration lifecycle:</p>
+<ol>
+<li><em>Acceptance</em> -- the specification is a declaration of what is supposed to happen, but may be a work in progress.</li>
+<li><em>Regression</em> -- the work described in the specification is supposed to be complete and should never fail.</li>
+</ol>
+<p>Today, Storyteller formalizes this lifecyle in its <a href="/documentation/ci">continuous integration support</a>. When specifications are first created in the editing tool, a specification will have its lifecycle set to <em>Acceptance</em> to mark it as a work in progress that will not cause build failures when the Storyteller specifications are executed in the batch mode. When the development team is satisfied that the functionality of a specification is &quot;done,&quot; the team should mark that specification as <em>Regression</em> so that Storyteller treats that specification as a mandatory check in the system.</p>
 
 
 			      	</div>

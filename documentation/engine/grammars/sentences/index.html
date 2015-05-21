@@ -1,14 +1,181 @@
 <!DOCTYPE html>
-<html><head><title>Error!</title></head><body><h1>Error!</h1><pre>System.ArgumentOutOfRangeException: Cannot find a topic with key &#39;documentation/grammars/actions&#39;
-Parameter name: key
-   at ST.Docs.Transformation.LinkToTransformHandler.findOther(Topic current, String key) in z:\code\Storyteller\src\ST\Docs\Transformation\LinkToTransformHandler.cs:line 78
-   at ST.Docs.Transformation.LinkToTransformHandler.Transform(Topic current, String data) in z:\code\Storyteller\src\ST\Docs\Transformation\LinkToTransformHandler.cs:line 33
-   at ST.Docs.Transformation.Transformer.&lt;&gt;c__DisplayClass5.&lt;Transform&gt;b__4(Token token) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 51
-   at System.Collections.Generic.GenericEnumerableExtensions.Each[T](IEnumerable`1 values, Action`1 eachAction) in c:\BuildAgent\work\4dafc5966c0aefb4\src\FubuCore\EnumerableExtensions.cs:line 78
-   at ST.Docs.Transformation.Transformer.Transform(Topic current, String before) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 43
-   at ST.Docs.Transformation.Transformer.InnerTransformHandler.Transform(Topic current, String data) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 85
-   at ST.Docs.Transformation.Transformer.&lt;&gt;c__DisplayClass5.&lt;Transform&gt;b__4(Token token) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 51
-   at System.Collections.Generic.GenericEnumerableExtensions.Each[T](IEnumerable`1 values, Action`1 eachAction) in c:\BuildAgent\work\4dafc5966c0aefb4\src\FubuCore\EnumerableExtensions.cs:line 78
-   at ST.Docs.Transformation.Transformer.Transform(Topic current, String before) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 43
-   at ST.Docs.Transformation.HtmlGenerator.generate(Topic topic) in z:\code\Storyteller\src\ST\Docs\Transformation\HtmlGenerator.cs:line 71
-   at ST.Docs.Transformation.HtmlGenerator.Generate(Topic topic) in z:\code\Storyteller\src\ST\Docs\Transformation\HtmlGenerator.cs:line 35</pre></body></html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Sentences</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/darthfubumvc/storyteller2"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		        <li>
+
+
+		        </li>
+		      </ul>
+
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><a href="/documentation/engine/grammars" title="Grammars">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/actions" title="Carrying out Actions">Next</a></li>
+		      </ul>
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Sentences</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/actions">Carrying out Actions</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars">Grammars</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Sentences</h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Sentences-->
+<p>The simplest and most commonly used type of Grammar is just a single line within a Specification called a <em>Sentence</em>.</p>
+<h2>A Sample Specification Using Sentences</h2>
+<p>Again visiting the problem domain of writing our own Calculator software, we could use Sentence grammars to specify the multiplication and addition features like so:</p>
+<p data-path="Calculator/Using Sentences" data-spec="{&quot;title&quot;:&quot;Using Sentences&quot;,&quot;path&quot;:&quot;Calculator/Using Sentences&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Calculator&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Punching in values to the calculator&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;9290656a-2ba9-495e-b0e4-a3961df7fa65&quot;},{&quot;key&quot;:&quot;StartWith&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;3&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;8923fcd3-1f2f-4a59-b27d-2790a74e1f62&quot;},{&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;2&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;dd3b39c7-63c8-469e-837e-261779e0b4b0&quot;},{&quot;text&quot;:&quot;Check the current value on the calculator screen&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;70fa2976-93e8-4432-90a1-daea42c77b93&quot;},{&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;6&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;ec115e90-3397-4a1f-bc83-8e9790fdb4fc&quot;},{&quot;text&quot;:&quot;You can use more than one input for a sentence&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;3ffefa75-5ce9-4e3c-a706-b92ba3f91e70&quot;},{&quot;key&quot;:&quot;AddingNumbersTogether&quot;,&quot;cells&quot;:{&quot;x&quot;:&quot;2&quot;,&quot;y&quot;:&quot;3&quot;,&quot;returnValue&quot;:&quot;5&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;b6513916-dbb0-433d-b7da-c9441ebdf111&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;f753bec2-a16c-48aa-a64d-c3791d5cbdd2&quot;}],&quot;id&quot;:&quot;17e4de49-522f-48f5-81d6-b41749174441&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Calculator&quot;,&quot;key&quot;:&quot;Calculator&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CalculatorFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Start with {value}&quot;,&quot;key&quot;:&quot;StartWith&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Add {value}&quot;,&quot;key&quot;:&quot;Add&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Subtract {value}&quot;,&quot;key&quot;:&quot;Subtract&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Multiply by {value}&quot;,&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Divide by {value}&quot;,&quot;key&quot;:&quot;DivideBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The value should be {value}&quot;,&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Adding {x} to {y} should equal {returnValue}&quot;,&quot;key&quot;:&quot;AddingNumbersTogether&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;returnValue&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;The sum of two columns should be&quot;,&quot;key&quot;:&quot;AddingNumbersTogetherAsTable&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;For X={X} and Y={Y}, the Sum should be {Sum} and the Product should be {Product}&quot;,&quot;key&quot;:&quot;SumAndProduct&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;Sum and Product Operations&quot;,&quot;key&quot;:&quot;Operations&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;8923fcd3-1f2f-4a59-b27d-2790a74e1f62&quot;,&quot;spec&quot;:&quot;17e4de49-522f-48f5-81d6-b41749174441&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;dd3b39c7-63c8-469e-837e-261779e0b4b0&quot;,&quot;spec&quot;:&quot;17e4de49-522f-48f5-81d6-b41749174441&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;value&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;ec115e90-3397-4a1f-bc83-8e9790fdb4fc&quot;,&quot;spec&quot;:&quot;17e4de49-522f-48f5-81d6-b41749174441&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;returnValue&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;b6513916-dbb0-433d-b7da-c9441ebdf111&quot;,&quot;spec&quot;:&quot;17e4de49-522f-48f5-81d6-b41749174441&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;}]" class="spec-result"></p>
+<h2>Using Fixture Methods</h2>
+<p>The simplest way to write a <em>Sentence</em> grammar is to just add a public method to a Fixture class that either returns a single value or has a <code>void</code> signature.</p>
+<p>The &quot;Starts with {number}&quot; sentence used in the specification above looks like:</p>
+<pre><code class="language-csharp">
+        [FormatAs("Start with {value}")]
+        public void StartWith(double value)
+        {
+            _calculator.Value = value;
+        }
+</code></pre>
+<p>The <code>[FormatAs]</code> attribute value specifies how the Sentence grammar will be rendered into HTML output. The syntax is to replace <code>{parameter name}</code> with the value of that method parameter in the HTML display. If you leave off the <code>[FormatAs]</code> attribute, Storyteller will just use the method signature as the format. In the case above, that format would be <code>StartsWith({number})</code>.</p>
+<div class="alert alert-info" role="alert">In earlier versions of Storyteller the formatting had to be specified in the C# Fixture code. Before 3.0 is officially released, there will be a mechanism to specify the formatting language in the user interface client before or after the Fixture code is written. </div>
+<h2>Asserting Values with the Return Value</h2>
+<p>There is <em>some</em> value in writing smoke tests just to see if the system blows up when you perform actions, but sooner or later you probably want to check some state or value returned from the system. You can use a Sentence method to assert on a single value like the <code>TheValueShouldBe</code> grammar used in the sample Specification above:</p>
+<pre><code class="language-csharp">
+        [FormatAs("The value should be {value}")]
+        public double TheValueShouldBe()
+        {
+            return _calculator.Value;
+        }
+</code></pre>
+<p>If the expected value does not match the returned value from the grammar method, the results output will look like this:</p>
+<p data-path="Calculator/Bad Values" data-spec="{&quot;title&quot;:&quot;Bad Values&quot;,&quot;path&quot;:&quot;Calculator/Bad Values&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Calculator&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Punching in values to the calculator&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;9290656a-2ba9-495e-b0e4-a3961df7fa65&quot;},{&quot;key&quot;:&quot;StartWith&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;3&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;40ce4ae9-d8fb-40b3-b6a7-c46320a0edd2&quot;},{&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;2&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;667ea98e-cd7f-4958-bf77-1785d6f2edde&quot;},{&quot;text&quot;:&quot;This value is wrong and the specification should fail&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;3ffefa75-5ce9-4e3c-a706-b92ba3f91e70&quot;},{&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;cells&quot;:{&quot;value&quot;:&quot;7&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;eb2ea1ef-191d-4663-b6a0-04efda19c0dc&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;f753bec2-a16c-48aa-a64d-c3791d5cbdd2&quot;}],&quot;id&quot;:&quot;f6aca131-be42-405b-ae76-ad3f6359f8ed&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Calculator&quot;,&quot;key&quot;:&quot;Calculator&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CalculatorFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Start with {value}&quot;,&quot;key&quot;:&quot;StartWith&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Add {value}&quot;,&quot;key&quot;:&quot;Add&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Subtract {value}&quot;,&quot;key&quot;:&quot;Subtract&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Multiply by {value}&quot;,&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Divide by {value}&quot;,&quot;key&quot;:&quot;DivideBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The value should be {value}&quot;,&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Adding {x} to {y} should equal {returnValue}&quot;,&quot;key&quot;:&quot;AddingNumbersTogether&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;returnValue&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;The sum of two columns should be&quot;,&quot;key&quot;:&quot;AddingNumbersTogetherAsTable&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;For X={X} and Y={Y}, the Sum should be {Sum} and the Product should be {Product}&quot;,&quot;key&quot;:&quot;SumAndProduct&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;Sum and Product Operations&quot;,&quot;key&quot;:&quot;Operations&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;40ce4ae9-d8fb-40b3-b6a7-c46320a0edd2&quot;,&quot;spec&quot;:&quot;f6aca131-be42-405b-ae76-ad3f6359f8ed&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;667ea98e-cd7f-4958-bf77-1785d6f2edde&quot;,&quot;spec&quot;:&quot;f6aca131-be42-405b-ae76-ad3f6359f8ed&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:&quot;6&quot;,&quot;error&quot;:null,&quot;cell&quot;:&quot;value&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;failed&quot;}],&quot;id&quot;:&quot;eb2ea1ef-191d-4663-b6a0-04efda19c0dc&quot;,&quot;spec&quot;:&quot;f6aca131-be42-405b-ae76-ad3f6359f8ed&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;}]" class="spec-result"></p>
+<h2>Using Output Parameters</h2>
+<p>New in Storyteller 3.0 is the ability to use output parameters to specify multiple value assertions in a single Sentence method. Below is an example:</p>
+<pre><code class="language-csharp">
+        [FormatAs("Adding {x} to {y} should equal {returnValue}")]
+        public double AddingNumbersTogether(double x, double y)
+        {
+            _calculator.Value = x;
+            _calculator.Add(y);
+            return _calculator.Value;
+        }
+</code></pre>
+<p>Used in a specification, that grammar would look like this:</p>
+<p data-path="Calculator/Using Output Parameters in a Sentence" data-spec="{&quot;title&quot;:&quot;Using Output Parameters in a Sentence&quot;,&quot;path&quot;:&quot;Calculator/Using Output Parameters in a Sentence&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Calculator&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;SumAndProduct&quot;,&quot;cells&quot;:{&quot;X&quot;:&quot;3&quot;,&quot;Y&quot;:&quot;4&quot;,&quot;Sum&quot;:&quot;7&quot;,&quot;Product&quot;:&quot;12&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;09c4a2f2-c11a-4706-95c0-e4a4e69d608d&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;bf46494c-5c77-4efb-a4dc-a034980202a2&quot;}],&quot;id&quot;:&quot;bcdc78f5-030d-40b7-908d-f76a65e9f035&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Calculator&quot;,&quot;key&quot;:&quot;Calculator&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CalculatorFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Start with {value}&quot;,&quot;key&quot;:&quot;StartWith&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Add {value}&quot;,&quot;key&quot;:&quot;Add&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Subtract {value}&quot;,&quot;key&quot;:&quot;Subtract&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Multiply by {value}&quot;,&quot;key&quot;:&quot;MultiplyBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Divide by {value}&quot;,&quot;key&quot;:&quot;DivideBy&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The value should be {value}&quot;,&quot;key&quot;:&quot;TheValueShouldBe&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;value&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Adding {x} to {y} should equal {returnValue}&quot;,&quot;key&quot;:&quot;AddingNumbersTogether&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;returnValue&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;x&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;The sum of two columns should be&quot;,&quot;key&quot;:&quot;AddingNumbersTogetherAsTable&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;format&quot;:&quot;For X={X} and Y={Y}, the Sum should be {Sum} and the Product should be {Product}&quot;,&quot;key&quot;:&quot;SumAndProduct&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Y&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Sum&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Product&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;Sum and Product Operations&quot;,&quot;key&quot;:&quot;Operations&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;Sum&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;},{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;Product&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;09c4a2f2-c11a-4706-95c0-e4a4e69d608d&quot;,&quot;spec&quot;:&quot;bcdc78f5-030d-40b7-908d-f76a65e9f035&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;}]" class="spec-result"></p>
+<p>See also:</p>
+<ul>
+<li><a href="/documentation/engine/grammars/actions">Carrying out Actions</a></li>
+<li><a href="/documentation/engine/grammars/assertions">Asserting Values</a></li>
+<li><a href="/documentation/engine/grammars/facts">Asserting Facts</a></li>
+</ul>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars">Grammars</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/actions">Carrying out Actions</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

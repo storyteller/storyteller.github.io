@@ -1,14 +1,171 @@
 <!DOCTYPE html>
-<html><head><title>Error!</title></head><body><h1>Error!</h1><pre>System.ArgumentOutOfRangeException: Cannot find a topic with key &#39;documentation/system_under_test&#39;
-Parameter name: key
-   at ST.Docs.Transformation.LinkToTransformHandler.findOther(Topic current, String key) in z:\code\Storyteller\src\ST\Docs\Transformation\LinkToTransformHandler.cs:line 78
-   at ST.Docs.Transformation.LinkToTransformHandler.Transform(Topic current, String data) in z:\code\Storyteller\src\ST\Docs\Transformation\LinkToTransformHandler.cs:line 33
-   at ST.Docs.Transformation.Transformer.&lt;&gt;c__DisplayClass5.&lt;Transform&gt;b__4(Token token) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 51
-   at System.Collections.Generic.GenericEnumerableExtensions.Each[T](IEnumerable`1 values, Action`1 eachAction) in c:\BuildAgent\work\4dafc5966c0aefb4\src\FubuCore\EnumerableExtensions.cs:line 78
-   at ST.Docs.Transformation.Transformer.Transform(Topic current, String before) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 43
-   at ST.Docs.Transformation.Transformer.InnerTransformHandler.Transform(Topic current, String data) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 85
-   at ST.Docs.Transformation.Transformer.&lt;&gt;c__DisplayClass5.&lt;Transform&gt;b__4(Token token) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 51
-   at System.Collections.Generic.GenericEnumerableExtensions.Each[T](IEnumerable`1 values, Action`1 eachAction) in c:\BuildAgent\work\4dafc5966c0aefb4\src\FubuCore\EnumerableExtensions.cs:line 78
-   at ST.Docs.Transformation.Transformer.Transform(Topic current, String before) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 43
-   at ST.Docs.Transformation.HtmlGenerator.generate(Topic topic) in z:\code\Storyteller\src\ST\Docs\Transformation\HtmlGenerator.cs:line 71
-   at ST.Docs.Transformation.HtmlGenerator.Generate(Topic topic) in z:\code\Storyteller\src\ST\Docs\Transformation\HtmlGenerator.cs:line 35</pre></body></html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Integration with Continuous Integration</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/darthfubumvc/storyteller2"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		        <li>
+
+
+		        </li>
+		      </ul>
+
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><a href="/documentation/instrumentation" title="Instrumenting and Performance Logging">Previous</a></li>
+		      	<li><a href="/documentation/docs" title="Living Documentation Generation">Next</a></li>
+		      </ul>
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Integration with Continuous Integration</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/docs">Living Documentation Generation</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/instrumentation">Instrumenting and Performance Logging</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Integration with Continuous Integration</h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Integration with Continuous Integration-->
+<!--Url:ci-->
+<div class="alert alert-info" role="alert"><strong>Note!</strong> The batch running of specifications in continuous integration scenarios is significantly different in Storyteller 3 as a direct result of poor experiences with earlier versions. Besides some internal performance optimization, Storyteller 3 tries to be much more aggressive in failing fast in continuous integration to prevent runaway builds and provide faster feedback for teams that depend on Storyteller for regression testing. </div>
+<p>Storyteller specifications can be executed from the command line tool with the <code>st run</code> command. You may either run all the specifications (for smaller projects or faster systems), or run one suite of specifications at a time.</p>
+<h2>Fast Build, Slow Build</h2>
+<p>In usage over the years, I will run the Storyteller specifications as part of the normal automated build for a codebase <strong>if they <em>feel</em> fast enough</strong>. Since Storyteller is going to be more frequently used for integration testing, the Storyteller specifications can easily become slower or intolerably long running for the kind of quick feedback you want in your normal automated build. In this common case, the Storyteller team recommends a <em>cascading build</em> where your normal build runs first with your &quot;fast&quot; tests, then on success triggers a secondary build to run the Storyteller specifications.</p>
+<p>The reasoning is to create more effective and quicker feedback cycles. A team using a cascading build may follow a policy of waiting on the fast build before continuing any work after a push to source control, but only deal with the slower, cascading build when and if it fails.</p>
+<h2>Critical and Catastropic Exceptions</h2>
+<p>Storyteller 3 introduces two new exceptions that you can choose to throw yourself:</p>
+<ol>
+<li><code>StorytellerCriticalException</code> -- tells Storyteller that the current specification cannot possibly succeed and causes Storyteller to stop executing the specification wherever it's at. Internally, Storyteller treats any failure in <code>Fixture.SetUp()</code> or <code>Fixture.TearDown()</code> as a critical exception. A classic example is using Storyteller to test a web application where a section of a specification starts by trying to open the application to a certain Url. If the web server returns an error on the request, Storyteller should not bother to try to find the expected elements on the screen. It should fail quickly with a clear indication that it was unable to load the web page.</li>
+<li><code>StorytellerCatastropicException</code> -- tells Storyteller that the current system under test is in an invalid state and to stop trying to execute anything else. You can throw this exception yourself if you detect something like an unavailable database connection that makes the system unusable. Internally, Storyteller throws this exception if the <code>ISystem</code> fails to start or if it cannot create an <code>IExecutionContext</code>.</li>
+</ol>
+<p>See <a href="/documentation/engine/system_under_test">Connecting Storyteller to the System under Test</a> for more information.</p>
+<h2>Retries</h2>
+<p>I hate to tell you this, but it is somewhat likely that your Storyteller specifications are going to fail sometimes in your continuous integration runs. It's also somewhat likely that you may hit specifications that are consistently reliable -- especially when you are testing against any kind of system that involves a lot of asynchronous operations like just about any modern web application. To this end, the original Storyteller team adopted the idea of &quot;retries,&quot; where a specification that fails can be retried a configured number of times (we got this idea from jQuery as I recall).</p>
+<p>This &quot;retry&quot; capability has produced very mixed results in real usage. In the early days of <a href="http://www.seleniumhq.org">Selenium</a> when the browser automation was so unreliable, the retry capability made our automated testing much more useful. Today, the retry capability is still valuable when we use Storyteller against asynchronous messaging systems. That being said, the retry capability in older versions of Storyteller has also been detrimental when it too aggressively tries to retry specifications that have no chance of ever succeeding or when the system under test itself is in an invalid state -- often hitting the timeout for each specification on each retry.</p>
+<p>To that end, Storyteller 3 changes the retry policy a bit to <a href="http://en.wikipedia.org/wiki/Fail-fast">fail faster</a>:</p>
+<ul>
+<li>The retry count <strong>as of now</strong> is specified per specification with the default being no retries. This <a href="https://github.com/DarthFubuMVC/StoryTeller2/issues/151">may change later</a> based on our shop's experience with Storyteller 3. For now, however, the attitude we are taking is that retries are a potentially harmful property that must be explicitly enabled.</li>
+<li>Specifications marked as <em>Acceptance</em> will never be retried.</li>
+<li>If in the course of executing a Specification the Storyteller engine hits a &quot;critical&quot; or &quot;catastropic&quot; exception, the specification will no longer be retried even if it has not exceeded its maxiumum number of retries. A &quot;critical&quot; exception is any failure from a <code>Fixture.SetUp()</code>, <code>Fixture.TearDown()</code>, or the <code>StorytellerCriticalException</code> being thrown by grammars.</li>
+<li>If the system under test itself fails to start or cannot create an execution context, the entire batch of specifications is aborted, but the results are still shown.</li>
+</ul>
+<p>TODO(see instrumentation, which should involve exception throwing now too)</p>
+<p>TODO(link to the lifecycle topic when it exists)</p>
+<h2>Lifecycle</h2>
+<p>Storyteller has always treated <em>Acceptance</em> and <em>Regression</em> specifications somewhat differently in the command line execution. <em>Acceptance</em> specifications are executed strictly for informational purposes, are never retried in the case of failures, and do not count toward the success or failure of the execution run. <em>Regression</em> specifications on the other hand can be retried and any number of <em>Regression</em> failures will cause the <code>st run</code> command to return a non-zero return code denoting a failure.</p>
+<h2>Results</h2>
+<p>The specification execution results are written to a single html file with <strong>no other file dependencies</strong>. In continuous integration scenarios, you would want to have this file written to a place where your CI server will save this file as an artifact tagged to the build. For example, my teams write the Storyteller results to an <code>/artifacts</code> folder and configure our TeamCity build server to automatically store any file written to that directory as build artifacts. Most CI servers today will allow you to expose this html file from the build server website to browse the results.</p>
+<p>The results page is a single page application with a tabular summary view of all the specifications executed, how long each took to execute, the high level result counts, and the number of retries. From the summary, you can drill into individual specifications by clicking on the specification name.</p>
+<h2>Command Usage</h2>
+<section class="command-section"><h4><span id="run" class="section-header">st run</span><i class="command-description">Run a suite of StoryTeller tests</i></h4></section>
+The `st run` command allows you to run specifications from an optimized batch mode from the command line. This command will also optionally dump out a couple additional  reports about the specifications that executed that may be useful for custom reporting or performance optimization. The CSV option is a dump of the performance tracing across all the specifications. The JSON dump is a raw dump of the Storyteller runtime model for the specifications. 
+<table class="table usages-table"><thead><tr><th colspan="2">Usages</th></tr></thead><tbody><tr><td>Execute</td><td class="command-usage">st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</td></tr><tr><td>Execute and save results</td><td class="command-usage">st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</td></tr></tbody></table>
+<table class="table"><thead><tr><th colspan="2">Arguments</th></tr></thead><tbody><tr><td class="command-arg-name">path</td><td class="command-arg-description">Path to the StoryTeller project file or the project directory</td></tr></tbody></table>
+<table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-r, --results-path &lt;resultspath&gt;]</td><td class="command-flag-description">Path to write out the results. Default is stresults.htm</td></tr><tr><td class="command-flag-usage">[-w, --workspace &lt;workspace&gt;]</td><td class="command-flag-description">Optional.  Runs only one workspace</td></tr><tr><td class="command-flag-usage">[-o, --open]</td><td class="command-flag-description">Open the results in a browser after the run. DO NOT DO THIS IN CI!</td></tr><tr><td class="command-flag-usage">[-c, --csv &lt;csv&gt;]</td><td class="command-flag-description">Write the performance data in CSV format to the specified path</td></tr><tr><td class="command-flag-usage">[-j, --json &lt;json&gt;]</td><td class="command-flag-description">Write the raw result information to JSON format at the specified path</td></tr><tr><td class="command-flag-usage">[-d, --dump &lt;dump&gt;]</td><td class="command-flag-description">Dump the raw JSON history of the batch run to the specified path</td></tr><tr><td class="command-flag-usage">[-b, --build &lt;build&gt;]</td><td class="command-flag-description">Specify a build target to force Storyteller to choose that profile. By default, ST will use &#39;Debug&#39;</td></tr><tr><td class="command-flag-usage">[-p, --profile &lt;profile&gt;]</td><td class="command-flag-description">Storyteller test mode profile for systems like Serenity that use this</td></tr><tr><td class="command-flag-usage">[-t, --timeout &lt;timeout&gt;]</td><td class="command-flag-description">Optional. Default project timeout in seconds.</td></tr><tr><td class="command-flag-usage">[-l, --lifecycle Acceptance|Regression|Any]</td><td class="command-flag-description">Optional. Only runs tests with desired lifecyle</td></tr><tr><td class="command-flag-usage">[-z, --teamcity]</td><td class="command-flag-description">Optional. Applies extra logging to see progress within TeamCity during CI runs</td></tr><tr><td class="command-flag-usage">[-c, --config &lt;confi&gt;]</td><td class="command-flag-description">Optional. Override the config file selection of the Storyteller test running AppDomain</td></tr></tbody></table>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/instrumentation">Instrumenting and Performance Logging</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/docs">Living Documentation Generation</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

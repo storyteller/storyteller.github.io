@@ -1,14 +1,189 @@
 <!DOCTYPE html>
-<html><head><title>Error!</title></head><body><h1>Error!</h1><pre>System.ArgumentOutOfRangeException: Cannot find a topic with key &#39;documentation/grammars/embedded_section&#39;
-Parameter name: key
-   at ST.Docs.Transformation.LinkToTransformHandler.findOther(Topic current, String key) in z:\code\Storyteller\src\ST\Docs\Transformation\LinkToTransformHandler.cs:line 78
-   at ST.Docs.Transformation.LinkToTransformHandler.Transform(Topic current, String data) in z:\code\Storyteller\src\ST\Docs\Transformation\LinkToTransformHandler.cs:line 33
-   at ST.Docs.Transformation.Transformer.&lt;&gt;c__DisplayClass5.&lt;Transform&gt;b__4(Token token) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 51
-   at System.Collections.Generic.GenericEnumerableExtensions.Each[T](IEnumerable`1 values, Action`1 eachAction) in c:\BuildAgent\work\4dafc5966c0aefb4\src\FubuCore\EnumerableExtensions.cs:line 78
-   at ST.Docs.Transformation.Transformer.Transform(Topic current, String before) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 43
-   at ST.Docs.Transformation.Transformer.InnerTransformHandler.Transform(Topic current, String data) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 85
-   at ST.Docs.Transformation.Transformer.&lt;&gt;c__DisplayClass5.&lt;Transform&gt;b__4(Token token) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 51
-   at System.Collections.Generic.GenericEnumerableExtensions.Each[T](IEnumerable`1 values, Action`1 eachAction) in c:\BuildAgent\work\4dafc5966c0aefb4\src\FubuCore\EnumerableExtensions.cs:line 78
-   at ST.Docs.Transformation.Transformer.Transform(Topic current, String before) in z:\code\Storyteller\src\ST\Docs\Transformation\Transformer.cs:line 43
-   at ST.Docs.Transformation.HtmlGenerator.generate(Topic topic) in z:\code\Storyteller\src\ST\Docs\Transformation\HtmlGenerator.cs:line 71
-   at ST.Docs.Transformation.HtmlGenerator.Generate(Topic topic) in z:\code\Storyteller\src\ST\Docs\Transformation\HtmlGenerator.cs:line 35</pre></body></html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Importing and Currying Grammars</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/darthfubumvc/storyteller2"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		        <li>
+
+
+		        </li>
+		      </ul>
+
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><a href="/documentation/engine/grammars/embedded_section" title="Embedded Sections">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/create_object" title="Creating Complex Objects">Next</a></li>
+		      </ul>
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Importing and Currying Grammars</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/embedded_section">Embedded Sections</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Importing and Currying Grammars</h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Importing and Currying Grammars-->
+<!--Url:reuse-->
+<p>Storyteller provides a couple mechanisms to reuse grammars across fixtures or even within the same fixture:</p>
+<ol>
+<li>Subclass a <code>Fixture</code> with inheritance.</li>
+<li>Use <a href="/documentation/engine/grammars/embedded_section">Embedded Sections</a></li>
+<li>Use <em>Currying</em> to use an existing grammar in a more specific way. Shown below.</li>
+<li>Use the <code>Fixture.Import()</code> method shown below</li>
+</ol>
+<h2>Currying for More Expressiveness</h2>
+<div class="alert alert-info" role="alert">What we're calling <i>Currying</i> in Storyteller is probably more accurately an example of <i>partial application</i> from Functional Programming. Mea culpa, but "curry" is shorter and we're keeping it for now. See <a href="http://raganwald.com/2013/03/07/currying-and-partial-application.html">Raganwald on the difference between currying and partial application.</a> </div>
+<p>Let's say that you're working on an invoicing system again. A common task in your Storyteller project will be to set up an <code>Invoice</code> object with all its various properties. In some cases you definitely want to explicitly specify all of the Invoice's properties. In other cases, the only thing that matters for the specification is that an Invoice is open or fulfilled. Since one of the Storyteller's deepest held ideas is that only information germane to a specification should be expressed in a specification, Storyteller provides a feature called <em>grammar currying</em> to allow you to supply less information to an existing grammar.</p>
+<p>The generic grammar for setting up an Invoice and a curried version to set up an open invoice.</p>
+<pre><code class="language-csharp">
+    public class CurryingFixture : Fixture
+    {
+        [FormatAs("Invoice {Id} is open {IsOpen} and due on {DueDate}")]
+        public void CreateInvoice(string Id, DateTime DueDate, Boolean IsOpen)
+        {
+<pre><code>    }
+
+    public IGrammar OpenInvoice()
+    {
+        return this[&quot;CreateInvoice&quot;].Curry()
+            .Template(&quot;Invoice {Id} is open&quot;)
+            .Defaults(&quot;DueDate:TODAY+2;IsOpen:true&quot;);
+    }
+}
+</code></pre>
+<p></code></pre></p>
+<p>In usage, you can see the difference between the more generic grammar and the specific, curried grammar.</p>
+<p data-path="Currying/Currying" data-spec="{&quot;title&quot;:&quot;Currying&quot;,&quot;path&quot;:&quot;Currying/Currying&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Currying&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Without currying and supplying all the information&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;1d9cdc91-5685-4bfa-9668-5a367d76883b&quot;},{&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#1&quot;,&quot;DueDate&quot;:&quot;TODAY+5&quot;,&quot;IsOpen&quot;:&quot;True&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c0664b7c-fe76-4c55-bd4b-10c9b0014d08&quot;},{&quot;text&quot;:&quot;If all the spec cares about is that the invoice is open&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;abc2745e-0467-494d-b4ee-3ae3b0475694&quot;},{&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#2&quot;,&quot;DueDate&quot;:&quot;TODAY+2;IsOpen&quot;,&quot;IsOpen&quot;:&quot;False&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;79ded0db-5f39-4c0e-903d-ce9c1407b28a&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;1d5fd235-cebf-4a97-a5c1-1ab15f74b95e&quot;}],&quot;id&quot;:&quot;93be7129-3144-4b0f-94b4-56707296b11f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Currying&quot;,&quot;key&quot;:&quot;Currying&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CurryingFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;,&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;DueDate&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;IsOpen&quot;,&quot;default&quot;:&quot;False&quot;,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:&quot;boolean&quot;,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open&quot;,&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p>The goal of grammar currying was to make the expression of the specifications more declarative and easier to understand without requiring users to duplicate grammar code.</p>
+<h2>Importing Grammars</h2>
+<p>Storyteller also supports a mechanism to import a grammar from one fixture into another:</p>
+<pre><code class="language-csharp">
+    public class LogoutFixture : Fixture
+    {
+        [FormatAs("Log the user out")]
+        public void Logout()
+        {
+            // manipulate the system under test to 
+            // log the user out
+        }
+    }
+<pre><code>public class AnotherFixture : Fixture
+{
+    public AnotherFixture()
+    {
+        this[&quot;Logout&quot;] = Import&lt;LogoutFixture&gt;(&quot;Logout&quot;);
+    }
+}
+</code></pre>
+<p></code></pre></p>
+<p>When using an imported grammar, the <code>ISpecContext</code> for the current specification is available on the original Fixture object, but you <strong>cannot depend on the <code>SetUp()</code> and <code>TearDown()</code> methods to be called on the original Fixture.</strong></p>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/embedded_section">Embedded Sections</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+
