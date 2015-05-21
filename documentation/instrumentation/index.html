@@ -97,11 +97,140 @@
 			      	<div id="main-pane">
 			      		<!--Title:Instrumenting and Performance Logging-->
 <!--Url:instrumentation-->
+<p>Since it is an imperfect world, Storyteller specifications will sometimes fail -- and since Storyteller is generally used for integration scenarios and expressed in high level language that purposely disconnected from the code artifacts, it has been difficult from time to time (read: frequently) to trouble shoot failing specifications. At the same time, Storyteller usage has suffered in the past from performance problems and long testing times. While the Storyteller team has invested a lot of time into performance optimizations in Storyteller itself, the 3.0 release has added some long overdue tooling to measure and expose the performance characteristics of the specifications so that teams <strong>can identify where the real throughput problems really are</strong>.</p>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Sometime after the official Storyteller 3.0 release, the team would like to investigating an execution mode that allows you to walk through all the specification steps manually to try to make debugging specification failures easier than it is today.
+</div>
 <h2>StoryTellerAssert</h2>
+<p>The original means of adding more contextual information about specification failures is the old <code>StoryTellerAssert</code> static class, with its usage shown below:</p>
+<pre><code class="language-csharp">
+            // Fail immediately with this message
+            StoryTellerAssert.Fail("Something is wrong");
+<pre><code>        // Fail if the Func&lt;bool&gt; filter is true
+        StoryTellerAssert.Fail(() =&gt; true, &quot;The condition is {0}&quot;, true);
+
+        // Fail if the boolean condition is true
+        var value = 1;
+        StoryTellerAssert.Fail(value &gt; 0, &quot;The number was not supposed to be bigger than one&quot;);
+</code></pre>
+<p></code></pre></p>
+<p>While you can always just throw an exception in a grammar to provide more information about invalid conditions, using this functionality will allow you to add readable contextual error messages into the html results to help explain failures without adding an ugly .Net stacktrace.</p>
+<p>A classic example of using <code>StoryTellerAssert</code> is if you have a grammar that is supposed to select a given value in a select box on the screen. If the element is hidden, does not exist, or the desired value is not part of the options, use <code>StoryTellerAssert</code> to make the normally quiet grammar fail with some kind of contextual explanation of why that action is invalid for easier debugging later.</p>
+<p>Try not to use <code>StoryTellerAssert</code> in place of <a href="/documentation/engine/grammars/assertions">assertions</a> or <a href="/documentation/engine/grammars/facts">facts</a> -- especially when that results in much more work on your part.</p>
 <h2>Debug Output</h2>
+<p>If you are compiling to the <code>Debug</code> profile in your local work, any calls to .Net's built in <code>Debug.WriteLine()</code> during the execution of a specification will show up in a section at the very bottom of the specification results html.</p>
+<p>The sample below is from the internal specifications on the documentation generation that I introduced to trouble shoot a failing specification one day:</p>
+<div data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2"><h3 data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2.0">Debug Output</h3><div data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2.1"><pre class="debug-output">Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\blue.md
+Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\blue.md
+Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\index.md
+Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\index.md
+Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\lightbrown.md
+Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\lightbrown.md
+Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\purple.md
+Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\purple.md
+Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
+Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
+</pre></div><hr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2.2"></div>
 <h2>Custom Logging</h2>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> The Storyteller HTML rendering uses <a href="http://getbootstrap.com">Bootstrap</a> for all of its styling. You can assume that Bootstrap styles are loaded into any html rendering of your custom html to take advantage of Bootstrap styling.
+</div>
+<p>A relatively new feature in Storyteller is the ability to add custom HTML to the results report. We originally built this functionality to use Storyteller against a system with quite a bit of distributed messaging where we would write a threaded history of the messages sent, received, and handled by the service bus endpoints during the execution. That has been successful enough that Storyteller 3.0 has formalized and generalized that mechanism.</p>
+<p>We are now using the instrumentation extensibility shown below to log the HTTP requests handled by our web application during specifications so that our teams have a much better understanding of just what is going on inside of the system during specification execution. We are also using the custom logging of HTTP requests and service bus message handling to understand where there may be opportunities for performance improvement by combining or batching up HTTP requests made from our client to our server.</p>
+<p>The entry point to customized logging is the small <code>IReporting</code> service exposed off of <code>ISpecContext.Reporting</code>:</p>
+<pre><code class="language-csharp">
+    public interface IReporting
+    {
+        /// <summary>
+        /// Fetch or create a custom IReporter of type T
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T ReporterFor<T>() where T : Report, new();
+<pre><code>    /// &lt;summary&gt;
+    /// Log custom html to the results report
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;title&quot;&gt;&lt;/param&gt;
+    /// &lt;param name=&quot;html&quot;&gt;&lt;/param&gt;
+    void Log(string title, string html);
+
+    /// &lt;summary&gt;
+    /// Explicitly add a new IReporter to the
+    /// running context
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;report&quot;&gt;&lt;/param&gt;
+    void Log(Report report);
+}
+</code></pre>
+<p></code></pre></p>
+<p>The <code>ISpecContext</code> service is available as the <code>Context</code> property inside of <code>Fixture</code> classes where it can be used by any <a href="/documentation/engine/grammars">grammar code</a> like in this <a href="/documentation/engine/grammars/sentences">Sentences</a>:</p>
+<pre><code class="language-csharp">
+    public class LoggingFixture : Fixture
+    {
+        [FormatAs("Do something that requires custom logging")]
+        public void DoSomething()
+        {
+            Context.Reporting.Log(
+                "I am making a custom log", 
+                "<h1>I did something</h1>");
+        }
+    }
+</code></pre>
+<p>The reporting is also accessible in the <code>IExecutionContext.AfterExecution()</code> method. We exploit this method to add contextual information from the application's own diagnostics at the end of each specification.</p>
+<pre><code class="language-csharp">
+    public interface IExecutionContext : IDisposable
+    {
+        // AfterExecution is a hook to gather up custom logging
+        // or to make custom assertions against the specification
+        // execution
+        void AfterExecution(ISpecContext context);
+<pre><code>    T GetService&lt;T&gt;();
+}
+</code></pre>
+<p></code></pre></p>
+<p>Another usage of custom reporting to gather up html results in a single section is to use your own <code>IReport</code> implementation:</p>
+<pre><code class="language-csharp">
+    public interface Report
+    {
+        string ToHtml();
+        string Title { get; }
+    }
+</code></pre>
+<p>A custom <code>IReport</code> from Storyteller's internal tests is shown below:</p>
+<pre><code class="language-csharp">
+    public class ListReport : Report
+    {
+        private readonly HtmlTag _ul = new HtmlTag("ul").AddClass("list-group");
+<pre><code>    public string ToHtml()
+    {
+        return _ul.ToString();
+    }
+
+    public ListReport Add(string text)
+    {
+        _ul.Add(&quot;li&quot;).AddClass(&quot;list-group-item&quot;).Text(text);
+        return this;
+    }
+
+    public string Title
+    {
+        get { return &quot;Some Numbers&quot;; }
+    }
+}
+</code></pre>
+<p></code></pre></p>
+<p>In usage, you can share a custom <code>IReport</code> between grammars and fixtures by using this syntax below:</p>
+<pre><code class="language-csharp">
+            Context.Reporting.ReporterFor<ListReport>().Add(_number.ToString());
+</code></pre>
+<p>Not that it's very interesting, but here is the html that gets added to the very bottom of the specification results from the logging shown above:</p>
+<div data-reactid=".0.1.$spec-editorsentence4=2results.1.2:3"><h3 data-reactid=".0.1.$spec-editorsentence4=2results.1.2:3.0">Some Numbers</h3><div data-reactid=".0.1.$spec-editorsentence4=2results.1.2:3.1"><ul class="list-group"><li class="list-group-item">5</li><li class="list-group-item">19</li><li class="list-group-item">17</li></ul></div><hr data-reactid=".0.1.$spec-editorsentence4=2results.1.2:3.2"></div>
 <h2>Using the Specification Timing</h2>
+<p>New for Storyteller 3.0 is some tracing for the performance of the steps within a specification. At the bottom of specification results html you should find a table of data like this one from an internal Storyteller specification:</p>
+<div data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1"><hr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.0"><h5 data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.1"><span data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.1.0">Execution Timing </span><small data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.1.1">all timings in milliseconds</small></h5><table class="table table-striped" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2"><tbody><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.0"><th data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.0.0">Type</th><th data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.0.1">Subject</th><th data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.0.2">Start</th><th data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.0.3">End</th><th data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.0.4">Duration</th></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:0"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:0.0">Specification</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:0.1">Navigation structure for a single directory without explicit ordering</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:0.2">0</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:0.3">23</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:0.4">23</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:1"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:1.0">Context</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:1.1">Creation</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:1.2">2</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:1.3">4</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:1.4">2</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:2"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:2.0">Fixture</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:2.1">TopicFolder:SetUp</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:2.2">4</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:2.3">4</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:2.4">0</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:3"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:3.0">Grammar</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:3.1">TheTopicsAre:Row</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:3.2">4</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:3.3">9</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:3.4">5</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:4"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:4.0">Grammar</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:4.1">TheTopicsAre:Row</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:4.2">9</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:4.3">12</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:4.4">3</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:5"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:5.0">Grammar</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:5.1">TheTopicsAre:Row</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:5.2">12</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:5.3">12</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:5.4">0</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:6"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:6.0">Grammar</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:6.1">TheTopicsAre:Row</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:6.2">12</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:6.3">13</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:6.4">1</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:7"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:7.0">Grammar</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:7.1">TheTopicsAre:Row</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:7.2">13</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:7.3">20</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:7.4">7</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:8"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:8.0">Grammar</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:8.1">rows</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:8.2">20</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:8.3">23</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:8.4">3</td></tr><tr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:9"><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:9.0">Fixture</td><td data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:9.1">TopicFolder:TearDown</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:9.2">23</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:9.3">23</td><td class="number-cell" data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:1.2.1:9.4">0</td></tr></tbody></table></div>
+<p>This table tracks the time in milliseconds spent in each step by grammar and all the &quot;silent actions&quot; like creating the execution context and <code>Fixture.SetUp()/TearDown()</code> methods that happen behind the scenes.</p>
 <h2>Exporting the Performance Data</h2>
+<p>To make it easier to spot and diagnose performance and throughput problems with the Storyteller specifications and probably the application itself, Storyteller allows you to dump the performance data shown above to file formats suitable for analysis by other tools.</p>
+<p>The raw performance data can be exported from the <code>st run</code> in a CSV format suitable for easy import to a spreadsheet or database with the <code>--csv</code> flag like this: `st run [directory] --csv [file name].</p>
+<p>The same performance data can be exported to a JSON format with `st run [directory] --json [file name].</p>
 
 
 			      	</div>
