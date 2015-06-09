@@ -105,15 +105,73 @@
 <p>Storyteller allows you to create user-defined lists of valid values to a Cell for an improved editor experience. These lists can be defined directly on a Cell or referenced by list name to values defined at either the containing <code>Fixture</code> level or from a custom <code>ISystem.</code></p>
 <h2>Defining Lists Directly to a Cell</h2>
 <p>You can add selection lists directly to a cell with the <code>[SelectionList(name of list)]</code> or <code>[SelectionValues(value1, value2, ...)]</code> attributes for grammars that call methods:</p>
-<p>37e4370c-26a5-4c56-8076-e959f5b67493</p>
+<pre><code class="language-csharp">
+        public void DoSomething(
+            [SelectionValues(&quot;Tom&quot;, &quot;Todd&quot;)] string name, 
+            [SelectionList(&quot;Numbers&quot;)]int x, int y)
+        {
+        }
+</code></pre>
 <p>You can also use the <code>SelectionList()</code> and <code>SelectionValues()</code> methods on <code>ICellExpression</code> to add selection values to other kinds of grammars:</p>
-<p>0922f4ff-0952-400d-ac97-dca3ec8a1459</p>
+<pre><code class="language-csharp">
+        public IGrammar OrderedDetailsAre()
+        {
+            return VerifySetOf(getDetails)
+                .Titled(&quot;The Ordered details should be&quot;)
+                .Ordered()
+
+                // Use this syntax if you want to customize
+                // the cells in this SetVerification grammar
+                .MatchOn(_ =&gt;
+                {
+                    _.Compare(o =&gt; o.Amount).DefaultValue(&quot;100&quot;).Header(&quot;The Amount&quot;);
+
+                    _.Compare(o =&gt; o.Date)
+
+                        // Adding a selection list by display/value
+                        .SelectionOptions(
+                            new Option(&quot;Today&quot;, &quot;TODAY&quot;), 
+                            new Option(&quot;Yesterday&quot;, &quot;TODAY-1&quot;), 
+                            new Option(&quot;Tomorrow&quot;, &quot;TODAY+1&quot;)
+                        );
+
+                    _.Compare(o =&gt; o.Name)
+                        .Header(&quot;The Name&quot;)
+
+                        // Simple value list
+                        .SelectionValues(&quot;Hank&quot;, &quot;Tom&quot;, &quot;Alice&quot;);
+
+                    // Simply refer to a selection list 
+                    // defined elsewhere by name
+                    _.Compare(o =&gt; o.Part)
+                        .SelectionList(&quot;Parts&quot;);
+                });
+        }
+</code></pre>
 <h2>Fixture Wide Lists</h2>
 <p>You can also define named option lists to a Fixture class like this:</p>
-<p>24a9cb09-bd4e-4c3c-b46d-d944edaf906c</p>
+<pre><code class="language-csharp">
+        public SelectionValuesFixture()
+        {
+            AddSelectionValues(&quot;Names&quot;, &quot;Jeremy&quot;, &quot;Monte&quot;, &quot;Max&quot;);
+        }
+</code></pre>
 <h2>System Wide Lists</h2>
 <p>Lists can also be defined or built in a custom <code>ISystem</code> like this:</p>
-<p>f7f46966-291a-4b1c-82b5-fe2ee8c22eca</p>
+<pre><code class="language-csharp">
+        public CellHandling Start()
+        {
+            var handling = CellHandling.Basic();
+
+            // Adding a system wide list. 
+            handling.Lists[&quot;positions&quot;].AddValues(&quot;LB&quot;, &quot;OL&quot;, &quot;DL&quot;, &quot;WR&quot;, &quot;RB&quot;);
+
+            // This is where you can register a custom runtime conversion
+            handling.Conversions.RegisterRuntimeConversion&lt;PlayerConverter&gt;();
+
+            return handling;
+        }
+</code></pre>
 
 
 			      	</div>

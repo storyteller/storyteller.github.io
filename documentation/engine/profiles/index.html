@@ -109,7 +109,18 @@ st run src/Specifications --profile PhantomJS
 <p>st open src/Specifications --profile Firefox</p>
 </pre>
 <p>In your own application code, either in a custom <a href="/documentation/engine/system_under_test">ISystem</a> or in <code>&lt;a href=&quot;/documentation/engine/fixtures&quot;&gt;Fixture&lt;/a&gt;</code>classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):</p>
-<p>c9d82cb7-0e23-420f-ade9-ad29bc0a311f</p>
+<pre><code class="language-csharp">
+    public class SometimesSlowFixture : Fixture
+    {
+        public void Slow()
+        {
+            if (Project.CurrentProfile == &quot;slow&quot;)
+            {
+                Thread.Sleep(1.Minutes());
+            }
+        } 
+    }
+</code></pre>
 
 
 			      	</div>
