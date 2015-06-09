@@ -124,155 +124,32 @@
 <h2>By ctor(string)</h2>
 <p>A very powerful mechanism in Storyteller's conversion subsystem is the ability to just call a public constructor of a Type that accepts a single string argument.</p>
 <p>From the unit tests in the Storyteller code, we have a type called <code>Color</code> that exposes a public constructor matching this criteria:</p>
-<pre><code class="language-csharp">
-    public class Color
-    {
-        public string Name { get; set; }
-<pre><code>    public Color(string name)
-    {
-        this.Name = name;
-    }
-}
-</code></pre>
-<p></code></pre></p>
+<p>efb0eb63-a59b-429b-99ea-364ab2115dfb</p>
 <p>In action, the conversion code selects the &quot;call ctor(string)&quot; strategy and this test below passes:</p>
-<pre><code class="language-csharp">
-        [Test]
-        public void string_ctor_conversion()
-        {
-            conversions.Convert(typeof(Color), "Red")
-                .ShouldBeOfType<Color>()
-                .Name.ShouldBe("Red");
-        }
-</code></pre>
+<p>c3db5ef3-cdb1-40a0-bc00-e7e2ed52c131</p>
 <p>The inspiration for this feature was taken from a software system that tracked steel members. We frequently used a value type called <code>Dimension</code> that was frequently described in short hand like: <code>1 x 1 x 36</code> that expressed the physical cross section and length of a steel piece. That type looked something like this:</p>
-<pre><code class="language-csharp">
-    public class Dimensions
-    {
-        public Dimensions()
-        {
-        }
-<pre><code>    // This constructor would be called by Storyteller
-    public Dimensions(string text)
-    {
-        var parts = text.ToDelimitedArray('x');
-        Width = int.Parse(parts[0]);
-        Thickness = int.Parse(parts[1]);
-        Length = int.Parse(parts[2]);
-    }
-
-    public int Width { get; set; }
-    public int Length { get; set; }
-    public int Thickness { get; set; }
-}
-</code></pre>
-<p></code></pre></p>
+<p>3cfe86ba-2454-44f2-be19-4bd8eb542080</p>
 <p>Using this conversion may allow you to express hierarchical data in a concise, more readable format than you would be able to achieve by strictly supplying raw values for every raw property of a type.</p>
 <p>You can think of this pattern as a built in <a href="http://en.wikipedia.org/wiki/Interpreter_pattern">interpreter patter</a> -- crude as it may be.</p>
 <h2>Custom Conversions</h2>
 <p>Custom conversions come in two different flavors, with the simpler version being the <code>IConversionProvider</code> shown below:</p>
-<pre><code class="language-csharp">
-    public interface IConversionProvider
-    {
-        // Given the type argument, either return a
-        // Func that can parse a string into that Type
-        // or return null to let another IConversionProvider
-        // handle this type
-        Func<string, object> ConverterFor(Type type);
-    }
-</code></pre>
+<p>9eaf719e-d31a-4464-839e-0a9d42b89fe9</p>
 <p>Internally, Storyteller treats all the conversion providers as a <a href="http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">chain of responsibility</a> such that the first provider that &quot;knows&quot; how to handle a type provides the actual conversion strategy as a simple <code>Func&amp;lt;string, object&amp;gt;</code> func. User supplied providers are evaluated before the built in providers.</p>
 <p>A sample provider is the <code>EnumerationConversion</code> taken from the Storyteller code itself that handles any .Net Enumeration type:</p>
-<pre><code class="language-csharp">
-    public class EnumerationConversion : IConversionProvider
-    {
-        public Func<string, object> ConverterFor(Type type)
-        {
-            if (type.IsEnum)
-            {
-                return x => Enum.Parse(type, x);
-            }
-<pre><code>        return null;
-    }
-}
-</code></pre>
-<p></code></pre></p>
+<p>92a2b5d0-00b2-4196-bcf6-f7c2a9d394e5</p>
 <h2>Runtime Conversions</h2>
 <div class="alert alert-info" role="alert">
 <p>Internally, Storyteller can apply the non-runtime conversions as a kind of &quot;warmup&quot; task to get a specification ready to execute before passing control to the actual specification engine. This was done as a performance optimization in the 3.0 release because of throughput issues in a very large project using an older version. Runtime conversions have to be delayed until the specification is executing, so there is a small performance penalty.</p>
 </div>
 <p>The more complex extension point is the <code>IRuntimeConverter</code> that is allowed to use anything exposed by the <code>ISpecContext</code>, including system services, to do the conversion/location/resolution from raw text to the requested type.</p>
 <p>The signature is shown below:</p>
-<pre><code class="language-csharp">
-    public interface IRuntimeConverter
-    {
-        object Convert(string raw, ISpecContext context);
-        bool Matches(Type type);
-    }
-</code></pre>
+<p>158f869a-d8e4-42bc-a9f3-6c3be9d03044</p>
 <p>A sample usage from the internal unit tests is shown below:</p>
-<pre><code class="language-csharp">
-    public class PlayerConverter : IRuntimeConverter
-    {
-        public static readonly IList<Player> Players = new List<Player>
-        {
-            new Player {FirstName = "Justin", LastName = "Houston", Position = "LB"},
-            new Player {FirstName = "Jeremy", LastName = "Maclin", Position = "WR"},
-            new Player {FirstName = "Jamaal", LastName = "Charles", Position = "RB"},
-        };
-<pre><code>    public object Convert(string raw, ISpecContext context)
-    {
-        return Players.FirstOrDefault(x =&gt; x.FullName() == raw);
-    }
-
-    public bool Matches(Type type)
-    {
-        return typeof (Player) == type;
-    }
-}
-
-public class Player
-{
-    public string FirstName;
-    public string LastName;
-    public string Position;
-
-    public string FullName()
-    {
-        return &quot;{0} {1}&quot;.ToFormat(FirstName, LastName);
-    }
-}
-</code></pre>
-<p></code></pre></p>
+<p>0637fd4f-6993-4c96-99cc-8d8bd62b1438</p>
 <h2>Registering Custom Converters</h2>
 <p>Part of the signature of a custom <code>ISystem</code> is to return a <code>CellHandling</code> object that holds everything Storyteller needs to know in order to, well, handle all the cells in the specification system -- including any custom conversions.</p>
 <p>The <code>Conversions</code> property of <code>CellHandling</code> allows you to add custom <code>IConversionProvider</code> and <code>IRuntimeConverter</code> types and objects as in this sample below:</p>
-<pre><code class="language-csharp">
-        public CellHandling Start()
-        {
-            var handling = CellHandling.Basic();
-<pre><code>        // Adding a system wide list. 
-        handling.Lists[&quot;positions&quot;].AddValues(&quot;LB&quot;, &quot;OL&quot;, &quot;DL&quot;, &quot;WR&quot;, &quot;RB&quot;);
-
-        // This is where you can register a custom runtime conversion
-        handling.Conversions.RegisterRuntimeConversion&lt;PlayerConverter&gt;();
-
-        return handling;
-    }
-</code></pre>
-<p></code></pre></p>
-<h2>DateTime's</h2>
-<div class="alert alert-info" role="alert">
-<p>The &quot;TODAY +/- #&quot; nomenclature was invented to deal with common business logic that dealt with relative dates. The original Storyteller team felt that using this nomenclature made the specifications easier to understand in terms of the desired logic by using relative dates than it was to use hard coded dates. Plus it helps you set up test data for relative date logic like &quot;send an email if the open issue is more than 45 days old&quot; that can be expressed in test setup as &quot;IssueDate = TODAY - 46.&quot;</p>
-</div>
-<p>Date and time logic is so common that Storyteller has some special handling for expressing dates. The following rules in order of precedence are available:</p>
-<ol>
-<li>&quot;[Day of the Week] [24 hour time].&quot; -- So that &quot;Wednesday 14:30&quot; translates as 2:30 PM on the first Wednesday in the future. If today's day matches the day of the week, it select today's date.</li>
-<li>&quot;TODAY&quot; -- equivalent to DateTime.Today()</li>
-<li>&quot;TODAY+#&quot; or &quot;TODAY-#&quot; -- equivalent to DateTime.Today().Add(#.Days()).</li>
-<li><a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> formatted dates</li>
-<li>The default .Net DateTime.Parse(text) method</li>
-</ol>
+<p>b634da0a-a9aa-4e6f-ac3f-74bd33acb417</p>
 
 
 			      	</div>
@@ -307,6 +184,3 @@ public class Player
         <script type="text/javascript" src="/content/prism.js"></script>
         <script type="text/javascript" src="/content/sidebar.js"></script>
         <script type="text/javascript" src="/content/affix.js"></script>
-    </foot>
-</html>
-

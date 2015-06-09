@@ -109,25 +109,7 @@ st run src/Specifications --profile PhantomJS
 <p>st open src/Specifications --profile Firefox</p>
 </pre>
 <p>In your own application code, either in a custom <a href="/documentation/engine/system_under_test">ISystem</a> or in <code>&lt;a href=&quot;/documentation/engine/fixtures&quot;&gt;Fixture&lt;/a&gt;</code>classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):</p>
-<pre><code class="language-csharp">
-    public class SometimesSlowFixture : Fixture
-    {
-        public void Slow()
-        {
-            if (Project.CurrentProfile == "slow")
-            {
-                Thread.Sleep(1.Minutes());
-            }
-        } 
-    }
-</code></pre>
-<p>If you are running the interactive specification tool, the profile name will be shown in parantheses next to the system name in the top of the browser page.</p>
-<p>What might this be good for?</p>
-<ul>
-<li>The original usage was to supply the name of the browser that WebDriver should use in tests against a web application</li>
-<li>It has been useful in internal Storyteller testing for simulating failure conditions</li>
-<li>Opting into heavier tracing for better debugging that might be too slow to run normally</li>
-</ul>
+<p>c9d82cb7-0e23-420f-ade9-ad29bc0a311f</p>
 
 
 			      	</div>
@@ -162,6 +144,3 @@ st run src/Specifications --profile PhantomJS
         <script type="text/javascript" src="/content/prism.js"></script>
         <script type="text/javascript" src="/content/sidebar.js"></script>
         <script type="text/javascript" src="/content/affix.js"></script>
-    </foot>
-</html>
-

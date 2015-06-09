@@ -109,26 +109,7 @@
 <li>Start the system under test again</li>
 </ol>
 <p>The hook in your code that Storyteller uses to govern this lifecycle is the <code>ISystem</code> interface shown below.&quot;</p>
-<pre><code class="language-csharp">
-    public interface ISystem : IDisposable
-    {
-        /// <summary>
-        /// Starts the system or application and
-        /// returns a CellHandling object to be used
-        /// for all conversions and lists
-        /// </summary>
-        /// <returns></returns>
-        CellHandling Start();
-<pre><code>    /// &lt;summary&gt;
-    /// Runs as the very first step in specification
-    /// execution. The IExecutionContext returned is used
-    /// within the scope of the current Specification
-    /// &lt;/summary&gt;
-    /// &lt;returns&gt;&lt;/returns&gt;
-    IExecutionContext CreateContext();
-}
-</code></pre>
-<p></code></pre></p>
+<p>b9e42052-4793-40ca-a880-df6657c24b7c</p>
 <p>The <code>ISystem</code> interface only has three methods:</p>
 <ol>
 <li><code>Start() : CellHandling</code> -- this is a hook to do any kind of system bootstrapping or activation and an opportunity to put together any custom cell conversions and system wide selection lists. This method is only called <strong>once</strong> each time the testing <code>AppDomain</code> is loaded.</li>
@@ -136,17 +117,7 @@
 <li><code>Dispose()</code> -- Clean up after yourself! This method is called when the Storyteller application is shut down and anytime Storyteller tries to recycle the system under test.</li>
 </ol>
 <p>The <code>IExecutionContext</code> only lives for the lifetime of a specification execution and is disposed immediately after the specification runs. The <code>Dispose()</code> method is called even if the specification times out or aborts early with a critical exception.</p>
-<pre><code class="language-csharp">
-    public interface IExecutionContext : IDisposable
-    {
-        // AfterExecution is a hook to gather up custom logging
-        // or to make custom assertions against the specification
-        // execution
-        void AfterExecution(ISpecContext context);
-<pre><code>    T GetService&lt;T&gt;();
-}
-</code></pre>
-<p></code></pre></p>
+<p>64f1401e-d3ef-44db-bfa6-e78716734f0d</p>
 <p>Use the <code>Dispose()</code> method to do any kind of global state cleanup between specification runs.</p>
 <div class="alert alert-info" role="warning"><strong>Note!</strong> Make sure that the <code>Dispose()</code> method for your <code>ISystem</code> is thorough in how it shuts down the system to release resources like file locks, database connections, or network ports. Failing to do this when Storyteller tries to reload the system under test for new changes will cause you no end of grief. And yes, that's the voice of experience talking.
 </div>
@@ -159,26 +130,7 @@
 </ol>
 <h2>Custom Conversion Providers and Selection Lists</h2>
 <p>Custom conversion providers and system wide selection lists can be added in the <code>ISystem.Start()</code> method. The <code>CellHandling</code> class below exposes methods to add and configure lists and conversions:</p>
-<pre><code class="language-csharp">
-    public class CellHandling
-    {
-        public CellHandling(EquivalenceChecker equivalence, Conversions conversions)
-        {
-            Equivalence = equivalence;
-            Conversions = conversions;
-        }
-<pre><code>    public EquivalenceChecker Equivalence { get; private set; }
-    public Conversions Conversions { get; private set; }
-
-    public readonly Cache&lt;string, OptionList&gt; Lists = new Cache&lt;string, OptionList&gt;(key =&gt; new OptionList(key)); 
-
-    public static CellHandling Basic()
-    {
-        return new CellHandling(new EquivalenceChecker(), new Conversions());
-    }
-}
-</code></pre>
-<p></code></pre></p>
+<p>9207c2f7-866e-4f3a-86aa-ee0966f9b397</p>
 
 
 			      	</div>
@@ -213,6 +165,3 @@
         <script type="text/javascript" src="/content/prism.js"></script>
         <script type="text/javascript" src="/content/sidebar.js"></script>
         <script type="text/javascript" src="/content/affix.js"></script>
-    </foot>
-</html>
-

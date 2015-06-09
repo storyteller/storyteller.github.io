@@ -102,43 +102,7 @@
 <div class="alert alert-warning" role="alert"><strong>Warning!</strong> Only one instance of each Fixture class is created and shared across all specification executions in a Storyteller process. This is a breaking change from earlier version. </div>
 <p>The specification language in Storyteller starts with implementations of the <code>Fixture</code> class that implement and expose the individual grammars.</p>
 <p>A <code>Fixture</code> class has to be a public, concrete class that inherits from <code>Storyteller.Fixture</code> like the class shown below:</p>
-<pre><code class="language-csharp">
-    public class SampleFixture : Fixture
-    {
-        public SampleFixture()
-        {
-            Title = "The Sample Fixture";
-<pre><code>        // Programmatically adding a Grammar to this Fixture
-        this[&quot;SayHello&quot;] 
-            = Do(&quot;Say Hello&quot;, c =&gt; Debug.WriteLine(&quot;Well, hello there!&quot;));
-
-    }
-
-    // Add a grammar from a Sentence method
-    public void SayGoodbye()
-    {
-        Debug.WriteLine(&quot;Goodbye.&quot;);
-    }
-
-    public IGrammar SayYourName()
-    {
-        return Do(&quot;Say your name&quot;, c =&gt; Debug.WriteLine(&quot;My name is Storyteller&quot;));
-    }
-
-    public override void SetUp()
-    {
-        // Perform any actions before this Fixture is used during
-        // the execution of a section inside a specification
-    }
-
-    public override void TearDown()
-    {
-        // Perform actions at the end of a section
-        // when a specification is executed
-    }
-}
-</code></pre>
-<p></code></pre></p>
+<p>56375ebe-5455-46b3-88c6-bc79e21641ca</p>
 <h3>Some things of note:</h3>
 <ul>
 <li>The idiom is to name the Fixture classes [Something]Fixture, where &quot;Something&quot; would be the default title.</li>
@@ -148,80 +112,26 @@
 <div class="alert alert-info" role="alert"><strong>Info</strong> The initial project team that developed and used Storyteller felt that it was much easier to trace the functionality of the Fixture language to the right place in the code if you primarily used individual methods on the Fixture classes instead of explicitly adding grammars in the constructor function of a Fixture. </div>
 <h2>Fixture and Grammars</h2>
 <p>The <code>Fixture</code> class holds its grammar objects in a hash that's exposed as an indexer on the object:</p>
-<pre><code class="language-csharp">
-        [IndexerName("Grammars")]
-        public IGrammar this[string key]
-        {
-            get { return _grammars[key]; }
-            set
-            {
-                _grammars[key] = value;
-                value.Key = key;
-            }
-        }
-</code></pre>
+<p>5183a83b-0436-4b2a-9a7a-36b0c33582b8</p>
 <p>You can both access grammars by name and programmatically add grammar objects to this hashed collection with the C# syntax <code>this[&quot;grammar key&quot;] = myGrammar</code>.</p>
 <div class="alert alert-info" role="alert"><strong>Info</strong> As of 3.0, Storyteller is finally smart enough to build named grammars on demand if they are missing, so there's no longer any concern about how the grammars are ordered in the Fixture class.</div>
 <h2>Adding Grammars by Method</h2>
 <p>Fixture objects find their grammars by reflecting over its <code>Type</code> and looking for any public method whose name matches the requested grammar key. A method that returns an <code>IGrammar</code> object will be executed and the resulting IGrammar object is exposed on the Fixture with the name of the method. See the example below:</p>
-<pre><code class="language-csharp">
-        public IGrammar CheckTopic()
-        {
-            return Paragraph("Check the properties of a topic at the root of the topic directory", _ =>
-            {
-                _ += this["ForFile"];
-                _ += c => { c.State.CurrentObject = TopicLoader.LoadTopic(_location, true); };
-<pre><code>            _.VerifyPropertiesOf&lt;Topic&gt;(x =&gt;
-            {
-                x.Check(y =&gt; y.Key);
-                x.Check(y =&gt; y.Title);
-                x.Check(y =&gt; y.UrlSegment);
-            });
-        });
-    }
-</code></pre>
-<p></code></pre></p>
+<p>b82a4db1-2913-4d40-acd3-aabf09d152ce</p>
 <p>For methods that either have a <code>Void</code> signature or return a value that's not <code>IGrammar</code>, a Fixture object will create a <em>Sentence</em> grammar that will call that method on the Fixture object when it executes a specification.</p>
 <p>See <a href="/documentation/engine/grammars/sentences">Sentences</a> for more information.</p>
 <h2>Accessing the Context</h2>
 <p>The <code>ISpecContext</code> object for the currently executing specification is exposed on Fixture objects through its <code>Context</code> property. The following sample is taken from a Fixture used in Storyteller's internal specifications that tests the documentation generation:</p>
-<pre><code class="language-csharp">
-<pre><code>    // This is taken from a Fixture class that is used
-    // internally to test Storyteller's documentation
-    // generation
-    public override void SetUp()
-    {
-        _directory = Context.Service&lt;DocSettings&gt;().Root;
-    }
-</code></pre>
-<p></code></pre></p>
+<p>5f8c26dd-b833-43e3-a0c1-d8de42e10c25</p>
 <p>Note that the <code>Context</code> property is set during execution before any <code>SetUp</code> method or Grammar's from the Section are called. <strong>Only use the <code>Context</code> property and never cache the <code>ISpecContext</code> in a private field to avoid accessing stale data from a previous specification</strong>.</p>
 <h2>Retrieving Application Services</h2>
 <p>Storyteller supplies a lightweight abstraction to provide access to running services in the system under test via this syntax taken from one of the specifications for Storyteller itself:</p>
-<pre><code class="language-csharp">
-        public override void SetUp()
-        {
-            // In this case, the DocSettings object is 
-            // ultimately resolved by the underlying
-            // IoC container (StructureMap of course) for 
-            // the running documentation application
-            _directory = Context.Service<DocSettings>().Root;
-        }
-</code></pre>
+<p>5fc2e3c8-5d6b-4a57-9ca3-d7d13da37ecd</p>
 <p>The <code>GetService&lt;T&gt;</code> method delegates to the <code>IExecutionContext</code> method of the same name that is built from the system under test for each specification execution. See <a href="/documentation/engine/system_under_test">Connecting Storyteller to the System under Test</a> for more information.</p>
 <h2>The Current Specification</h2>
 <p>Storyteller has been used on a couple systems that involved reading and working with textual files. While the Storyteller team usually prefers to do define all specification setup data in the specification itself, sometimes we have opted to use the raw textual files. What we wanted to do was simply put the specification input files side by side to whereever the actual Storyteller specification file is persisted and then read files in from relative paths later. That was not really possible in early Storyteller, but is now.</p>
 <p>The currently executing specification is reachable inside any <code>Fixture</code> class from this code:</p>
-<pre><code class="language-csharp">
-        [FormatAs("Load the file {filename}")]
-        public void LoadFile(string filename)
-        {
-            var currentDirectory = Context.Specification.Filename.ParentDirectory();
-            var path = currentDirectory.AppendPath(filename);
-<pre><code>        // do something with the file at 'path'
-    }
-</code></pre>
-<p></code></pre></p>
+<p>44a4a30c-c254-4494-bd51-4fd798bc4eb3</p>
 <p>An object of the <code>Specification</code> class contains all the information and expression of that specification, but also &quot;knows&quot; where it is persisted on the file system.</p>
 <p>The Storyteller team theorizes that exposing the current <code>Specification</code> may be valuable to &quot;warm up&quot; or parallelize specification execution for better throughput, but we have not yet exploited this.</p>
 <h2>SetUp() and TearDown()</h2>
@@ -233,35 +143,9 @@
 </ul>
 <h2>Hidden Grammars and Fixtures</h2>
 <p>You will occasionaly want to build a grammar that will be used by another grammar, but shouldn't be exposed in the Storyteller editor as a valid choice. In that case, simply mark a grammar with the <code>[Hidden]</code> attribute as shown below:</p>
-<pre><code class="language-csharp">
-<pre><code>    // CaptureLine will not be visible in the user interface for user
-    // selection when authoring a specification, but can be used internally
-    [Hidden]
-    public void CaptureLine(string Text)
-    {
-        _text.Add(Text);
-    }
-
-    public IGrammar WriteFile()
-    {
-        // The WriteFile grammar uses the CaptureLine grammar
-        // as the basis for a table
-        return this[&quot;CaptureLine&quot;].AsTable(&quot;The contents are&quot;)
-            .After(() =&gt;
-            {
-                new FileSystem().WriteToFlatFile(_location, writer =&gt; _text.Each(writer.WriteLine));
-            });
-    }
-</code></pre>
-<p></code></pre></p>
+<p>3ad7199e-56a6-48b5-a213-9eb8f7bcb2b1</p>
 <p>In the same token, if you have a <code>Fixture</code> class than will be used as an embedded section, but never by itself as a top level section, decorate a <code>Fixture</code> class with the <code>[Hidden]</code> attribute as shown below:</p>
-<pre><code class="language-csharp">
-    [Hidden]
-    public class SecretFixture : Fixture
-    {
-<pre><code>}
-</code></pre>
-<p></code></pre></p>
+<p>8afd35a2-5668-4f0c-a644-4673af52df06</p>
 
 
 			      	</div>
@@ -296,6 +180,3 @@
         <script type="text/javascript" src="/content/prism.js"></script>
         <script type="text/javascript" src="/content/sidebar.js"></script>
         <script type="text/javascript" src="/content/affix.js"></script>
-    </foot>
-</html>
-
