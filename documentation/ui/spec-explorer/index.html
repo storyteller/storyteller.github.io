@@ -11,12 +11,14 @@
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
 		
+		
         
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
 
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
@@ -56,7 +58,7 @@
 
 		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/ui/shell" title="The Application Shell">Previous</a></li>
-		      	<li><a href="/documentation/ui/spec-editor" title="The Specification Editor">Next</a></li>
+		      	<li><a href="/documentation/ui/language" title="Working with the Fixture and Grammar Language">Next</a></li>
 		      </ul>
 		    </nav>
 
@@ -82,7 +84,7 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/ui/spec-editor">The Specification Editor</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/ui/language">Working with the Fixture and Grammar Language</a></p>
 		        	<h3 class="no-margin">Previous</h3><a href="/documentation/ui/shell">The Application Shell</a></p>
 
 		        </ul>
@@ -97,7 +99,75 @@
 			      	<div id="main-pane">
 			      		<!--Title:The Specification Explorer-->
 <!--Url:spec-explorer-->
-<p>TODO(Write some content!)</p>
+<p>The &quot;Specification Explorer&quot; is the main view of the Storyteller specification editor and provides a pretty typical tree view of all the specifications in the project. The suite nodes in the specification explorer can be expanded or collapsed by clicking the <i class="fa fa-fw fa-caret-down" data-reactid=".0.1.$1af4afe3-a926-4abe-bd27-c3ae23409a5e.1.1:$Embedded.0.0.0"></i> or <i class="fa fa-fw fa-caret-right" data-reactid=".0.1.$1af4afe3-a926-4abe-bd27-c3ae23409a5e.1.1:$Embedded.0.0.0"></i> icons.</p>
+<p>The specification explorer consists of a tree view component displaying all the suites and specifications and a vertical pane on the left that contains the controls to filter the specification tree or perform batched operations on the specifications shown on the tree.</p>
+<h5><strong>The Specification Explorer page</strong></h5>
+<img src="/content/images/spec-explorer.png" width="100%"/>
+<h2>Specification State</h2>
+<p>The display of the specification leaves in the tree view will change to denote status. The table below demonstrates the different specification states:</p>
+<table class="table">
+<tr>
+    <th>Description</th>
+    <th>Display</th>
+</tr>
+<tr>
+    <td>No results, not running or queued</td>
+    <td><i class="fa fa-circle-o"></i> [Specification Name]</td>
+</tr>
+<tr>
+    <td>Last execution succeeded</td>
+    <td><i class="fa fa-check text-success"></i> [Specification Name]</td>
+</tr>
+<tr>
+    <td>Last execution failed</td>
+    <td><i class="fa fa-exclamation-circle text-danger"></i> [Specification Name]</td>
+</tr>
+<tr>
+    <td>Queued</td>
+    <td><i class="fa fa-circle-o"> [Specification Name]</i></td>
+</tr>
+<tr>
+    <td>Running with no conclusive results</td>
+    <td><i class="fa fa-spinner fa-spin"></i> <strong>[Specification Name]</strong></td>
+</tr>
+<tr>
+    <td>Running successfully</td>
+    <td><i class="fa fa-spinner fa-spin text-success"></i> <strong>[Specification Name]</strong></td>
+</tr>
+<tr>
+    <td>Running with failures</td>
+    <td><i class="fa fa-spinner fa-spin text-danger"></i> <strong>[Specification Name]</strong></td>
+</tr>
+</table>
+<h2>Filtering</h2>
+<p>The specification tree can be filtered by any combination of result state (none, any, successful, or failed) and specification lifecycle (any, acceptance, or regression) using the filter button groups in the left of the specification editor screen.</p>
+<h2>Adding a new Top Level Suite</h2>
+<p>To add a new top-level suite, click the &quot;new suite&quot; link just to the right of the title &quot;All Specifications&quot; at the top of the tree view to bring up the modal dialog for adding a suite. Note that you can only add top level suites when you are on the home page of the specification explorer.</p>
+<h5><strong>The add suite dialog</strong></h5>
+<img src="/content/images/new-suite.png" width="100%"/>
+<h2>Adding Child Suites</h2>
+<p>Click the &quot;new child suite&quot; link just to the right of any suite node in the tree view to open up the modal dialog for adding child suites.</p>
+<h5><strong>The add a child suite dialog</strong></h5>
+<img src="/content/images/new-child-suite.png" width="100%"/>
+<h2>Adding Specifications</h2>
+<p>Click the &quot;new spec&quot; link to the right of any suite node to bring up a modal dialog to add a specification to that suite.</p>
+<h5><strong>The new specification dialog</strong></h5>
+<img src="/content/images/new-specification.png" width="100%"/>
+<h2>Cloning an Existing Specification</h2>
+<p>Clicking the &quot;clone&quot; link to the right of any Specification leaf in the tree will bring up a modal dialog to enter the name for the new Specification. When cloning a specification, Storyteller copies the entire structure of the original Specification but <em>always sets the lifecycle of the new specification to &quot;Acceptance&quot;</em>.</p>
+<h5><strong>Clone a specification dialog</strong></h5>
+<img src="/content/images/clone-specification.png" width="100%"/>
+<h2>Deleting Specifications</h2>
+<p>Click the &quot;delete&quot; link to the right of any Specification to delete it.</p>
+<h2>Navigate to a Suite</h2>
+<p>In the tree view, click on the name of any suite to drill down into the specifications for only that suite.</p>
+<h2>Running Specifications</h2>
+<p>To run all the specifications shown in the tree view, click the &quot;Run All&quot; link at the top left of the specification explorer page. This command will only run the specifications that meet the currently selected filter.</p>
+<p>To run one specification at a time, just click the &quot;run&quot; link to the right of any specification leaf.</p>
+<h2>Navigating to a Specification</h2>
+<p>In the tree view, click on the name of any specification to navigate to the <a href="/documentation/ui/spec-editor">The Specification Editor</a> page for that specification.</p>
+<h2>Batch Changing Specification Lifecycle</h2>
+<p>At any point, you can change the lifecycle of all the specifications currently in the tree view by clicking either the &quot;Mark as Acceptance&quot; or the &quot;Mark as Regression&quot; buttons. These commands honor the current specification filter. Do note that you will still have to persist the changes to any specifications that are already loaded. Use the &quot;Save All Changes&quot; link at the top to persist all outstanding changes.</p>
 
 
 			      	</div>
@@ -111,7 +181,7 @@
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/ui/spec-editor">The Specification Editor</a>
+				        	<strong>Next: </strong><a href="/documentation/ui/language">Working with the Fixture and Grammar Language</a>
 
 				        </span>
 			      	</nav>
