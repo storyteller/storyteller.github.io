@@ -28,7 +28,7 @@
     
     <body  >
 
-<a href="https://github.com/darthfubumvc/storyteller2"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
         
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
@@ -48,7 +48,7 @@
 		        </li>
 		        <li>
 		        <li>
-<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
 		        <li>
 
@@ -57,7 +57,7 @@
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
-		      	<li><a href="/documentation/docs" title="Living Documentation Generation">Previous</a></li>
+		      	<li><a href="/documentation/docs/authoring" title="Authoring Topics">Previous</a></li>
 		      	<li><a href="/documentation/docs/outlines" title="Topic Outlines">Next</a></li>
 		      </ul>
 		    </nav>
@@ -85,7 +85,7 @@
 		        </ul>
 
 		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/docs/outlines">Topic Outlines</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/docs">Living Documentation Generation</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/docs/authoring">Authoring Topics</a></p>
 
 		        </ul>
 		      </div><!--/left-->
@@ -99,7 +99,20 @@
 			      	<div id="main-pane">
 			      		<!--Title:Creating a Navigation Structure-->
 <!--Url:navigation-->
-<p>TODO(Write some content!)</p>
+<p>Storyteller supports the idea of a hierarchical navigation structure that is inferred from the structure of the files in the <code>/documentation</code> folder.</p>
+<h2>Explicitly Order Topics in a Directory</h2>
+<p>To override the default ordering of topics, create a file named <code>order.txt</code> in that directory and simply list the file names <em>without the .md</em> extension of the topics in that directory in the order in which you wish the navigation to flow. Any files that are not part of the <code>order.txt</code> file are simply put at the end by sorting on their title.</p>
+<p>As an example, consider the topic you're reading right now. This file is called &quot;navigation.md&quot; and is in Storyteller's GitHub repository <a href="https://github.com/storyteller/Storyteller/tree/master/documentation/documentation/docs">here with all its sibling files</a>. To create the navigation order in what we hope is a logical narrative, we used an <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/documentation/docs/order.txt">order.txt</a> file to configure the ordering like so:</p>
+<pre>
+getting_started
+authoring
+navigation
+outlines
+samples
+theme
+running
+export
+</pre>
 
 
 			      	</div>
@@ -108,7 +121,7 @@
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/docs">Living Documentation Generation</a>
+				        	<strong>Previous: </strong><a href="/documentation/docs/authoring">Authoring Topics</a>
 
 				        </span>
 				        <span class="pull-right">
@@ -134,3 +147,6 @@
         <script type="text/javascript" src="/content/prism.js"></script>
         <script type="text/javascript" src="/content/sidebar.js"></script>
         <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+
