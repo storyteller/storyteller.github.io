@@ -99,7 +99,52 @@
 			      	<div id="main-pane">
 			      		<!--Title:Topic Outlines-->
 <!--Url:outlines-->
-<p>TODO(Write some content!)</p>
+<p>If you want to quickly generate the skeleton of a documentation project, Storyteller comes with the <code>st doc-seed</code> command.</p>
+<p>The first step is to write a file called <code>outline.txt</code> in your <code>/documentation</code> folder. Configure the topics in the order and structure you want with the right titles with a format like this (originally used to generate the documentation you are reading):</p>
+<pre>
+index:Storyteller for Executable Specifications and Living Documentation
+terminology
+system_under_test:Connecting Storyteller to the System under Test
+language:Crafting the Specification Language
+table_vs_flow:Table vs. Flow Based Testing
+fixtures
+fixtures/context:Using the Specification Context
+fixtures/state:State Management across Fixtures
+grammars
+grammars/actions:Carrying out Actions
+grammars/facts:Asserting Facts
+grammars/assertions:Asserting Values
+grammars/paragraphs:'Macros' with Paragraph Grammars
+grammars/tables:Tables
+grammars/decision_tables:Decision Tables
+grammars/sets:Verifying a Set of Data
+grammars/embedded_section:Embedded Sections
+grammars/reusing:Reusing Grammars across Fixtures
+grammars/currying:Currying Grammars for more Expressive Specifications
+comments:Embedding Comments in Specifications
+selection_lists:Selection Lists
+system_state:Setting up System State
+conversion:Data Conversion within Specifications
+ui:The User Interface
+ui/spec-explorer:The Specification Explorer
+ui/spec-editor:The Specification Editor
+performance:Performance Timing
+instrumentation:Instrumenting Specification Execution
+ci:Integration with Continuous Integration
+docs:Living Documentation Generation
+docs/navigation:Creating a Navigation Structure
+docs/outlines:Topic Outlines
+docs/topics:Topic Files
+docs/samples:Embedding Code Samples
+docs/theme:Documentation Theme
+docs/running:Running the Documentation Website Locally
+docs/export:Exporting the Documentation
+</pre>
+<p>Once you are happy with the order, run <code>st doc-seed</code> to create a shell of the topic files.</p>
+<p>Right now this is a one way generation, but if there is demand (or better yet a pull request;-)), this could be extended to be bi-directional.</p>
+<section class="command-section"><h4><span id="doc-seed" class="section-header">st doc-seed</span><i class="command-description">Seeds a topic file structure from an outline.txt file</i></h4></section>
+<div class="single-command-usage"><em>st doc-seed</em>[-d, --directory <directory>] [-v, --version <version>] [-c, --code [<code1 code2 code3 ...>]]</div>
+<table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-d, --directory &lt;directory&gt;]</td><td class="command-flag-description">The documentation directory. The default is &#39;documentation&#39;</td></tr><tr><td class="command-flag-usage">[-v, --version &lt;version&gt;]</td><td class="command-flag-description">Override the application version. Default is &#39;Unknown&#39;</td></tr><tr><td class="command-flag-usage">[-c, --code [&lt;code1 code2 code3 ...&gt;]]</td><td class="command-flag-description">Override the directories where sample scanning should be enabled. Default is [src]</td></tr></tbody></table>
 
 
 			      	</div>

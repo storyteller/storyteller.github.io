@@ -98,6 +98,23 @@
 
 			      	<div id="main-pane">
 			      		<!--Title: Linking to Other Topics-->
+<p>Storyteller has a custom syntax to link to other topics in a topic file just to handle the various url modes in previewing and publishing.</p>
+<p>In all the use cases shown below, you can find samples in Storyteller's own <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/layout.htm">layout.htm</a> file that specifies the layout of this website.</p>
+<p>In its simplest form, you will use a syntax like:</p>
+<p><code>&lt;[linkto:documentation/docs/authoring]&gt;</code></p>
+<p>Which will render this: <a href="/documentation/docs/authoring">Authoring Topics</a>. The default output will be a link to that topic with the proper Url and using that topic's title as the link text.</p>
+<p>The path after the colon is effectively the relative path from the documentation root to the topic file, minus the <code>.md</code> extension. <code>index.md</code> files are referenced by just its parent directory.</p>
+<h2>Override the Link Title</h2>
+<p>To override the link text, use a format like this:</p>
+<p><code>&lt;[linkto:documentation/docs/authoring;title=A different link description]&gt;</code>, which renders: <a href="/documentation/docs/authoring">A different link description</a>.</p>
+<h2>Customize the Link Rendering</h2>
+<p>You can override the construction of the link html by explicitly defining the html template in the directive usage like this one sample that is taken from Storyteller's <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/layout.htm#L60-L61">own documentation layout.htm</a>.</p>
+<p><code>&lt;[linkto:{previous};&lt;li&gt;&lt;a href=&quot;{href}&quot; title=&quot;{title}&quot;&gt;Previous&lt;/a&gt;&lt;/li&gt;]&gt;</code></p>
+<p>The substitutions are just common handlebars kind of templating for the line ({href}) and the title ({title}).</p>
+<h2>Link to the Next Topic</h2>
+<p>As part of your <code>layout.htm</code> file, you may want to have a link to the next topic if one exists. If you are on the very last topic in the structure, you don't want that topic to render at all. In that case, use the text <code>{next}</code> as the topic key.</p>
+<h2>Link to the Previous Topic</h2>
+<p>Likewise, you can create a link to the previous topic by using <code>{previous}</code> as the topic identifier.</p>
 
 
 			      	</div>
