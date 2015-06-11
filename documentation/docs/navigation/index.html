@@ -58,7 +58,7 @@
 
 		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/docs/authoring" title="Authoring Topics">Previous</a></li>
-		      	<li><a href="/documentation/docs/outlines" title="Topic Outlines">Next</a></li>
+		      	<li><a href="/documentation/docs/linking" title="Linking to Other Topics">Next</a></li>
 		      </ul>
 		    </nav>
 
@@ -84,7 +84,7 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/docs/outlines">Topic Outlines</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/docs/linking">Linking to Other Topics</a></p>
 		        	<h3 class="no-margin">Previous</h3><a href="/documentation/docs/authoring">Authoring Topics</a></p>
 
 		        </ul>
@@ -100,7 +100,22 @@
 			      		<!--Title:Creating a Navigation Structure-->
 <!--Url:navigation-->
 <p>Storyteller supports the idea of a hierarchical navigation structure that is inferred from the structure of the files in the <code>/documentation</code> folder.</p>
-<h2>Explicitly Order Topics in a Directory</h2>
+<p>The navigation tree structure is derived using these rules:</p>
+<ol>
+<li>
+<p>The root folder and each child folder (<code>/content</code> is treated specially) is treated like a node within the tree with the <code>index.md</code> or <code>splash.htm</code> file considered to be the root of that node</p>
+</li>
+<li>
+<p>Other topic files named with the pattern <code>[key].md</code> are additional topics that are nested directly underneath the <code>index.md</code> topic in that folder.</p>
+</li>
+<li>
+<p>If there is a child folder, the <code>/[key]/index.md</code> topic node is nested directly underneath the parent folder's root.</p>
+</li>
+<li>
+<p>Child topics in a topic node directory are ordered by the title of the child topics unless there is an <code>order.txt</code> file as described below</p>
+</li>
+</ol>
+<h2>Explicit Topic Ordering with &quot;Order.txt&quot;</h2>
 <p>To override the default ordering of topics, create a file named <code>order.txt</code> in that directory and simply list the file names <em>without the .md</em> extension of the topics in that directory in the order in which you wish the navigation to flow. Any files that are not part of the <code>order.txt</code> file are simply put at the end by sorting on their title.</p>
 <p>As an example, consider the topic you're reading right now. This file is called &quot;navigation.md&quot; and is in Storyteller's GitHub repository <a href="https://github.com/storyteller/Storyteller/tree/master/documentation/documentation/docs">here with all its sibling files</a>. To create the navigation order in what we hope is a logical narrative, we used an <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/documentation/docs/order.txt">order.txt</a> file to configure the ordering like so:</p>
 <pre>
@@ -113,6 +128,7 @@ theme
 running
 export
 </pre>
+<p>Child folders can be part of the ordering by just using the child folder name as the key in <code>order.txt</code>. See this <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/documentation/order.txt">file ordering the Storyteller documentation</a> that orders the <a href="https://github.com/storyteller/Storyteller/tree/master/documentation/documentation">documentation topics</a> at <a href="http://storyteller.github.io/documentation">http://storyteller.github.io/documentation</a>.</p>
 
 
 			      	</div>
@@ -126,7 +142,7 @@ export
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/docs/outlines">Topic Outlines</a>
+				        	<strong>Next: </strong><a href="/documentation/docs/linking">Linking to Other Topics</a>
 
 				        </span>
 			      	</nav>
