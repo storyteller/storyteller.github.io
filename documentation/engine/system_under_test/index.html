@@ -127,13 +127,20 @@
         /// &lt;/summary&gt;
         /// &lt;returns&gt;&lt;/returns&gt;
         IExecutionContext CreateContext();
+
+        /// &lt;summary&gt;
+        /// Use to bootstrap the system when it first starts
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        Task Warmup();
     }
 </code></pre>
-<p>The <code>ISystem</code> interface only has three methods:</p>
+<p>The <code>ISystem</code> interface only has four methods:</p>
 <ol>
 <li><code>Start() : CellHandling</code> -- this is a hook to do any kind of system bootstrapping or activation and an opportunity to put together any custom cell conversions and system wide selection lists. This method is only called <strong>once</strong> each time the testing <code>AppDomain</code> is loaded.</li>
 <li><code>CreateContext() : IExecutionContext</code> -- this method is executed as the first step in executing a specification. Use this method to perform any globally applicable state setup actions that will apply to all specifications.</li>
 <li><code>Dispose()</code> -- Clean up after yourself! This method is called when the Storyteller application is shut down and anytime Storyteller tries to recycle the system under test.</li>
+<li><code>Warmup() : Task</code> -- For systems that might need a little head start in bootstrapping, this method gives Storyteller a chance to &quot;warm up&quot; the system under test before you run any actual specifications</li>
 </ol>
 <p>The <code>IExecutionContext</code> only lives for the lifetime of a specification execution and is disposed immediately after the specification runs. The <code>Dispose()</code> method is called even if the specification times out or aborts early with a critical exception.</p>
 <pre><code class="language-csharp">
