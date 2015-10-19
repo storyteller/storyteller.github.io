@@ -36,7 +36,7 @@
 		      <a href="/" class="navbar-brand">Storyteller</a>
 		    </div>
 		    <nav class="collapse navbar-collapse" role="navigation">
-		      <ul class="nav navbar-nav">
+		      <ul class="nav navbar-nav pull-right">
             <li>
               <a href="/tutorial">Tutorial</a>
             </li>
@@ -50,16 +50,15 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		        <li>
-
-
-		        </li>
-		      </ul>
-
-		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/ui/language" title="Working with the Fixture and Grammar Language">Previous</a></li>
 		      	<li><a href="/documentation/engine" title="The .Net Engine">Next</a></li>
 		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
 		    </nav>
 
 		  </div>
@@ -117,7 +116,7 @@
 <h5><strong>Status Bar with Failures</strong></h5><img src="/content/images/editing/status-bar.png" style="max-width:100%" />
 <h5><strong>Status Bar with a Success</strong></h5><img src="/content/images/editing/status-bar-success.png" style="max-width:100%" />
 <p>The status bar tells you the resulting counts if any, and when the specification was last executed in local machine time.</p>
-<h2>Running, Saving, and Undo/Redo Changes</h2>
+<h2>Running, Saving, Undo/Redo Changes, and Opening the File</h2>
 <p>At the top left of the screen, just below the specification title, is a series of buttons providing contextual actions on a specification.</p>
 <h5><strong>The Command Bar</strong></h5><img src="/content/images/editing/spec-commands.png" style="max-width:100%" />
 <p>From left to right, the buttons are:</p>
@@ -130,6 +129,11 @@
 </li>
 <li>
 <p>Undo and Redo buttons to rollback any unsaved changes or to reapply changes that were previously rolled back.</p>
+</li>
+<li>
+<p>An &quot;Open&quot; button that will try to open the underlying specification file in your default editor for xml files as a quick shortcut
+to make edits by hand. Any changes to the file should be reflected in the editor shorly after saving the file, but the file system watchers have
+been known to be slow sometimes. <strong>It's freqently quicker to make large scale reorderings directly to the file than it is with the editor.</strong></p>
 </li>
 </ol>
 <h2>Preview the Specification</h2>
@@ -155,6 +159,9 @@
 <p>The maximum retry count for the specification can be edited by changing the textbox at the top left of the contextual pane.</p>
 <p>Individual cells in the specification are edited by either textbox's, checkbox's, or select box's depending on the type of cell. Only the active cell is shown in an editable form. All other cells are in a &quot;preview&quot; mode to enhance the legibility of the specification while editing (this was a major shortcoming in Storyteller 1-2).</p>
 <h5><strong>Editing Cells</strong></h5><img src="/content/images/editing/editing-cells.png" style="max-width:100%" />
+<h2>Specification Expiration</h2>
+<p>At the top left of the specification editor is a small control to review and edit the specification expiration date for this specification.</p>
+<p>See <a href="/documentation/expiration">Specification Expiration</a> for more information.</p>
 <h2>The Specification Outline and Step &quot;Containers&quot;</h2>
 <p>The specification itself, top level sections, tables, and embedded sections can all act as &quot;containers&quot; that are composed of simpler steps. Inside the specification editor, only one container can be active at any one time. The contextual controls in the left pane of the editor are dependent upon the active container:</p>
 <ul>
@@ -201,7 +208,8 @@
 <p>Or by the contextual links in the left pane for an active container:</p>
 <h5><strong>New Comment via the Contextual Links</strong></h5><img src="/content/images/editing/new-comment-2.png" style="max-width:100%" />
 <h2>Reordering Steps or Sections</h2>
-<p>Sections, comments, and steps can be reordered within their parent container by using keyboard shortcuts:</p>
+<p>Sections, comments, and steps can be reordered by clicking on the up and down caret icons in the editor controls.</p>
+<p>Sections, comments, and steps can also be reordered within their parent container by using keyboard shortcuts:</p>
 <ol>
 <li>Reorder steps or sections by moving the active step or section up with <code>ctrl + alt + up</code> or <code>ctrl + pageup</code></li>
 <li>Reorder steps or sections by moving the active step or section down with <code>ctrl + alt + down</code> or <code>ctrl + pagedown</code></li>
@@ -237,7 +245,29 @@
 		  	</div><!--/row-->
 		</div><!--/container-->
 
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
 
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
     </body>
 
 

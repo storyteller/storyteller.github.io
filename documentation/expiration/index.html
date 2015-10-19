@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Storyteller - Documentation Skinning</title>
+		<title>Storyteller - Specification Expiration</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
@@ -50,8 +50,8 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/docs/export" title="Exporting the Documentation">Previous</a></li>
-		      	<li><a href="/documentation/docs/authoring" title="Authoring Topics">Next</a></li>
+		      	<li><a href="/documentation/lifecycle" title="The Specification Lifecycle">Previous</a></li>
+		      	<li><a href="/documentation/language" title="Crafting the Specification Language">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -66,7 +66,7 @@
 
 		  <div class="container">
 		  	<nav class="navbar-inverse">
-		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/docs">Living Documentation Generation</a></li><li class="active">Documentation Skinning</li></ol>
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Specification Expiration</li></ol>
 		  	</nav>
 		  </div>
 
@@ -83,45 +83,26 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/docs/authoring">Authoring Topics</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/docs/export">Exporting the Documentation</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/language">Crafting the Specification Language</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/lifecycle">The Specification Lifecycle</a></p>
 
 		        </ul>
 		      </div><!--/left-->
 		      
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Documentation Skinning</h1>
+			      	<h1>Specification Expiration</h1>
 			      
 			      	<hr />
 
 			      	<div id="main-pane">
-			      		<!--Title:Documentation Skinning-->
-<!--Url:theme-->
-<p>Storyteller requires a <code>layout.htm</code> file at the root directory of the documentation. This file is used to specify the standard layout for all the topics in your documentation project. At runtime, Storyteller renders topic content by processing the directives in the <code>layout.htm</code> file for navigation elements, linking to client side assets, and rendering the topic content. The <code>layout.htm</code> file has a similar function to master pages in server side web rendering tools like Razor or Spark.</p>
-<p>For an example, see <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/layout.htm">the layout for this documentation website</a>.</p>
-<p>See <a href="/documentation/docs/linking">Linking to Other Topics</a> for an explanation of how to use the preprocessed directives for navigation elements.</p>
-<p>Also see <a href="/documentation/docs/images">Embedding Images</a> for working with images.</p>
-<h2>Inner Content</h2>
-<p>To place the actual content of a topic file within the layout, use this directive: <code>&lt;[inner]&gt;</code>.</p>
-<h2>Topic Title</h2>
-<p>To embed the title of the current topic, use <code>&lt;[title]&gt;</code></p>
-<h2>Version</h2>
-<p>To embed the version of the product passed to the <code>st doc-run</code> or <code>st doc-export</code> commands, use <code>&lt;[version]&gt;</code></p>
-<h2>Root Url</h2>
-<p>To embed the url to the root of the documentation project, use <code>&lt;[RootUrl]&amp;gh;</code>.</p>
-<div class="alert alert-info" role="alert"><strong>Note!</strong> The directives for images, styles, and scripts are only necessary for assets bundled directly into the documentation export. These directives are applied differently depending upon whether the documentation is running in the live preview, exported for website hosting, or exported for local file system browsing. If you are linking to assets from another website, you do not need these directives.
-</div>
-<h2>CSS Files</h2>
-<p>To link to CSS files with Storyteller's pathing rules in exports, use this syntax:</p>
-<p><code>&lt;[css:content/bootstrap.min.css]&gt;</code></p>
-<p>The path in <code>css:[path]</code> should be relative to the root of the documentation directory.</p>
-<h2>Script Files</h2>
-<p>To link to script files with Storyteller's pathing rules in exports, use this syntax:</p>
-<p><code>&lt;[script:content/prism.js]&gt;</code></p>
-<h2>Topic Breadcrumbs</h2>
-<p>To use a breadcrumbs element from <a href="http://getbootstrap.com">Bootstrap</a>, use this syntax:</p>
-<p><code>&lt;[Breadcrumbs]&gt;</code></p>
+			      		<!--Title: Specification Expiration-->
+<p>You can optionally set an <em>expiration date</em> on a specification as a forceful reminder to review an existing specification for continued validity. If an
+expired specification is executed in a <a href="/documentation/ci">continuous integration build at the command line</a>, it will fail immediately with
+the specific message &quot;This test has expired and needs to be updated.&quot;</p>
+<p>After evaluating the specification, you can either choose to eliminate the specification if it is obsolete or reset or clear the expiration date to mark the specification as valid.</p>
+<p>This feature may be useful if you support a system that has rapidly changing business rules or like us, has to change with new government regulations on a frequent basis.</p>
+<p>See the <a href="/documentation/ui/spec-editor">The Specification Editor</a> for more information on editing specifications.</p>
 
 
 			      	</div>
@@ -130,12 +111,12 @@
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/docs/export">Exporting the Documentation</a>
+				        	<strong>Previous: </strong><a href="/documentation/lifecycle">The Specification Lifecycle</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/docs/authoring">Authoring Topics</a>
+				        	<strong>Next: </strong><a href="/documentation/language">Crafting the Specification Language</a>
 
 				        </span>
 			      	</nav>

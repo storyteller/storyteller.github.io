@@ -36,7 +36,7 @@
 		      <a href="/" class="navbar-brand">Storyteller</a>
 		    </div>
 		    <nav class="collapse navbar-collapse" role="navigation">
-		      <ul class="nav navbar-nav">
+		      <ul class="nav navbar-nav pull-right">
             <li>
               <a href="/tutorial">Tutorial</a>
             </li>
@@ -50,16 +50,15 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		        <li>
-
-
-		        </li>
-		      </ul>
-
-		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/language" title="Crafting the Specification Language">Previous</a></li>
 		      	<li><a href="/documentation/ci" title="Integration with Continuous Integration">Next</a></li>
 		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
 		    </nav>
 
 		  </div>
@@ -133,6 +132,8 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
 Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
 </pre></div><hr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2.2"></div>
+<h2>Exceptions</h2>
+<p>Because we have had some periodic trouble with exceptions not being surfaced correctly through the html results (we swear this is fixed now), there's a built in results tab that just shows the stacktraces for every .Net exception detected by Storyteller during a specification run.</p>
 <h2>Custom Logging</h2>
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The Storyteller HTML rendering uses <a href="http://getbootstrap.com">Bootstrap</a> for all of its styling. You can assume that Bootstrap styles are loaded into any html rendering of your custom html to take advantage of Bootstrap styling.
 </div>
@@ -154,7 +155,7 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
         /// &lt;/summary&gt;
         /// &lt;param name=&quot;title&quot;&gt;&lt;/param&gt;
         /// &lt;param name=&quot;html&quot;&gt;&lt;/param&gt;
-        void Log(string title, string html);
+        void Log(string title, string html, string shortTitle = null);
 
         /// &lt;summary&gt;
         /// Explicitly add a new IReporter to the
@@ -181,6 +182,10 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 <pre><code class="language-csharp">
     public interface IExecutionContext : IDisposable
     {
+        // BeforeExecution() is a hook to potentially
+        // set up state or do any kind of custom logging
+        void BeforeExecution(ISpecContext context);
+        
         // AfterExecution is a hook to gather up custom logging
         // or to make custom assertions against the specification
         // execution
@@ -193,8 +198,27 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 <pre><code class="language-csharp">
     public interface Report
     {
+        /// &lt;summary&gt;
+        /// Creates the html representation of this report
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
         string ToHtml();
+
+        /// &lt;summary&gt;
+        /// The title to display within the results tab for this report
+        /// &lt;/summary&gt;
         string Title { get; }
+
+        /// &lt;summary&gt;
+        /// Text to display on the tab header for this report
+        /// &lt;/summary&gt;
+        string ShortTitle { get; }
+
+        /// &lt;summary&gt;
+        /// Count of messages or logs that this Report shows. 
+        /// This report tab will be hidden if the Count = 0.
+        /// &lt;/summary&gt;
+        int Count { get; }
     }
 </code></pre>
 <p>A custom <code>IReport</code> from Storyteller's internal tests is shown below:</p>
@@ -202,6 +226,7 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
     public class ListReport : Report
     {
         private readonly HtmlTag _ul = new HtmlTag(&quot;ul&quot;).AddClass(&quot;list-group&quot;);
+        private int _count;
 
         public string ToHtml()
         {
@@ -210,6 +235,7 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 
         public ListReport Add(string text)
         {
+            _count++;
             _ul.Add(&quot;li&quot;).AddClass(&quot;list-group-item&quot;).Text(text);
             return this;
         }
@@ -217,6 +243,16 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
         public string Title
         {
             get { return &quot;Some Numbers&quot;; }
+        }
+
+        public string ShortTitle
+        {
+            get { return &quot;Numbers&quot;; }
+        }
+
+        public int Count
+        {
+            get { return _count; }
         }
     }
 </code></pre>
@@ -256,7 +292,29 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 		  	</div><!--/row-->
 		</div><!--/container-->
 
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
 
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
     </body>
 
 

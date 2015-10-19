@@ -36,7 +36,7 @@
 		      <a href="/" class="navbar-brand">Storyteller</a>
 		    </div>
 		    <nav class="collapse navbar-collapse" role="navigation">
-		      <ul class="nav navbar-nav">
+		      <ul class="nav navbar-nav pull-right">
             <li>
               <a href="/tutorial">Tutorial</a>
             </li>
@@ -50,16 +50,15 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		        <li>
-
-
-		        </li>
-		      </ul>
-
-		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/engine/grammars/sentences" title="Sentences">Previous</a></li>
 		      	<li><a href="/documentation/engine/grammars/facts" title="Asserting Facts">Next</a></li>
 		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
 		    </nav>
 
 		  </div>
@@ -119,7 +118,7 @@
     }
 </code></pre>
 <p>Which would lead to a specification like this:</p>
-<p data-path="Actions/Explicit Action" data-spec="{&quot;title&quot;:&quot;Explicit Action&quot;,&quot;path&quot;:&quot;Actions/Explicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Kick off the batch process manually&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;b9e0ab0e-5aba-4a3a-ae8d-f51b7d656e11&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;df423f49-8c14-4462-8a48-7f078c681411&quot;},{&quot;text&quot;:&quot;Do whatever assertions you need to verify the system behavior here.&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;4895cc9e-cffe-4e3d-9c47-b472397a4792&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;92d3e6a1-9851-4c93-b16e-920aa024359f&quot;}],&quot;id&quot;:&quot;84dbbfa8-14c7-4034-9b85-4bbb9504ba0f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Batch Process #1&quot;,&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Start the Batch Process&quot;,&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p data-path="Actions/Explicit Action" data-spec="{&quot;title&quot;:&quot;Explicit Action&quot;,&quot;path&quot;:&quot;Actions/Explicit Action&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, October 19, 2015&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Kick off the batch process manually&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;b9e0ab0e-5aba-4a3a-ae8d-f51b7d656e11&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;0379808e-7707-4b73-9094-c1d6c80b438c&quot;},{&quot;text&quot;:&quot;Do whatever assertions you need to verify the system behavior here.&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;4895cc9e-cffe-4e3d-9c47-b472397a4792&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;92d3e6a1-9851-4c93-b16e-920aa024359f&quot;}],&quot;id&quot;:&quot;84dbbfa8-14c7-4034-9b85-4bbb9504ba0f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Batch Process #1&quot;,&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Start the Batch Process&quot;,&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
 <h2>Implicit Actions</h2>
 <div class="alert alert-info" role="alert">Any exceptions thrown in the `SetUp()` or `TearDown()` methods would be surfaced into the generated results html. </div>
 <p>Quite frequently, our teams find that specications read much more cleanly if actions like kicking off a batch process or navigating a browser to a certain page or starting up an embedded web server are handled implicitly off stage.</p>
@@ -139,7 +138,7 @@
     }
 </code></pre>
 <p>Which leads to a specification like this below:</p>
-<p data-path="Actions/Implicit Action" data-spec="{&quot;title&quot;:&quot;Implicit Action&quot;,&quot;path&quot;:&quot;Actions/Implicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;BatchProcess&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Do whatever assertions you need to do to verify that the batch process ran correctly&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;c44a9e3f-b0f9-4294-9c93-fc6a95bd0d09&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;806cb1df-c29b-40bd-863f-2adf13e03b94&quot;}],&quot;id&quot;:&quot;c3805c4e-a83c-4fe7-8d81-1ac15f6d5f06&quot;}" data-fixtures="[{&quot;title&quot;:&quot;After the batch process finishes&quot;,&quot;key&quot;:&quot;BatchProcess&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.BatchProcessFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p data-path="Actions/Implicit Action" data-spec="{&quot;title&quot;:&quot;Implicit Action&quot;,&quot;path&quot;:&quot;Actions/Implicit Action&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, October 19, 2015&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;BatchProcess&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Do whatever assertions you need to do to verify that the batch process ran correctly&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;c44a9e3f-b0f9-4294-9c93-fc6a95bd0d09&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;806cb1df-c29b-40bd-863f-2adf13e03b94&quot;}],&quot;id&quot;:&quot;c3805c4e-a83c-4fe7-8d81-1ac15f6d5f06&quot;}" data-fixtures="[{&quot;title&quot;:&quot;After the batch process finishes&quot;,&quot;key&quot;:&quot;BatchProcess&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.BatchProcessFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
 <p>Storyteller supports both styles, but the Storyteller team recommends making your specifications as declarative as possible both to make the specifications quicker to author and easier to understand later. Don't fall into the trap of trying to use Storyteller like an xUnit tool.</p>
 
 
@@ -163,7 +162,29 @@
 		  	</div><!--/row-->
 		</div><!--/container-->
 
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
 
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
     </body>
 
 

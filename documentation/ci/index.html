@@ -36,7 +36,7 @@
 		      <a href="/" class="navbar-brand">Storyteller</a>
 		    </div>
 		    <nav class="collapse navbar-collapse" role="navigation">
-		      <ul class="nav navbar-nav">
+		      <ul class="nav navbar-nav pull-right">
             <li>
               <a href="/tutorial">Tutorial</a>
             </li>
@@ -50,16 +50,15 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		        <li>
-
-
-		        </li>
-		      </ul>
-
-		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/instrumentation" title="Instrumenting and Performance Logging">Previous</a></li>
 		      	<li><a href="/documentation/docs" title="Living Documentation Generation">Next</a></li>
 		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
 		    </nav>
 
 		  </div>
@@ -116,7 +115,7 @@
 <p>This &quot;retry&quot; capability has produced very mixed results in real usage. In the early days of <a href="http://www.seleniumhq.org">Selenium</a> when the browser automation was so unreliable, the retry capability made our automated testing much more useful. Today, the retry capability is still valuable when we use Storyteller against asynchronous messaging systems. That being said, the retry capability in older versions of Storyteller has also been detrimental when it too aggressively tries to retry specifications that have no chance of ever succeeding or when the system under test itself is in an invalid state -- often hitting the timeout for each specification on each retry.</p>
 <p>To that end, Storyteller 3 changes the retry policy a bit to <a href="http://en.wikipedia.org/wiki/Fail-fast">fail faster</a>:</p>
 <ul>
-<li>The retry count <strong>as of now</strong> is specified per specification with the default being no retries. This <a href="https://github.com/DarthFubuMVC/StoryTeller2/issues/151">may change later</a> based on our shop's experience with Storyteller 3. For now, however, the attitude we are taking is that retries are a potentially harmful property that must be explicitly enabled.</li>
+<li>The retry count <strong>as of now</strong> is specified per specification with the default being no retries unless this is overridden by the <code>st run --retries [#]</code> or <code>st open --retries [#]</code> flags. This <a href="https://github.com/DarthFubuMVC/StoryTeller2/issues/151">may change later</a> based on our shop's experience with Storyteller 3. For now, however, the attitude we are taking is that retries are a potentially harmful property that must be explicitly enabled.</li>
 <li>Specifications marked as <em>Acceptance</em> will never be retried.</li>
 <li>If in the course of executing a Specification the Storyteller engine hits a &quot;critical&quot; or &quot;catastropic&quot; exception, the specification will no longer be retried even if it has not exceeded its maxiumum number of retries. A &quot;critical&quot; exception is any failure from a <code>Fixture.SetUp()</code>, <code>Fixture.TearDown()</code>, or the <code>StorytellerCriticalException</code> being thrown by grammars.</li>
 <li>If the system under test itself fails to start or cannot create an execution context, the entire batch of specifications is aborted, but the results are still shown.</li>
@@ -131,9 +130,9 @@
 <h2>Command Usage</h2>
 <section class="command-section"><h4><span id="run" class="section-header">st run</span><i class="command-description">Run a suite of StoryTeller tests</i></h4></section>
 The `st run` command allows you to run specifications from an optimized batch mode from the command line. This command will also optionally dump out a couple additional  reports about the specifications that executed that may be useful for custom reporting or performance optimization. The CSV option is a dump of the performance tracing across all the specifications. The JSON dump is a raw dump of the Storyteller runtime model for the specifications. 
-<table class="table usages-table"><thead><tr><th colspan="2">Usages</th></tr></thead><tbody><tr><td>Execute</td><td class="command-usage">st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</td></tr><tr><td>Execute and save results</td><td class="command-usage">st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</td></tr></tbody></table>
+<table class="table usages-table"><thead><tr><th colspan="2">Usages</th></tr></thead><tbody><tr><td>Execute</td><td class="command-usage">st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</td></tr><tr><td>Execute and save results</td><td class="command-usage">st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</td></tr></tbody></table>
 <table class="table"><thead><tr><th colspan="2">Arguments</th></tr></thead><tbody><tr><td class="command-arg-name">path</td><td class="command-arg-description">Path to the StoryTeller project file or the project directory</td></tr></tbody></table>
-<table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-r, --results-path &lt;resultspath&gt;]</td><td class="command-flag-description">Path to write out the results. Default is stresults.htm</td></tr><tr><td class="command-flag-usage">[-w, --workspace &lt;workspace&gt;]</td><td class="command-flag-description">Optional.  Runs only one workspace</td></tr><tr><td class="command-flag-usage">[-o, --open]</td><td class="command-flag-description">Open the results in a browser after the run. DO NOT DO THIS IN CI!</td></tr><tr><td class="command-flag-usage">[-c, --csv &lt;csv&gt;]</td><td class="command-flag-description">Write the performance data in CSV format to the specified path</td></tr><tr><td class="command-flag-usage">[-j, --json &lt;json&gt;]</td><td class="command-flag-description">Write the raw result information to JSON format at the specified path</td></tr><tr><td class="command-flag-usage">[-d, --dump &lt;dump&gt;]</td><td class="command-flag-description">Dump the raw JSON history of the batch run to the specified path</td></tr><tr><td class="command-flag-usage">[-b, --build &lt;build&gt;]</td><td class="command-flag-description">Specify a build target to force Storyteller to choose that profile. By default, ST will use &#39;Debug&#39;</td></tr><tr><td class="command-flag-usage">[-p, --profile &lt;profile&gt;]</td><td class="command-flag-description">Storyteller test mode profile for systems like Serenity that use this</td></tr><tr><td class="command-flag-usage">[-t, --timeout &lt;timeout&gt;]</td><td class="command-flag-description">Optional. Default project timeout in seconds.</td></tr><tr><td class="command-flag-usage">[-l, --lifecycle Acceptance|Regression|Any]</td><td class="command-flag-description">Optional. Only runs tests with desired lifecyle</td></tr><tr><td class="command-flag-usage">[-z, --teamcity]</td><td class="command-flag-description">Optional. Applies extra logging to see progress within TeamCity during CI runs</td></tr><tr><td class="command-flag-usage">[-c, --config &lt;confi&gt;]</td><td class="command-flag-description">Optional. Override the config file selection of the Storyteller test running AppDomain</td></tr></tbody></table>
+<table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-r, --results-path &lt;resultspath&gt;]</td><td class="command-flag-description">Path to write out the results. Default is stresults.htm</td></tr><tr><td class="command-flag-usage">[-w, --workspace &lt;workspace&gt;]</td><td class="command-flag-description">Optional.  Runs only one workspace</td></tr><tr><td class="command-flag-usage">[-o, --open]</td><td class="command-flag-description">Open the results in a browser after the run. DO NOT DO THIS IN CI!</td></tr><tr><td class="command-flag-usage">[-c, --csv &lt;csv&gt;]</td><td class="command-flag-description">Write the performance data in CSV format to the specified path</td></tr><tr><td class="command-flag-usage">[-j, --json &lt;json&gt;]</td><td class="command-flag-description">Write the raw result information to JSON format at the specified path</td></tr><tr><td class="command-flag-usage">[-d, --dump &lt;dump&gt;]</td><td class="command-flag-description">Dump the raw JSON history of the batch run to the specified path</td></tr><tr><td class="command-flag-usage">[-b, --build &lt;build&gt;]</td><td class="command-flag-description">Specify a build target to force Storyteller to choose that profile. By default, ST will use &#39;Debug&#39;</td></tr><tr><td class="command-flag-usage">[-p, --profile &lt;profile&gt;]</td><td class="command-flag-description">Storyteller test mode profile for systems like Serenity that use this</td></tr><tr><td class="command-flag-usage">[-t, --timeout &lt;timeout&gt;]</td><td class="command-flag-description">Optional. Default project timeout in seconds.</td></tr><tr><td class="command-flag-usage">[-l, --lifecycle Acceptance|Regression|Any]</td><td class="command-flag-description">Optional. Only runs tests with desired lifecyle</td></tr><tr><td class="command-flag-usage">[-z, --teamcity]</td><td class="command-flag-description">Optional. Applies extra logging to see progress within TeamCity during CI runs</td></tr><tr><td class="command-flag-usage">[-c, --config &lt;confi&gt;]</td><td class="command-flag-description">Optional. Override the config file selection of the Storyteller test running AppDomain</td></tr><tr><td class="command-flag-usage">[-r, --retries &lt;retries&gt;]</td><td class="command-flag-description">Sets a minimum number of retry attempts for this execution</td></tr></tbody></table>
 
 
 			      	</div>
@@ -156,7 +155,29 @@ The `st run` command allows you to run specifications from an optimized batch mo
 		  	</div><!--/row-->
 		</div><!--/container-->
 
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
 
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
     </body>
 
 

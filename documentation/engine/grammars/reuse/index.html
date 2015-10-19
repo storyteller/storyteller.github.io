@@ -36,7 +36,7 @@
 		      <a href="/" class="navbar-brand">Storyteller</a>
 		    </div>
 		    <nav class="collapse navbar-collapse" role="navigation">
-		      <ul class="nav navbar-nav">
+		      <ul class="nav navbar-nav pull-right">
             <li>
               <a href="/tutorial">Tutorial</a>
             </li>
@@ -50,16 +50,15 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		        <li>
-
-
-		        </li>
-		      </ul>
-
-		      <ul class="nav navbar-nav navbar-right">
 		      	<li><a href="/documentation/engine/grammars/embedded_section" title="Embedded Sections">Previous</a></li>
 		      	<li><a href="/documentation/engine/grammars/create_object" title="Creating Complex Objects">Next</a></li>
 		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
 		    </nav>
 
 		  </div>
@@ -128,7 +127,7 @@
     }
 </code></pre>
 <p>In usage, you can see the difference between the more generic grammar and the specific, curried grammar.</p>
-<p data-path="Currying/Currying" data-spec="{&quot;title&quot;:&quot;Currying&quot;,&quot;path&quot;:&quot;Currying/Currying&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Currying&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Without currying and supplying all the information&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;1d9cdc91-5685-4bfa-9668-5a367d76883b&quot;},{&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#1&quot;,&quot;DueDate&quot;:&quot;TODAY+5&quot;,&quot;IsOpen&quot;:&quot;True&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;dac48474-a5c4-4af5-88f4-e6ba5266e5bc&quot;},{&quot;text&quot;:&quot;If all the spec cares about is that the invoice is open&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;abc2745e-0467-494d-b4ee-3ae3b0475694&quot;},{&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#2&quot;,&quot;DueDate&quot;:&quot;TODAY+2;IsOpen&quot;,&quot;IsOpen&quot;:&quot;False&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;7682c7ee-3f8b-4f04-8bd3-9094dc4d1157&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;1d5fd235-cebf-4a97-a5c1-1ab15f74b95e&quot;}],&quot;id&quot;:&quot;93be7129-3144-4b0f-94b4-56707296b11f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Currying&quot;,&quot;key&quot;:&quot;Currying&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CurryingFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;,&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;DueDate&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;IsOpen&quot;,&quot;default&quot;:&quot;False&quot;,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:&quot;boolean&quot;,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open&quot;,&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p data-path="Currying/Currying" data-spec="{&quot;title&quot;:&quot;Currying&quot;,&quot;path&quot;:&quot;Currying/Currying&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, October 19, 2015&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;Currying&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Without currying and supplying all the information&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;1d9cdc91-5685-4bfa-9668-5a367d76883b&quot;},{&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#1&quot;,&quot;DueDate&quot;:&quot;TODAY+5&quot;,&quot;IsOpen&quot;:&quot;True&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;d3390036-aa2a-4409-9745-8603e0714f8b&quot;},{&quot;text&quot;:&quot;If all the spec cares about is that the invoice is open&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;abc2745e-0467-494d-b4ee-3ae3b0475694&quot;},{&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#2&quot;,&quot;DueDate&quot;:&quot;TODAY+2;IsOpen&quot;,&quot;IsOpen&quot;:&quot;False&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;986d5343-2d62-44c0-8270-4485327c63a5&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;1d5fd235-cebf-4a97-a5c1-1ab15f74b95e&quot;}],&quot;id&quot;:&quot;93be7129-3144-4b0f-94b4-56707296b11f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Currying&quot;,&quot;key&quot;:&quot;Currying&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CurryingFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;,&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;DueDate&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;IsOpen&quot;,&quot;default&quot;:&quot;False&quot;,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:&quot;boolean&quot;,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open&quot;,&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
 <p>The goal of grammar currying was to make the expression of the specifications more declarative and easier to understand without requiring users to duplicate grammar code.</p>
 <h2>Importing Grammars</h2>
 <p>Storyteller also supports a mechanism to import a grammar from one fixture into another:</p>
@@ -174,7 +173,29 @@
 		  	</div><!--/row-->
 		</div><!--/container-->
 
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
 
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
     </body>
 
 
