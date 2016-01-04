@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Getting Started</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation" title="Documentation">Previous</a></li>
+		      	<li><a href="/documentation/terminology" title="Terminology">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Getting Started</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/terminology">Terminology</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation">Documentation</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Getting Started<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/getting_started.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Getting Started-->
+<!--Url:getting_started-->
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong> As of now, Storyteller 3.0 is only running on Windows. Before Storyteller 3.0 is officially released, we will ensure that Storyteller 3.0 is completely usable on OSX and Linux via Mono and/or the CoreCLR.
+</div>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Making the "getting started" story much simpler and easier than earlier versions has been a major goal of the Storyteller 3.0 release. The old "project.xml" file from Storyteller 1-2 is now gone. 3.0 has replaced the upfront configuration with a combination of out of the box defaults and command line flags for explicit overrides.
+</div>
+<p>This document describes how to install and intialize your Storyteller specfication project. For more specific documentation, see:</p>
+<ul>
+<li><a href="/documentation/ci">Integration with Continuous Integration</a></li>
+<li><a href="/documentation/ui">The Specification Editor and Interactive Runner</a></li>
+</ul>
+<h2>Installing Storyteller</h2>
+<p>At this time (3.0 alpha), <a href="http://nuget.org/packages/storyteller">Storyteller is <strong>only</strong> distributed via Nuget</a> with the mandatory command line tool described below included into the <code>/tools</code> directory.</p>
+<p>For the final release and a subsequent move to the new DNX platform, the team is considering using Chocolately on Windows and Brew on OSX to distribute the <code>ST.exe</code> command line tool. Depending on the timeline, the new command line support in the DNX platform may end up being the best solution in the future.</p>
+<h2>Storyteller's Architecture</h2>
+<p>Storyteller consists of just two deployed elements:</p>
+<ol>
+<li>The <code>Storyteller.dll</code> library that you must reference to implement <a href="/documentation/engine/fixtures">Fixture's</a>, <a href="/documentation/engine/grammars">Grammars</a>, and any custom <a href="/documentation/engine/system_under_test">ISystem</a>.</li>
+<li>The <code>ST.exe</code> command line tool in the <code>/tools</code> folder of the distributed Nuget that implements a batch specification runner, an embedded web application (&quot;The Specification Editor&quot;) for interactive work against the specifications, and tooling to author and publish static documentation (not coincidentally what was used to create this website).</li>
+</ol>
+<h2>Using the Command Line Tool</h2>
+<p>The <code>ST.exe</code> tool generally follows Unix idioms for command line usage that tools like <code>git</code> or <code>npm</code> use for their command line syntax, so:</p>
+<ul>
+<li><code>ST.exe</code> exposes multiple commands identified by the second word of the signature, so <code>st run</code> or <code>st open</code> are valid commands.</li>
+<li>Optional flags are used like: <code>--word [value]</code> or <code>-w [value]</code> as a shorthand</li>
+<li>Boolean flags can be used like: <code>--open</code> or <code>-o</code>.</li>
+<li>If there are multiple boolean optional flags, the <code>-abc</code> usage is the equivalent to <code>-a -b -c</code></li>
+</ul>
+<p>You can query the command line usage with the command <code>st ?</code> or <code>st help</code> to see all the commands that are available.</p>
+<pre>
+    doc-export -> Export a documentation project to static html
+       doc-run -> Run the documentation in a live mode
+      doc-seed -> Seeds a topic file structure from an outline.txt file
+          open -> Opens the specification editor web tool
+           run -> Run a suite of StoryTeller tests
+</pre>
+<p>You can also query the exact usage of a single command with the syntax like <code>st ? run</code> to display the usage of the <code>st run</code> command.</p>
+<h2>Enabling Storyteller Execution</h2>
+<p>The only mandatory thing you have to do to setup a Storyteller project today is to add a reference to the <code>Storyteller.dll</code> to the .Net project that is going to hold your <code>Fixture</code> and the optional <code>ISystem</code> class. Technically, Storyteller does not depend on any actual Visual Studio.Net project file or VS.Net itself but you will typically want to use a VS.Net project just for convenience.</p>
+<p>Like most .Net testing tools, the Storyteller batch running and interative specification editor tools have to open a second <code>AppDomain</code> with &quot;shadow copying&quot; enabled where the actual specification execution takes place. Storyteller assumes that the project directory is layed out in the idiomatic VS.Net manner:</p>
+<ul>
+<li>An application configuration file at the root.</li>
+<li>A subdirectory for the binary assemblies -- this subdirectory <strong>must</strong> contain the <code>Storyteller.dll</code> assembly.</li>
+<li>A <code>/Specs</code> folder where Storyteller will persist the actual specifications (more on this below).</li>
+</ul>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Storyteller 3.0 is a little more intelligent in how it creates the <code>AppDomain</code> for execution. It is no longer necessary to copy the <code>*.config</code> file to the output directory for the configuration file to be picked up by Storyteller. You're welcome Andrew.
+</div>
+<p>Unless you specify the configuration file name explicitly with <code>st run --config [file name]</code>, Storyteller determines the configuration file for the execution <code>AppDomain</code> by first looking for a file named <code>app.config</code>, then <code>web.config</code> to use as the configuration file when spawning the new <code>AppDomain</code>.</p>
+<p>For the private bin path of the execution <code>AppDomain</code>, Storyteller uses this precedence:</p>
+<ol>
+<li>If the user uses the <code>st run [path] --build [Debug/Release]</code> or <code>st open [path] --build [Debug/Release]</code> flag, use that build profile</li>
+<li>If the folder <code>/bin/Debug</code> exists, use that folder as the private bin path</li>
+<li>If the folder <code>/bin/Release</code> exists, use that folder</li>
+<li>Use <code>/bin</code></li>
+</ol>
+<p>My typical workflow with .Net projects is to work locally using the <em>Debug</em> target. Once in a while I may compile to the <em>Release</em> target just to test Nuget publishing locally, but <em>Debug</em> is where most of my work happens. On the build server though, I compile with <em>Release</em> and need Storyteller to execute the specifications using the binaries compiled to the <code>/bin/Release</code> folder. Because most of my work is done with <em>Debug</em>, but an older set of <em>Release</em> build artifacts may be hanging around on the file system, I have changed to precedence to default to <em>Debug</em>.</p>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> The <code>AppDomain</code> mechanics discussed above will not apply when Storyteller is moved to the DNX platform. The Storyteller team is not quite sure about the details of how Storyteller will work on DNX, but we are committed to making that happen in the 2015 calendar year.
+</div>
+<h2>How Storyteller Persists Specifications</h2>
+<p>Storyteller persists specifications as Xml files in the <code>/Specs</code> folder directly under the root of your Storyteller project, with subfolders to represent the suite structure. Storyteller will create this directory on demand if it does not already exist the first time it needs to persist a new specification or top level suite.</p>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Why, you might ask, use Xml files and not JSON, YAML, or even an inferred Javascript syntax that we've kicked around over the years? The main answer is simply backward compatibility with Storyteller 1-2. The primary developer on Storyteller also has the uncool opinion that Xml formats are easier to edit by hand for deeply nested document structures than JSON. The hope of the Storyteller team is that the new 3.0 user interface for editing specifications is good enough that users do not often feel the need to get into the raw Xml.
+</div>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation">Documentation</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/terminology">Terminology</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

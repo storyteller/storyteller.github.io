@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Verifying Object Properties</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/grammars/create_object" title="Creating Complex Objects">Previous</a></li>
+		      	<li><a href="/documentation/engine/state" title="Managing State during Execution">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Verifying Object Properties</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/state">Managing State during Execution</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Verifying Object Properties<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/verify_object.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Verifying Object Properties-->
+<p>If you need to assert the values of several object properties in one logical step, the <code>Fixture.VerifyPropertiesOf&lt;T&gt;()</code> method is a helper to quickly put together a <a href="/documentation/engine/grammars/paragraphs">paragraph grammer</a> to verify multiple properties.</p>
+<p>Using the same <code>Address</code> type from the previous section (<a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a>), you could build a grammar like this one:</p>
+<pre><code class="language-csharp">
+        public IGrammar TheAddressShouldBe()
+        {
+            return VerifyPropertiesOf&lt;Address&gt;(&quot;then the new address properties should be&quot;, x =&gt;
+            {
+                x.Check(o =&gt; o.Address1);
+                x.Check(o =&gt; o.Address2);
+                x.Check(o =&gt; o.City);
+            });
+        }
+</code></pre>
+<p>In usage, a specification using that grammar will render results like this below:</p>
+<p data-path="Create Objects/Using VerifyProperties" data-spec="{&quot;title&quot;:&quot;Using VerifyProperties&quot;,&quot;path&quot;:&quot;Create Objects/Using VerifyProperties&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, January 04, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;Address&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;IfTheAddressIs&quot;,&quot;cells&quot;:{&quot;Address1&quot;:&quot;3 1st Street&quot;,&quot;Address2&quot;:&quot;EMPTY&quot;,&quot;City&quot;:&quot;Austin&quot;,&quot;StateOrProvince&quot;:&quot;TX&quot;,&quot;Country&quot;:&quot;USA&quot;,&quot;PostalCode&quot;:&quot;78703&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;},{&quot;key&quot;:&quot;TheAddressShouldBe&quot;,&quot;cells&quot;:{&quot;Address1&quot;:&quot;3 1st Street&quot;,&quot;Address2&quot;:&quot;EMPTY&quot;,&quot;City&quot;:&quot;Dallas&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;75a25919-332e-4c33-bd14-db25af863ca2&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;a0e321f1-a3df-40df-82ea-761b39b3504e&quot;}],&quot;id&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Address Setup&quot;,&quot;key&quot;:&quot;Address&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.AddressFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address1 = {Address1}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address2 = {Address2}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;City = {City}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:&quot;Austin&quot;,&quot;header&quot;:&quot;City or Township&quot;,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;If the new address is&quot;,&quot;key&quot;:&quot;IfTheAddressIs2&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:&quot;Austin&quot;,&quot;header&quot;:&quot;City or Township&quot;,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:&quot;Austin&quot;,&quot;header&quot;:&quot;City or Township&quot;,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;Rows&quot;,&quot;title&quot;:&quot;The addresses are&quot;,&quot;key&quot;:&quot;TheAddressesAre&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address1 = {Address1}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address2 = {Address2}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;City = {City}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;StateOrProvince = {StateOrProvince}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Country = {Country}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Country&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;PostalCode = {PostalCode}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;PostalCode&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;If the new address is&quot;,&quot;key&quot;:&quot;IfTheAddressIs&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Country&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;PostalCode&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address1 = {Address1}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address2 = {Address2}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;City = {City}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;StateOrProvince = {StateOrProvince}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Country = {Country}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Country&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;PostalCode = {PostalCode}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;PostalCode&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;If the new address is&quot;,&quot;key&quot;:&quot;IfTheAddressIs3&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Country&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;PostalCode&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;format&quot;:&quot;Street Address {line1}, {line2}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;line1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;line2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;City = {City}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;StateOrProvince = {StateOrProvince}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;The address by street is&quot;,&quot;key&quot;:&quot;AddressByStreet&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;line1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;line2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The street address is {street}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;street&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;City = {City}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;StateOrProvince = {StateOrProvince}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;The address by street is&quot;,&quot;key&quot;:&quot;AddressWithStreetAddress&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;street&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;StateOrProvince&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address1 = {Address1}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address2 = {Address2}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;An address in Dallas, TX&quot;,&quot;key&quot;:&quot;AddressWithObjectIs&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;format&quot;:&quot;Address1 should be {Address1}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Address2 should be {Address2}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;City should be {City}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;then the new address properties should be&quot;,&quot;key&quot;:&quot;TheAddressShouldBe&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Address1&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Address2&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;1&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;2&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;3&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;4&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;5&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a6fc5813-ee20-45c2-a909-5560c201943a&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;6&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;Address1&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;75a25919-332e-4c33-bd14-db25af863ca2&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;0&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;Address2&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;75a25919-332e-4c33-bd14-db25af863ca2&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;1&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:&quot;Austin&quot;,&quot;error&quot;:null,&quot;cell&quot;:&quot;City&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;failed&quot;}],&quot;id&quot;:&quot;75a25919-332e-4c33-bd14-db25af863ca2&quot;,&quot;spec&quot;:&quot;de8736db-3402-42f7-b2bd-8e0e78d9f4bd&quot;,&quot;position&quot;:&quot;2&quot;,&quot;type&quot;:&quot;step-result&quot;}]" class="spec-result"></p>
+<p>You can use multiple &quot;dots&quot; in the call to <code>Check(expression)</code> and even verify the result of a method with no arguments. So <code>Check(o =&gt; o.Property1.Property2.Property3)</code> or <code>Check(o =&gt; o.IsActive())</code> are both valid. As of now, only properties and methods are supported. Support for fields will be added later.</p>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/state">Managing State during Execution</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

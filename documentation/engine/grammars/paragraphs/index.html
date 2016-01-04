@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - 'Macros' with Paragraph Grammars</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/grammars/assertions" title="Asserting Values">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/tables" title="Tables">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">&#39;Macros&#39; with Paragraph Grammars</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/tables">Tables</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/assertions">Asserting Values</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>'Macros' with Paragraph Grammars<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/paragraphs.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:'Macros' with Paragraph Grammars-->
+<!--Url:paragraphs-->
+<div class="alert alert-info" role="alert">There are some specialized versions of the _Paragraph_ grammar for setting up data or making a series of property verifications that are shown elsewhere.</div>
+<p>Storyteller was largely envisioned as a replacement for the older <a href="http://fitnesse.org">FitNesse</a> tool. One of the aggravations that the Storyteller team had when using FitNesse years ago was the sheer repetiveness of having to repeat the same basic steps in different specifications. To alleviate that pain, Storyteller was designed from the very beginning to support the idea of &quot;Composite&quot; grammars that allowed you to specify a series of steps that have to be performed together and possibly in a certain order.</p>
+<p>The <em>Paragraph</em> grammar can include any number of grammars of all types. A simple example is entering credentials into a login screen. You typically need to enter a user name and a login, then click a login button or hit enter to submit the credentials. We can use a <em>Paragraph</em> grammar to batch up the single logical operation from individual grammars like so:</p>
+<pre><code class="language-csharp">
+        [Hidden, FormatAs(&quot;Enter the user name {user}&quot;)]
+        public void EnterUserName(string user)
+        {
+            
+        }
+
+        [Hidden, FormatAs(&quot;Enter the password {password}&quot;)]
+        public void EnterPassword(string password)
+        {
+            
+        }
+
+        [Hidden, FormatAs(&quot;Click the login button&quot;)]
+        public void ClickLoginButton()
+        {
+            
+        }
+
+        public IGrammar Login()
+        {
+            return Paragraph(&quot;Enter login credentials&quot;, _ =&gt;
+            {
+                _ += this[&quot;EnterUserName&quot;];
+                _ += this[&quot;EnterPassword&quot;];
+                _ += this[&quot;ClickLoginButton&quot;];
+            });
+        }
+</code></pre>
+<p>In usage, the grammar above looks like this:</p>
+<p data-path="Glossary/Paragraph" data-spec="{&quot;title&quot;:&quot;Paragraph&quot;,&quot;path&quot;:&quot;Glossary/Paragraph&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, January 04, 2016&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;The panel box below is a \&quot;Section\&quot; within the specification that uses a \&quot;Fixture\&quot; titled \&quot;Glossary\&quot;&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;0fb381ef-c22a-4761-940e-8648d35276e8&quot;},{&quot;key&quot;:&quot;Glossary&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;You can group a number of grammars together in a pre-canned macro called a \&quot;Paragraph\&quot; grammar like this one below:&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;6666b587-16d9-4e0c-89a3-3a8ee6b741fc&quot;},{&quot;key&quot;:&quot;Login&quot;,&quot;cells&quot;:{&quot;user&quot;:&quot;sa&quot;,&quot;password&quot;:&quot;tiger&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;8f10af6b-9479-40a4-aa9e-7125fc83df57&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;892471e2-2a92-496e-96a7-2a3339897596&quot;}],&quot;id&quot;:&quot;948c1484-7390-40b9-9186-27dac44b3c02&quot;}" data-fixtures="[{&quot;title&quot;:&quot;The Application Portal Page&quot;,&quot;key&quot;:&quot;Glossary&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.GlossaryFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Click the logout link in the menu bar&quot;,&quot;key&quot;:&quot;Logout&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The user has been successfully logged out&quot;,&quot;key&quot;:&quot;TheUserHasBeenLoggedOut&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:null,&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;UserName&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Location&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Roles&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;table&quot;,&quot;title&quot;:&quot;The users in the system are&quot;,&quot;key&quot;:&quot;TheUsersAre&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;UserName&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Location&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;rows&quot;,&quot;ordered&quot;:false,&quot;title&quot;:&quot;The administrators should be&quot;,&quot;key&quot;:&quot;TheAdminsShouldBe&quot;,&quot;type&quot;:&quot;set-verification&quot;,&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;format&quot;:&quot;Enter the user name {user}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;user&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Enter the password {password}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;password&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Click the login button&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;Enter login credentials&quot;,&quot;key&quot;:&quot;Login&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;user&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;password&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;children&quot;:[{&quot;format&quot;:&quot;Enter the user name {user}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;user&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Enter the password {password}&quot;,&quot;key&quot;:null,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;password&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;key&quot;:null,&quot;type&quot;:&quot;silent&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;title&quot;:&quot;Enter login credentials&quot;,&quot;key&quot;:&quot;Login2&quot;,&quot;type&quot;:&quot;paragraph&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;user&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;password&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;fixture&quot;:{&quot;title&quot;:&quot;Preferences&quot;,&quot;key&quot;:&quot;Preferences&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.PreferencesFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Enable notifications? {enabled}&quot;,&quot;key&quot;:&quot;EnableNotifications&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;enabled&quot;,&quot;default&quot;:&quot;False&quot;,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:&quot;boolean&quot;,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Enable GPS Tracking? {enabled}&quot;,&quot;key&quot;:&quot;EnableGPS&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;enabled&quot;,&quot;default&quot;:&quot;False&quot;,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:&quot;boolean&quot;,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]},&quot;title&quot;:&quot;Set the current user&#39;s preferences&quot;,&quot;collection&quot;:&quot;Preferences&quot;,&quot;key&quot;:&quot;Preferences&quot;,&quot;type&quot;:&quot;embedded-section&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p>The grammars added to the paragraph can refer to other grammars in the current Fixture or grammars built on the spot. The code below is a sample of this from Storyteller's own integration tests:</p>
+<pre><code class="language-csharp">
+        public IGrammar Divide()
+        {
+            return Paragraph(&quot;Divide numbers&quot;, x =&gt;
+            {
+                x += c =&gt; _first = _second = 0;
+                x += Read&lt;double&gt;(&quot;x&quot;, o =&gt; _first = o);
+                x += Read&lt;double&gt;(&quot;y&quot;, o =&gt; _second = o);
+                x += Check(&quot;quotient&quot;, () =&gt; _first/_second);
+            }).AsTable(&quot;Do some division&quot;);
+        }
+</code></pre>
+<h2>Silent Grammars</h2>
+<p>It's frequently useful to execute some kind of operation before, after, or between the individual grammars within a <em>Paragraph</em>. Storyteller exposes the idea of a <em>Silent Grammar</em> for exactly this usage. The following sample rebuilds the <em>Paragraph</em> grammar from above, but this time using a silent action to click the login button:</p>
+<pre><code class="language-csharp">
+        public IGrammar Login2()
+        {
+            return Paragraph(&quot;Enter login credentials&quot;, _ =&gt;
+            {
+                _ += this[&quot;EnterUserName&quot;];
+                _ += this[&quot;EnterPassword&quot;];
+
+                // Lastly, a silent action
+                _ += c =&gt;
+                {
+                    // supply a Lambda that would click
+                    // the login button
+                };
+            });
+        }
+</code></pre>
+<p>Silent grammars can be added to a <em>Paragraph</em> with the signatures:</p>
+<ol>
+<li><code>Action</code></li>
+<li><code>Action&lt;ISpecContext&gt;</code> -- if you need information about the current specification, <a href="/documentation/engine/state">access to the execution state</a>, or want to resolve services from the system under test.</li>
+</ol>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/assertions">Asserting Values</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/tables">Tables</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+

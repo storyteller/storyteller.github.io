@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Verifying Sets</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+		
+		
+        
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+
+<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/grammars/tables" title="Tables">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/embedded_section" title="Embedded Sections">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Verifying Sets</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+		      
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller </h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/embedded_section">Embedded Sections</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/tables">Tables</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+		      
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Verifying Sets<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/sets.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
+			      
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--Title:Verifying Sets-->
+<!--Url:sets-->
+<p>One of the most powerful features of Storyteller is the ability to declaratively compare a set of expected results against the system state and report back:</p>
+<ol>
+<li>Which expected items were matched to the actual results</li>
+<li>Which expected items were missing from the actual results</li>
+<li>Items in the actual results that were unexpected</li>
+<li>Optionally, verify an exact order of the items between the expected items and the actual values</li>
+</ol>
+<h2>Arrays</h2>
+<p>The tabular forms of set verifications shown below are more powerful and detailed in how they display data, but a much more terse form is to simply assert against a .Net <code>Array</code> type just like you'd assert against other values.</p>
+<p>Below is an example <code>Fixture</code> that contains a pair of Sentence grammars to verify a string array and an integer array:</p>
+<pre><code class="language-csharp">
+    public class NameArrayFixture : Fixture
+    {
+        public NameArrayFixture()
+        {
+            Title = &quot;Comparing arrays&quot;;
+        }
+
+        [FormatAs(&quot;The array of names should be {names}&quot;)]
+        public string[] TheNameArrayShouldBe()
+        {
+            return new string[]{&quot;Han&quot;, &quot;Luke&quot;, &quot;Chewie&quot;};
+        }
+
+        [FormatAs(&quot;The first 4 numbers in the Fibonacci sequence should be {numbers}&quot;)]
+        public int[] FibonacciSeries()
+        {
+            return new int[] {1, 1, 2, 3};
+        }
+    }
+</code></pre>
+<p>In usage, the results of a specification using the fixture above will look like this:</p>
+<p data-path="Sets/Arrays" data-spec="{&quot;title&quot;:&quot;Arrays&quot;,&quot;path&quot;:&quot;Sets/Arrays&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, January 04, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;NameArray&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Getting it right&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;0f7e9a36-8192-4fae-85ee-b793b1c2c2b2&quot;},{&quot;key&quot;:&quot;TheNameArrayShouldBe&quot;,&quot;cells&quot;:{&quot;names&quot;:&quot;Han, Luke, Chewie&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;6c674a85-027d-4db2-b5e0-381be1e8c00a&quot;},{&quot;text&quot;:&quot;Get it wrong&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;37edb411-bf5e-4204-a7d2-bb49715774d1&quot;},{&quot;key&quot;:&quot;TheNameArrayShouldBe&quot;,&quot;cells&quot;:{&quot;names&quot;:&quot;Han, Chewie, Obi Wan&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;ebf1271c-ee8a-496e-90b4-70bcd509bc5d&quot;},{&quot;text&quot;:&quot;Array comparison works on any type&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;0360539f-a320-4f2a-8449-478f0d453706&quot;},{&quot;key&quot;:&quot;FibonacciSeries&quot;,&quot;cells&quot;:{&quot;numbers&quot;:&quot;1, 1, 2, 3&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;f8ac1185-5753-449b-b83b-37569dbffe0b&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;b277efb0-8d84-476c-9af1-cf8cafe8ec38&quot;}],&quot;id&quot;:&quot;1da0bbbe-42fd-463d-a02d-347ca57fc5b9&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Comparing arrays&quot;,&quot;key&quot;:&quot;NameArray&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.NameArrayFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The array of names should be {names}&quot;,&quot;key&quot;:&quot;TheNameArrayShouldBe&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;names&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;The first 4 numbers in the Fibonacci sequence should be {numbers}&quot;,&quot;key&quot;:&quot;FibonacciSeries&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;numbers&quot;,&quot;default&quot;:&quot;NULL&quot;,&quot;header&quot;:null,&quot;output&quot;:true,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;names&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;6c674a85-027d-4db2-b5e0-381be1e8c00a&quot;,&quot;spec&quot;:&quot;1da0bbbe-42fd-463d-a02d-347ca57fc5b9&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:&quot;Han, Luke, Chewie&quot;,&quot;error&quot;:null,&quot;cell&quot;:&quot;names&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;failed&quot;}],&quot;id&quot;:&quot;ebf1271c-ee8a-496e-90b4-70bcd509bc5d&quot;,&quot;spec&quot;:&quot;1da0bbbe-42fd-463d-a02d-347ca57fc5b9&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;numbers&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;f8ac1185-5753-449b-b83b-37569dbffe0b&quot;,&quot;spec&quot;:&quot;1da0bbbe-42fd-463d-a02d-347ca57fc5b9&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;}]" class="spec-result"></p>
+<p>Some things to note:</p>
+<ol>
+<li>The equivalence check is order specific. The two arrays have to be the same length and contain the same elements in the same order</li>
+<li>Only <code>Array</code>'s are supported at this time</li>
+<li>Storyteller <em>knows</em> how to convert a string into an array of some type by treating the raw string as a comma delimited string, then converting the raw string values into the element type.</li>
+<li>You can verify an array of any .Net type that Storyteller knows how to convert or parse from a string -- including your own application types</li>
+<li>The results are shown using the ToString() method of the inner element type. <strong>Do consider using custom ToString() methods to provide more information in the case of specification failures</strong>.</li>
+</ol>
+<p>See <a href="/documentation/engine/cells/conversion">Data Conversion within Specifications</a> for more information on how the conversion process works.</p>
+<h2>String Lists</h2>
+<p>If you'd rather express an expected set in rows, you can use the <code>VerifyStringList()</code> mechanism in <code>Fixture</code> classes to expose a special <em>Set Verification</em> for sets of strings.</p>
+<p>The code below shows how to use this syntax to create a grammar that will verify a set of string data:</p>
+<pre><code class="language-csharp">
+    public class NameListFixture : Fixture
+    {
+        private readonly List&lt;string&gt; _names = new List&lt;string&gt;();
+
+        public NameListFixture()
+        {
+            Title = &quot;Comparing a set of names&quot;;
+        }
+
+        public IGrammar TheNamesShouldBe()
+        {
+            return VerifyStringList(() =&gt; _names)
+                .Titled(&quot;The names in order should be&quot;, &quot;Name&quot;)
+                .Ordered();
+        }
+
+        // The two grammars below are just to set up the name list
+        [Hidden]
+        public void AddName(string name)
+        {
+            _names.Add(name);
+        }
+
+        public IGrammar TheNamesAre()
+        {
+            return this[&quot;AddName&quot;]
+                .AsTable(&quot;The data is&quot;)
+                .Before(() =&gt; _names.Clear());
+        }
+
+
+    }
+</code></pre>
+<p>Note that set verifications can explicitly choose to enforce the exact order of the results, or do an unordered comparison by default.</p>
+<div class="alert alert-info" role="alert"><strong>Info</strong> The Storyteller team's advice is to always use unordered set comparisons if you do not care about the order of the actual data just to remove a little bit of friction from your usage.</div>
+<p>In usage, the string list verification behaves like this sample specification below:</p>
+<p data-path="Sets/String Lists" data-spec="{&quot;title&quot;:&quot;String Lists&quot;,&quot;path&quot;:&quot;Sets/String Lists&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, January 04, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;NameList&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheNamesAre&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheNamesAre-row&quot;,&quot;cells&quot;:{&quot;name&quot;:&quot;Luke&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;75b41462-d797-4347-ba76-34e95518cf95&quot;},{&quot;key&quot;:&quot;TheNamesAre-row&quot;,&quot;cells&quot;:{&quot;name&quot;:&quot;Han&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;7473a6bb-2f3a-48d7-a09f-45b28f2c2fbc&quot;},{&quot;key&quot;:&quot;TheNamesAre-row&quot;,&quot;cells&quot;:{&quot;name&quot;:&quot;Chewie&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;f716c497-2db3-4966-ae8d-7664468ca092&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;6acfc9da-cb29-431f-84c9-bb0177e420e9&quot;}],&quot;id&quot;:&quot;73c4cfc2-d967-4a96-ad97-0d49809bb9c0&quot;},{&quot;text&quot;:&quot;The order is incorrect and this declaration should fail&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;142515d9-bcc3-4537-861d-ff0de0b5d4cc&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Luke&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;b7ffa927-e40b-4f97-ac40-780a38ee6fc0&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Chewie&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;8ab85478-c171-4402-99e5-ea829b9cdc8c&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Han&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;77078201-ebb7-4868-86ee-fc80b470f659&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;4b2b3b61-f412-4110-801e-8e43318d81df&quot;}],&quot;id&quot;:&quot;cbc36ee4-4b56-4977-ab01-112498acc92b&quot;},{&quot;text&quot;:&quot;Chewie got lost, so this fails too&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;aa71a666-cabb-41b9-b8e5-8b7ea63cc794&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Luke&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c10c9edb-7b52-4e14-9878-d0ccb618ce8c&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Han&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;120ed305-0138-4a97-ae17-ba9b8429ab9e&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;102e7d44-2635-4eb9-9246-9b6fdd2faf89&quot;}],&quot;id&quot;:&quot;56b64f76-f98d-442d-8f6e-b44be0916d30&quot;},{&quot;text&quot;:&quot;Leia wasn&#39;t with them at the time, so this declaration fails too&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;df0da80d-883d-43ed-9bc4-cbb148f69a28&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Luke&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;e63df103-13f5-4698-87eb-57545a2ea3ae&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Han&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;df9af842-1f3f-4864-8646-b180d8ad8851&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Chewie&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;ada502cf-1f7d-4bf2-9cea-0be91318c46b&quot;},{&quot;key&quot;:&quot;TheNamesShouldBe-row&quot;,&quot;cells&quot;:{&quot;Name&quot;:&quot;Leia&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;6e5d68bc-4572-448d-bf59-f8e4ddbba515&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;5b1c4aa0-2e20-4848-9d22-8986ccaed258&quot;}],&quot;id&quot;:&quot;344eb5a4-9a15-480a-b387-5dc8d30968b4&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;1bcccd5b-d7ee-4bbd-9159-fb55f4b8dcc7&quot;}],&quot;id&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Comparing a set of names&quot;,&quot;key&quot;:&quot;NameList&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.NameListFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;Name&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;Rows&quot;,&quot;ordered&quot;:true,&quot;title&quot;:&quot;The names in order should be&quot;,&quot;key&quot;:&quot;TheNamesShouldBe&quot;,&quot;type&quot;:&quot;set-verification&quot;,&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;name&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;Rows&quot;,&quot;title&quot;:&quot;The data is&quot;,&quot;key&quot;:&quot;TheNamesAre&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;75b41462-d797-4347-ba76-34e95518cf95&quot;,&quot;spec&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;7473a6bb-2f3a-48d7-a09f-45b28f2c2fbc&quot;,&quot;spec&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;f716c497-2db3-4966-ae8d-7664468ca092&quot;,&quot;spec&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;spec&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;,&quot;matches&quot;:[&quot;b7ffa927-e40b-4f97-ac40-780a38ee6fc0&quot;],&quot;missing&quot;:[],&quot;extras&quot;:[],&quot;wrongOrdered&quot;:[{&quot;actual&quot;:3,&quot;id&quot;:&quot;8ab85478-c171-4402-99e5-ea829b9cdc8c&quot;},{&quot;actual&quot;:2,&quot;id&quot;:&quot;77078201-ebb7-4868-86ee-fc80b470f659&quot;}],&quot;id&quot;:&quot;4b2b3b61-f412-4110-801e-8e43318d81df&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;,&quot;matches&quot;:[&quot;c10c9edb-7b52-4e14-9878-d0ccb618ce8c&quot;,&quot;120ed305-0138-4a97-ae17-ba9b8429ab9e&quot;],&quot;missing&quot;:[],&quot;extras&quot;:[{&quot;Name&quot;:&quot;Chewie&quot;}],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;102e7d44-2635-4eb9-9246-9b6fdd2faf89&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;a32d31b5-e60a-47a5-890c-a4b669d89eed&quot;,&quot;matches&quot;:[&quot;e63df103-13f5-4698-87eb-57545a2ea3ae&quot;,&quot;df9af842-1f3f-4864-8646-b180d8ad8851&quot;,&quot;ada502cf-1f7d-4bf2-9cea-0be91318c46b&quot;],&quot;missing&quot;:[&quot;6e5d68bc-4572-448d-bf59-f8e4ddbba515&quot;],&quot;extras&quot;:[],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;5b1c4aa0-2e20-4848-9d22-8986ccaed258&quot;,&quot;type&quot;:&quot;set-verification-result&quot;}]" class="spec-result"></p>
+<h2>Object Sets</h2>
+<p>The <code>VerifySetOf()</code> mechanism on <code>Fixture</code> classes enables you to write grammars to express the qualities of an expected set of data by testing individual values of the data items in the actual result.</p>
+<p>Let's say that you're building an invoicing system of some kind and you have a simple class to represent details like this (the very earliest version of Storyteller was originally conceived during a project on legal invoicing software that used the older <a href="http://fitnesse.org">FitNesse</a> tool):</p>
+<pre><code class="language-csharp">
+    public class InvoiceDetail
+    {
+        public double Amount { get; set; }
+        public DateTime Date { get; set; }
+        public string Name { get; set; }
+        public string Part { get; set; }
+    }
+</code></pre>
+<p>You could write some simple set comparisons with against that <code>InvoiceDetail</code> object with grammars like this code sample below:</p>
+<pre><code class="language-csharp">
+    public class SetsFixture : Fixture
+    {
+        public IGrammar UnorderedDetailsAre()
+        {
+            return VerifySetOf(() =&gt; _details)
+                .Titled(&quot;The unordered details should be&quot;)
+
+                // Use this shorthand syntax if you don&#39;t care about
+                // cell defaults or overriding the table headers
+                // in the html
+                .MatchOn(o =&gt; o.Amount, o =&gt; o.Date, o =&gt; o.Name);
+        }
+
+        public IGrammar OrderedDetailsAre()
+        {
+            return VerifySetOf(() =&gt; _details)
+                .Titled(&quot;The Ordered details should be&quot;)
+                .Ordered()
+
+                // Use this syntax if you want to customize
+                // the cells in this SetVerification grammar
+                .Comparisons(_ =&gt;
+                {
+                    _.Compare(o =&gt; o.Amount).DefaultValue(&quot;100&quot;).Header(&quot;The Amount&quot;);
+                    _.Compare(o =&gt; o.Date);
+                    _.Compare(o =&gt; o.Name).Header(&quot;The Name&quot;);
+                });
+        }
+
+        private readonly List&lt;InvoiceDetail&gt; _details = new List&lt;InvoiceDetail&gt;();
+
+        // This grammar is just used to set up the actual results
+        // in the specification
+        public IGrammar InvoiceDetailsAre()
+        {
+            return CreateNewObject&lt;InvoiceDetail&gt;(&quot;&quot;, x =&gt;
+            {
+                x.SetProperty(o =&gt; o.Amount);
+                x.SetProperty(o =&gt; o.Date);
+                x.SetProperty(o =&gt; o.Name);
+                x.Do(d =&gt; _details.Add(d));
+            })
+            .AsTable(&quot;The InvoiceDetails are&quot;)
+            .Before(() =&gt; _details.Clear());
+        }
+    }
+</code></pre>
+<p>The grammars above in action will render html results like so:</p>
+<p data-path="Sets/Object Sets" data-spec="{&quot;title&quot;:&quot;Object Sets&quot;,&quot;path&quot;:&quot;Sets/Object Sets&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Monday, January 04, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;Sets&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Just setting up the actual state of the system&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;94f287c5-2735-43d8-9645-2175c222ad95&quot;},{&quot;key&quot;:&quot;InvoiceDetailsAre&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;InvoiceDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;100&quot;,&quot;Date&quot;:&quot;TODAY&quot;,&quot;Name&quot;:&quot;The Shirts&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;671cdbb1-e647-4a7f-9b9a-36160f372064&quot;},{&quot;key&quot;:&quot;InvoiceDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;200&quot;,&quot;Date&quot;:&quot;TODAY-1&quot;,&quot;Name&quot;:&quot;The Pants&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;bc80d37f-4b89-4188-bef9-c4fdf35f31e1&quot;},{&quot;key&quot;:&quot;InvoiceDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;10&quot;,&quot;Date&quot;:&quot;TODAY-2&quot;,&quot;Name&quot;:&quot;Socks&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;efba48db-ad2f-4e73-92ba-4e94827d114d&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;c5c0c0a7-7c62-44c1-9a91-fe05b88f5d3c&quot;}],&quot;id&quot;:&quot;e6ea76bb-b3c8-43c9-8ab9-4913d9424e82&quot;},{&quot;text&quot;:&quot;This declaration is all out of order with the actual data, but that&#39;s okay in this case&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;5ae2c8e8-73b9-44db-9a3f-a2110739051c&quot;},{&quot;key&quot;:&quot;UnorderedDetailsAre&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;UnorderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;10&quot;,&quot;Date&quot;:&quot;TODAY-2&quot;,&quot;Name&quot;:&quot;Socks&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;9b76c088-c862-4f43-b36a-f6f2c6502abf&quot;},{&quot;key&quot;:&quot;UnorderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;200&quot;,&quot;Date&quot;:&quot;TODAY-1&quot;,&quot;Name&quot;:&quot;The Pants&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;14db3929-f472-4c78-a1d5-32cf624ce1ad&quot;},{&quot;key&quot;:&quot;UnorderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;100&quot;,&quot;Date&quot;:&quot;TODAY&quot;,&quot;Name&quot;:&quot;The Shirts&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;46192169-7681-4b8a-83c4-64fdfab40f3c&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;5bdd68fb-577e-4396-8d3e-54f31a3f61af&quot;}],&quot;id&quot;:&quot;1572ee4d-7bf8-437f-962a-aeaccbe47d86&quot;},{&quot;text&quot;:&quot;Now, let&#39;s do the same results where order matters. The table below will fail because the ordering is wrong&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;9324020c-c82a-4dce-aa20-834fdc1d0735&quot;},{&quot;key&quot;:&quot;OrderedDetailsAre&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;OrderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;10&quot;,&quot;Date&quot;:&quot;TODAY-2&quot;,&quot;Name&quot;:&quot;Socks&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c7408007-661e-4b11-a8e8-321089557ca3&quot;},{&quot;key&quot;:&quot;OrderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;200&quot;,&quot;Date&quot;:&quot;TODAY-1&quot;,&quot;Name&quot;:&quot;The Pants&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;bcbe0591-d1e3-4537-904a-4f1712f0e08a&quot;},{&quot;key&quot;:&quot;OrderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;100&quot;,&quot;Date&quot;:&quot;TODAY&quot;,&quot;Name&quot;:&quot;The Shirts&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;4e31d99b-52b5-4d58-b489-1535342a244c&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;6aac959d-71b4-42b6-9bf3-36235c806a17&quot;}],&quot;id&quot;:&quot;d7185996-31c9-431a-931b-194ac12e3002&quot;},{&quot;text&quot;:&quot;All Cells are Part of the Evaluation. This time, some of the cell values are wrong&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;40c33fe8-368a-4a32-8a7e-71e551ba6c8a&quot;},{&quot;key&quot;:&quot;UnorderedDetailsAre&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;UnorderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;11&quot;,&quot;Date&quot;:&quot;TODAY-2&quot;,&quot;Name&quot;:&quot;Socks&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;761891f5-7850-448e-895f-b5fff4b227b4&quot;},{&quot;key&quot;:&quot;UnorderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;200&quot;,&quot;Date&quot;:&quot;TODAY-5&quot;,&quot;Name&quot;:&quot;The Pants&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;37752e4b-9e01-4e2b-8b5b-61c5f8a454f3&quot;},{&quot;key&quot;:&quot;UnorderedDetailsAre-row&quot;,&quot;cells&quot;:{&quot;Amount&quot;:&quot;100&quot;,&quot;Date&quot;:&quot;TODAY&quot;,&quot;Name&quot;:&quot;Sweatpants&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c07cf80b-a22b-4b80-813b-ecce669a886a&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;aef21326-1283-4aaf-876b-e5cc0f3aacd8&quot;}],&quot;id&quot;:&quot;748ea3fa-f6f5-4c9f-acca-203c60096bcf&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;28b94dd1-2291-4d19-a40f-4b92e3e16065&quot;}],&quot;id&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Sets&quot;,&quot;key&quot;:&quot;Sets&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.SetsFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;Amount&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Date&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Name&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;rows&quot;,&quot;ordered&quot;:false,&quot;title&quot;:&quot;The unordered details should be&quot;,&quot;key&quot;:&quot;UnorderedDetailsAre&quot;,&quot;type&quot;:&quot;set-verification&quot;,&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;Amount&quot;,&quot;default&quot;:&quot;100&quot;,&quot;header&quot;:&quot;The Amount&quot;,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Date&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Name&quot;,&quot;default&quot;:null,&quot;header&quot;:&quot;The Name&quot;,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;rows&quot;,&quot;ordered&quot;:true,&quot;title&quot;:&quot;The Ordered details should be&quot;,&quot;key&quot;:&quot;OrderedDetailsAre&quot;,&quot;type&quot;:&quot;set-verification&quot;,&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;Amount&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Date&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Name&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;Rows&quot;,&quot;title&quot;:&quot;The InvoiceDetails are&quot;,&quot;key&quot;:&quot;InvoiceDetailsAre&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;671cdbb1-e647-4a7f-9b9a-36160f372064&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;1&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;671cdbb1-e647-4a7f-9b9a-36160f372064&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;2&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;671cdbb1-e647-4a7f-9b9a-36160f372064&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;3&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;bc80d37f-4b89-4188-bef9-c4fdf35f31e1&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;1&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;bc80d37f-4b89-4188-bef9-c4fdf35f31e1&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;2&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;bc80d37f-4b89-4188-bef9-c4fdf35f31e1&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;3&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;efba48db-ad2f-4e73-92ba-4e94827d114d&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;1&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;efba48db-ad2f-4e73-92ba-4e94827d114d&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;2&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;efba48db-ad2f-4e73-92ba-4e94827d114d&quot;,&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;position&quot;:&quot;3&quot;,&quot;type&quot;:&quot;step-result&quot;},{&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;matches&quot;:[&quot;9b76c088-c862-4f43-b36a-f6f2c6502abf&quot;,&quot;14db3929-f472-4c78-a1d5-32cf624ce1ad&quot;,&quot;46192169-7681-4b8a-83c4-64fdfab40f3c&quot;],&quot;missing&quot;:[],&quot;extras&quot;:[],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;5bdd68fb-577e-4396-8d3e-54f31a3f61af&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;matches&quot;:[&quot;bcbe0591-d1e3-4537-904a-4f1712f0e08a&quot;],&quot;missing&quot;:[],&quot;extras&quot;:[],&quot;wrongOrdered&quot;:[{&quot;actual&quot;:3,&quot;id&quot;:&quot;c7408007-661e-4b11-a8e8-321089557ca3&quot;},{&quot;actual&quot;:1,&quot;id&quot;:&quot;4e31d99b-52b5-4d58-b489-1535342a244c&quot;}],&quot;id&quot;:&quot;6aac959d-71b4-42b6-9bf3-36235c806a17&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;55e1b808-bcca-41b2-9787-6d8c2f1d66d5&quot;,&quot;matches&quot;:[],&quot;missing&quot;:[&quot;761891f5-7850-448e-895f-b5fff4b227b4&quot;,&quot;37752e4b-9e01-4e2b-8b5b-61c5f8a454f3&quot;,&quot;c07cf80b-a22b-4b80-813b-ecce669a886a&quot;],&quot;extras&quot;:[{&quot;Amount&quot;:&quot;100&quot;,&quot;Date&quot;:&quot;1/4/2016 12:00:00 AM&quot;,&quot;Name&quot;:&quot;The Shirts&quot;},{&quot;Amount&quot;:&quot;200&quot;,&quot;Date&quot;:&quot;1/3/2016 12:00:00 AM&quot;,&quot;Name&quot;:&quot;The Pants&quot;},{&quot;Amount&quot;:&quot;10&quot;,&quot;Date&quot;:&quot;1/2/2016 12:00:00 AM&quot;,&quot;Name&quot;:&quot;Socks&quot;}],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;aef21326-1283-4aaf-876b-e5cc0f3aacd8&quot;,&quot;type&quot;:&quot;set-verification-result&quot;}]" class="spec-result"></p>
+<h2>Tips for using Set Verifications Successfully</h2>
+<ol>
+<li>Since the world doesn't always conform to simple object structures, consider using intermediate types in your <em>Set Verification</em> grammars just to translate the actual system data to something that's easier to consume inside of Storyteller.</li>
+<li>Do take advantage of Storyteller's ability to customize string conversions so that you can specify more complex types in <em>Set Verification</em> columns.</li>
+<li>The <code>Compare(x =&gt; [expression])</code> and <code>MatchOn(x =&gt; [expression], x =&gt; [expression]) syntax can support following multiple properties and methods. So</code>Compare(x =&gt; x.Detail.Name)` is valid syntax that can be used inside of Storyteller.</li>
+</ol>
+<h2>Data Tables and Relational Databases</h2>
+<p>Set verification can also be done against a .Net <code>DataTable</code> so that you can easily and declaratively verify the expected
+results of a database table, view, or query. This feature was built specifically to ease testing against relational databases.</p>
+<p>To set up a set verification against a <code>DataTable</code>, use the <code>Fixture.VerifyDataTable()</code> method as shown below:</p>
+<pre><code class="language-csharp">
+        public IGrammar VerifyRows()
+        {
+            // fetchData is a method on this Fixture class that returns
+            // a DataTable
+            return VerifyDataTable(fetchData).Titled(&quot;The rows should be&quot;)
+                .Columns(x =&gt;
+                {
+                    x.Column&lt;string&gt;(&quot;City&quot;);
+                    x.Column&lt;int&gt;(&quot;Distance&quot;);
+                    x.Column&lt;string&gt;(&quot;Zip&quot;).Header(&quot;Postal Code&quot;);
+                });
+        }
+</code></pre> 
+<p>When you use this method, the key things you have to supply are:</p>
+<ol>
+<li>Some mechanism for fetching the <code>DataTable</code> to be verified. The <code>VerifyDataTable()</code> method has overloads for <code>Func&lt;ISpecContext, DataTable&gt;</code> and
+<code>Func&lt;DataTable&gt;</code>. The easiest approach is probably to make a private method that returns a <code>DataTable</code> and refer to that method.</li>
+<li>A title for the set verification grammar</li>
+<li>The columns in the DataTable you wish to verify. At a minimum, you'll need to supply the column name and a .Net Type. You can also optionally
+configure <code>Cell</code> properties like headers and editors just like any other cell in Storyteller.</li>
+</ol>
+<p>You can see the set verification grammar we built above in action inside a specification below:</p>
+<p data-path="Sets/Data Tables" data-spec="{&quot;title&quot;:&quot;Data Tables&quot;,&quot;path&quot;:&quot;Sets/Data Tables&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Wednesday, November 18, 2015&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;DataTable&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheDataTableIs&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;TheDataTableIs-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Austin&quot;,&quot;Distance&quot;:&quot;5&quot;,&quot;ZipCode&quot;:&quot;78750&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;587a06be-1ea2-4f81-adcb-c1b021ed848e&quot;},{&quot;key&quot;:&quot;TheDataTableIs-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Jasper&quot;,&quot;Distance&quot;:&quot;600&quot;,&quot;ZipCode&quot;:&quot;64755&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;a545351b-44b2-4bfd-b6e7-b92b0355544f&quot;},{&quot;key&quot;:&quot;TheDataTableIs-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Bentonville&quot;,&quot;Distance&quot;:&quot;550&quot;,&quot;ZipCode&quot;:&quot;72712&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;88d58ca0-03a6-4f0a-8dde-6125077d4f72&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;a3b07d16-ae2f-4219-82d2-ac85b75dd67e&quot;}],&quot;id&quot;:&quot;44bedc12-0718-48a2-8dac-7c92cc175c46&quot;},{&quot;text&quot;:&quot;Happy Path&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;d60d384e-afb8-4c58-8f6d-e6c52ac42837&quot;},{&quot;key&quot;:&quot;VerifyRows&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Austin&quot;,&quot;Distance&quot;:&quot;5&quot;,&quot;Zip&quot;:&quot;78750&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;b29b0376-17a8-4b24-9dcc-c6a0b845aff2&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Jasper&quot;,&quot;Distance&quot;:&quot;600&quot;,&quot;Zip&quot;:&quot;64755&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c5b734eb-fb33-4ce1-853f-45fc522d7cde&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Bentonville&quot;,&quot;Distance&quot;:&quot;550&quot;,&quot;Zip&quot;:&quot;72712&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;52d77fa5-4d29-487a-aee8-9caf960d1d9b&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;8ff689ba-e36d-4ee4-8b65-a225a965acd8&quot;}],&quot;id&quot;:&quot;9e9f486f-4d05-4c34-ae83-a033e0b7ba35&quot;},{&quot;text&quot;:&quot;Extra Rows Detected from the Database&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;8c3dfc01-a4e1-4266-8baf-2a1cfa225036&quot;},{&quot;key&quot;:&quot;VerifyRows&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Austin&quot;,&quot;Distance&quot;:&quot;5&quot;,&quot;Zip&quot;:&quot;78750&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;7b9ed58a-8965-4866-8123-d3ab09d3323e&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Jasper&quot;,&quot;Distance&quot;:&quot;600&quot;,&quot;Zip&quot;:&quot;64755&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;d095d3e4-1c60-4f15-9428-8bfc5bf4a63b&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;559b7c4c-ed97-4d9f-b1d1-56d77240851f&quot;}],&quot;id&quot;:&quot;d79409f7-d42b-4026-89ec-014a244a3ddb&quot;},{&quot;text&quot;:&quot;Missing Rows in the Database&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;5751eada-18f6-4360-9be9-41a8097d0152&quot;},{&quot;key&quot;:&quot;VerifyRows&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Austin&quot;,&quot;Distance&quot;:&quot;5&quot;,&quot;Zip&quot;:&quot;78750&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;9162cbf6-e2d8-43e9-8521-cf29c26e5abd&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Jasper&quot;,&quot;Distance&quot;:&quot;600&quot;,&quot;Zip&quot;:&quot;64755&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;9f2a061d-47f7-4fd2-92bf-590b859a93b7&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Bentonville&quot;,&quot;Distance&quot;:&quot;550&quot;,&quot;Zip&quot;:&quot;72712&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;49a9cb4a-c963-4e35-9e34-51582a32e6fa&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Joplin&quot;,&quot;Distance&quot;:&quot;575&quot;,&quot;Zip&quot;:&quot;64801&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;4af91f22-caf0-4ebd-a8b2-f4847bb8c6ee&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;1381e6d3-7352-400a-a87a-d70c28cbf858&quot;}],&quot;id&quot;:&quot;8ec3b7c5-9696-402d-a036-604665ca3c4a&quot;},{&quot;text&quot;:&quot;Mismatch in Rows&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;2ff1ba0d-3fb8-4699-b556-25bfeafc3359&quot;},{&quot;key&quot;:&quot;VerifyRows&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;rows&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Round Rock&quot;,&quot;Distance&quot;:&quot;5&quot;,&quot;Zip&quot;:&quot;78750&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;a23242ec-283b-4fb4-909b-767f790c966b&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Jasper&quot;,&quot;Distance&quot;:&quot;600&quot;,&quot;Zip&quot;:&quot;64755&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;f838bf39-dba0-4a25-af37-fe5c9540bfd3&quot;},{&quot;key&quot;:&quot;VerifyRows-row&quot;,&quot;cells&quot;:{&quot;City&quot;:&quot;Bentonville&quot;,&quot;Distance&quot;:&quot;550&quot;,&quot;Zip&quot;:&quot;72712&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;0849047b-19e7-47f5-83e2-4dd1d6ae7114&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;75f2de80-d263-41c7-a674-093fb2c227c0&quot;}],&quot;id&quot;:&quot;10152dfe-5b3a-4f84-8289-da85dbab230c&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;524c0cc3-cfd0-4447-b43f-4138def07c05&quot;}],&quot;id&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Verifying DataTables&quot;,&quot;key&quot;:&quot;DataTable&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.DataTableFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Distance&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;ZipCode&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;Rows&quot;,&quot;title&quot;:&quot;If the DataTable rows are&quot;,&quot;key&quot;:&quot;TheDataTableIs&quot;,&quot;type&quot;:&quot;table&quot;,&quot;errors&quot;:[]},{&quot;cells&quot;:[{&quot;key&quot;:&quot;City&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Distance&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;Zip&quot;,&quot;default&quot;:null,&quot;header&quot;:&quot;Postal Code&quot;,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;collection&quot;:&quot;rows&quot;,&quot;ordered&quot;:false,&quot;title&quot;:&quot;The rows should be&quot;,&quot;key&quot;:&quot;VerifyRows&quot;,&quot;type&quot;:&quot;set-verification&quot;,&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" data-results="[{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;587a06be-1ea2-4f81-adcb-c1b021ed848e&quot;,&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;a545351b-44b2-4bfd-b6e7-b92b0355544f&quot;,&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;88d58ca0-03a6-4f0a-8dde-6125077d4f72&quot;,&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;},{&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;matches&quot;:[&quot;b29b0376-17a8-4b24-9dcc-c6a0b845aff2&quot;,&quot;c5b734eb-fb33-4ce1-853f-45fc522d7cde&quot;,&quot;52d77fa5-4d29-487a-aee8-9caf960d1d9b&quot;],&quot;missing&quot;:[],&quot;extras&quot;:[],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;8ff689ba-e36d-4ee4-8b65-a225a965acd8&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;matches&quot;:[&quot;7b9ed58a-8965-4866-8123-d3ab09d3323e&quot;,&quot;d095d3e4-1c60-4f15-9428-8bfc5bf4a63b&quot;],&quot;missing&quot;:[],&quot;extras&quot;:[{&quot;City&quot;:&quot;Bentonville&quot;,&quot;Distance&quot;:&quot;550&quot;,&quot;Zip&quot;:&quot;72712&quot;}],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;559b7c4c-ed97-4d9f-b1d1-56d77240851f&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;matches&quot;:[&quot;9162cbf6-e2d8-43e9-8521-cf29c26e5abd&quot;,&quot;9f2a061d-47f7-4fd2-92bf-590b859a93b7&quot;,&quot;49a9cb4a-c963-4e35-9e34-51582a32e6fa&quot;],&quot;missing&quot;:[&quot;4af91f22-caf0-4ebd-a8b2-f4847bb8c6ee&quot;],&quot;extras&quot;:[],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;1381e6d3-7352-400a-a87a-d70c28cbf858&quot;,&quot;type&quot;:&quot;set-verification-result&quot;},{&quot;spec&quot;:&quot;c33a220d-ba91-4321-8319-bcee74114211&quot;,&quot;matches&quot;:[&quot;f838bf39-dba0-4a25-af37-fe5c9540bfd3&quot;,&quot;0849047b-19e7-47f5-83e2-4dd1d6ae7114&quot;],&quot;missing&quot;:[&quot;a23242ec-283b-4fb4-909b-767f790c966b&quot;],&quot;extras&quot;:[{&quot;City&quot;:&quot;Austin&quot;,&quot;Distance&quot;:&quot;5&quot;,&quot;Zip&quot;:&quot;78750&quot;}],&quot;wrongOrdered&quot;:[],&quot;id&quot;:&quot;75f2de80-d263-41c7-a674-093fb2c227c0&quot;,&quot;type&quot;:&quot;set-verification-result&quot;}]" class="spec-result"></p>
+
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/tables">Tables</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/embedded_section">Embedded Sections</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+}); 
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>
+
