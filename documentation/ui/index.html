@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,9 +10,9 @@
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -74,9 +74,9 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -88,11 +88,11 @@
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>The Specification Editor and Interactive Runner<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/ui/index.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>The Specification Editor and Interactive Runner<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/ui/index.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
@@ -102,14 +102,11 @@
 </div>
 <p>Storyteller comes with an embedded web application to author and interactively execute specifications with a rich client. To launch the application, use the <code>st open</code> command from described below. See <a href="/documentation/getting_started">Getting Started</a> for more information about the <code>ST.exe</code> tool distributed with Storyteller.</p>
 <p>For specific instructions on using the interactive specification tool, see the following topics:</p>
-<ul class="table-of-contents"><li><a href="/documentation/ui/shell">The Application Shell</a></li><li><a href="/documentation/ui/spec-explorer">The Specification Explorer</a></li><li><a href="/documentation/ui/language">Working with the Fixture and Grammar Language</a></li><li><a href="/documentation/ui/spec-editor">The Specification Editor</a></li></ul>
+<ul class="table-of-contents"><li><a href="/documentation/ui/shell">The Application Shell</a></li><li><a href="/documentation/ui/spec-explorer">The Specification Explorer</a></li><li><a href="/documentation/ui/language">Working with the Fixture and Grammar Language</a></li><li><a href="/documentation/ui/spec-editor">The Specification Editor</a></li><li><a href="/documentation/ui/fixtures">Fixture &amp; Grammar Explorer</a></li><li><a href="/documentation/ui/stepthrough">Stepthrough Mode for Debugging</a></li><li><a href="/documentation/ui/system">System Under Test Lifecycle</a></li></ul>
 <p>To launch the specification editor from a command line, type the command <code>st open [path]</code> where <em>[path]</em> is the project directory of the specification project you want to load. Other options to control how the testing AppDomain is constructed and other explicit overrides are described below:</p>
-<h2>st open</h2>
+<h2 id="st-open">st open</h2>
 <section class="command-section"><h4><span id="open" class="section-header">st open</span><i class="command-description">Opens the specification editor web tool</i></h4></section>
-<div class="single-command-usage"><em>st open</em><path> [-b, --build <build>] [-p, --profile <profile>] [-t, --timeout <timeout>] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config <confi>] [-r, --retries <retries>]</div>
-<table class="table"><thead><tr><th colspan="2">Arguments</th></tr></thead><tbody><tr><td class="command-arg-name">path</td><td class="command-arg-description">Path to the StoryTeller project file or the project directory</td></tr></tbody></table>
-<table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-b, --build &lt;build&gt;]</td><td class="command-flag-description">Specify a build target to force Storyteller to choose that profile. By default, ST will use &#39;Debug&#39;</td></tr><tr><td class="command-flag-usage">[-p, --profile &lt;profile&gt;]</td><td class="command-flag-description">Storyteller test mode profile for systems like Serenity that use this</td></tr><tr><td class="command-flag-usage">[-t, --timeout &lt;timeout&gt;]</td><td class="command-flag-description">Optional. Default project timeout in seconds.</td></tr><tr><td class="command-flag-usage">[-l, --lifecycle Acceptance|Regression|Any]</td><td class="command-flag-description">Optional. Only runs tests with desired lifecyle</td></tr><tr><td class="command-flag-usage">[-z, --teamcity]</td><td class="command-flag-description">Optional. Applies extra logging to see progress within TeamCity during CI runs</td></tr><tr><td class="command-flag-usage">[-c, --config &lt;confi&gt;]</td><td class="command-flag-description">Optional. Override the config file selection of the Storyteller test running AppDomain</td></tr><tr><td class="command-flag-usage">[-r, --retries &lt;retries&gt;]</td><td class="command-flag-description">Sets a minimum number of retry attempts for this execution</td></tr></tbody></table>
-
+<table class="table usages-table"><thead><tr><th colspan="2">Usages</th></tr></thead><tbody><tr><td>Open the Storyteller client to the current project</td><td class="command-usage">dotnet storyteller open [-d, --disable-auto-recycle] [-h, --hotreload] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</td></tr><tr><td>Open the Storyteller client to the named project</td><td class="command-usage">dotnet storyteller open &lt;path&gt; [-d, --disable-auto-recycle] [-h, --hotreload] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</td></tr></tbody></table><table class="table"><thead><tr><th colspan="2">Arguments</th></tr></thead><tbody><tr><td class="command-arg-name">path</td><td class="command-arg-description">Path to the StoryTeller project file or the project directory</td></tr></tbody></table><table class="table"><thead><tr><th colspan="2">Flags</th></tr></thead><tbody><tr><td class="command-flag-usage">[-d, --disable-auto-recycle]</td><td class="command-flag-description">DisableAutoRecycleFlag</td></tr><tr><td class="command-flag-usage">[-h, --hotreload]</td><td class="command-flag-description">Only for Storyteller development itself</td></tr><tr><td class="command-flag-usage">[-f, --framework &lt;framework&gt;]</td><td class="command-flag-description">Override the dotnet framework if multi-targeting</td></tr><tr><td class="command-flag-usage">[-b, --build &lt;build&gt;]</td><td class="command-flag-description">Specify a build target to force Storyteller to choose that profile. By default, ST will use &#x27;Debug&#x27;</td></tr><tr><td class="command-flag-usage">[-p, --profile &lt;profile&gt;]</td><td class="command-flag-description">Storyteller test mode profile for systems like Serenity that use this</td></tr><tr><td class="command-flag-usage">[-t, --timeout &lt;timeout&gt;]</td><td class="command-flag-description">Optional. Default project timeout in seconds.</td></tr><tr><td class="command-flag-usage">[-c, --config &lt;confi&gt;]</td><td class="command-flag-description">Optional. Override the config file selection of the Storyteller test running AppDomain</td></tr><tr><td class="command-flag-usage">[-s, --specs &lt;specs&gt;]</td><td class="command-flag-description">Optional. Override the spec directory</td></tr><tr><td class="command-flag-usage">[-f, --fixtures &lt;fixtures&gt;]</td><td class="command-flag-description">Optional. Override the fixtures directory</td></tr><tr><td class="command-flag-usage">[-c, --culture &lt;culture&gt;]</td><td class="command-flag-description">Force Storyteller to use this culture in all value conversions</td></tr><tr><td class="command-flag-usage">[-s, --system-name &lt;systemname&gt;]</td><td class="command-flag-description">Optional. Tell Storyteller which which ISystem to use</td></tr></tbody></table>
 
 			      	</div>
 
@@ -151,7 +148,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -167,4 +164,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-

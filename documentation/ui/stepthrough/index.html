@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Storyteller - Stepthrough Mode for Debugging</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+
+
+
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <!-- HTML code from Bootply.com editor -->
+
+    <body  >
+
+<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/ui/fixtures" title="Fixture & Grammar Explorer">Previous</a></li>
+		      	<li><a href="/documentation/ui/system" title="System Under Test Lifecycle">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/ui">The Specification Editor and Interactive Runner</a></li><li class="active">Stepthrough Mode for Debugging</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller 4.0.0</h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/ui/system">System Under Test Lifecycle</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/ui/fixtures">Fixture & Grammar Explorer</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Stepthrough Mode for Debugging<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/ui/stepthrough.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--title:Stepthrough Mode for Debugging-->
+<div class="alert alert-success">If you're looking for one singular reason to upgrade Storyteller from
+3.0 to 4.0 or to switch over from some other tool, the stepthrough mode is just that.</div>
+<p>The <strong>biggest</strong> new feature for Storyteller 4.0 is the ability to execute specifications in an
+interactive &quot;stepthrough&quot; mode to more easily troubleshoot and debug specifications that are failing.
+The stepthrough mode supports the familiar debugger concepts of <em>breakpoints</em>, <em>run next</em>, <em>run to breakpoint</em>,
+or <em>run to the end</em>.</p>
+<h2 id="kicking-off-the-stepthrough-mode">Kicking off the Stepthrough Mode</h2>
+<div class="alert alert-info"><b>Note!</b> If there are any specifications queued up for execution, the stepthrough
+request will go into the same queue and will not start until the other specifications in front of it are finished.</div>
+<p>To start the stepthrough execution of a specification, there's a new button in the top left of the
+<a href="/documentation/ui/spec-editor">specification editor</a> that starts running a specification
+in stepthrough mode:</p>
+<p><h5><strong>Starting the stepthrough mode</strong></h5><img src="/content/images/stepthrough/kickoff-stepthrough.png" style="max-width:100%" /></p>
+<p>You can also trigger the stepthrough mode from a specification editor page with keyboard shortcuts:</p>
+<ol>
+<li><code>ctrl + shift + s</code> or <code>ctrl + 3</code> to queue up the stepthrough of the current specification</li>
+<li><code>ctrl + 4</code> to <a href="/documentation/ui/system">recycle the system</a> and queue up the current specification for stepthrough</li>
+</ol>
+<h2 id="understanding-the-progress">Understanding the Progress</h2>
+<p>First off, Storyteller will show a progress bar across the top of the page for the current specification:</p>
+<p><h5><strong>The status bar during stepthrough</strong></h5><img src="/content/images/stepthrough/status-bar.png" style="max-width:100%" /></p>
+<p>If you navigate away from the specification editor page, you can use the progress bar to navigate right back to the
+specification that's running in stepthrough mode. You can also cancel the running execution from the same status bar.</p>
+<p>Storyteller will highlight the current step (i.e., what is about to be executed) in navy blue like this:</p>
+<p><h5><strong>content/images/stepthrough/initial-section-setup.png</strong></h5><img src="/content/images/stepthrough/initial-section-setup.png" style="max-width:100%" /></p>
+<p>One way or another, the Storyteller UI is placing a small control bar right into the highlighted step rendering
+just to make them easier to find on the page.</p>
+<p>Do note that the stepthrough mode shows normally &quot;hidden&quot; steps like <code>Fixture.Setup()</code> or <code>Fixture.Teardown()</code>
+to give you a chance to step into those operations during the stepthrough process.</p>
+<h2 id="breakpoints">Breakpoints</h2>
+<p>You can toggle breakpoints within the specification by clicking inside of any open circle at the left of a
+line in the specification. Active breakpoints show as a solid red circle like this:</p>
+<p><h5><strong>content/images/stepthrough/setting-breakpoint.png</strong></h5><img src="/content/images/stepthrough/setting-breakpoint.png" style="max-width:100%" /></p>
+<p>You can clear all the existing breakpoints with this button in the stepthrough control bar:</p>
+<p><h5><strong>Clear all breakpoints</strong></h5><img src="/content/images/stepthrough/clear-all-breakpoints.png" style="max-width:100%" /></p>
+<h2 id="run-the-next-step">Run the Next Step</h2>
+<p>To execute <strong>only</strong> the next specification step, click the button shown below or use the <code>F10</code> key:</p>
+<p><h5><strong>content/images/stepthrough/run-next.png</strong></h5><img src="/content/images/stepthrough/run-next.png" style="max-width:100%" /></p>
+<h2 id="run-to-a-breakpoint">Run to a Breakpoint</h2>
+<p>To run all the steps up to the next breakpoint, use the button shown below or use the <code>F8</code> key:</p>
+<p><h5><strong>content/images/stepthrough/run-to-breakpoint.png</strong></h5><img src="/content/images/stepthrough/run-to-breakpoint.png" style="max-width:100%" /></p>
+<p>If there are no breakpoints left before the end of the specification, this will just run the rest of the
+specification.</p>
+<h2 id="run-to-the-end">Run to the End</h2>
+<p>To just say &quot;go ahead and finish running this specification,&quot; click the button below or use the <code>shift + F10</code>
+keyboard shortcut:</p>
+<p><h5><strong>content/images/stepthrough/run-to-end.png</strong></h5><img src="/content/images/stepthrough/run-to-end.png" style="max-width:100%" /></p>
+<p>The Storyteller UI will navigate to the results page for the current specification when the stepthrough is complete.</p>
+<h2 id="stop-the-stepthrough-execution">Stop the Stepthrough Execution</h2>
+<p>To stop the stepthrough execution, click this button or use the link in the progress bar at the top of the page:</p>
+<p><h5><strong>content/images/stepthrough/stop-execution.png</strong></h5><img src="/content/images/stepthrough/stop-execution.png" style="max-width:100%" /></p>
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/ui/fixtures">Fixture & Grammar Explorer</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/ui/system">System Under Test Lifecycle</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+});
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>

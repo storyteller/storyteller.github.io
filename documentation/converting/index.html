@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Storyteller - Specification Expiration</title>
+		<title>Storyteller - Converting from Storyteller 3.0 to 4.0</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -50,8 +50,8 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/lifecycle" title="The Specification Lifecycle">Previous</a></li>
-		      	<li><a href="/documentation/language" title="Crafting the Specification Language">Next</a></li>
+		      	<li><a href="/documentation/getting_started" title="Getting Started">Previous</a></li>
+		      	<li><a href="/documentation/terminology" title="Terminology">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -66,7 +66,7 @@
 
 		  <div class="container">
 		  	<nav class="navbar-inverse">
-		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Specification Expiration</li></ol>
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Converting from Storyteller 3.0 to 4.0</li></ol>
 		  	</nav>
 		  </div>
 
@@ -74,36 +74,45 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/language">Crafting the Specification Language</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/lifecycle">The Specification Lifecycle</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/terminology">Terminology</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/getting_started">Getting Started</a></p>
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Specification Expiration<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/expiration.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>Converting from Storyteller 3.0 to 4.0<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/converting.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
-			      		<!--Title: Specification Expiration-->
-<p>You can optionally set an <em>expiration date</em> on a specification as a forceful reminder to review an existing specification for continued validity. If an
-expired specification is executed in a <a href="/documentation/ci">continuous integration build at the command line</a>, it will fail immediately with
-the specific message &quot;This test has expired and needs to be updated.&quot;</p>
-<p>After evaluating the specification, you can either choose to eliminate the specification if it is obsolete or reset or clear the expiration date to mark the specification as valid.</p>
-<p>This feature may be useful if you support a system that has rapidly changing business rules or like us, has to change with new government regulations on a frequent basis.</p>
-<p>See the <a href="/documentation/ui/spec-editor">The Specification Editor</a> for more information on editing specifications.</p>
-
+			      		<!--title:Converting from Storyteller 3.0 to 4.0-->
+<h2 id="converting-3.0-xml-spec-files-to-4.0-markdown-spec-files">Converting 3.0 Xml Spec Files to 4.0 Markdown Spec Files</h2>
+<p>Storyteller 4.0 introduces a new standard, text based format for persisting specifications that
+can roughly be described as &quot;Markdown with some Storyteller-specific stuff mixed in.&quot; See
+<a href="/documentation/markdown">Working with the Specification Markdown</a> for specifics on the new file format.</p>
+<p>To convert your 3.0 specs to the new 4.0 format, run this command from the root of your
+Storyteller project:</p>
+<pre><code>dotnet storyteller convert
+</code></pre>
+<p>Or run the <code>convert</code> command from the <code>StorytellerRunner.exe</code> tool in the <code>StorytellerRunnerCsproj</code>
+Nuget if you're not using the dotnet CLI.</p>
+<p>See <a href="/documentation/getting_started">Getting Started</a> for more information on setting up the <code>dotnet storyteller</code> tool
+for your project.</p>
+<h2 id="breaking-changes">Breaking Changes</h2>
+<p>Right now the only breaking API change is that Storyteller is using the <a href="https://github.com/JasperFx/baseline">Baseline</a> version
+of <code>Conversions</code>, and the Storyteller <code>IRuntimeConverter</code>'s are now registered against <code>CellHandling</code>. See
+<a href="/documentation/engine/cells/conversion">Data Conversion within Specifications</a> for more information.</p>
 
 			      	</div>
 
@@ -111,12 +120,12 @@ the specific message &quot;This test has expired and needs to be updated.&quot;<
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/lifecycle">The Specification Lifecycle</a>
+				        	<strong>Previous: </strong><a href="/documentation/getting_started">Getting Started</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/language">Crafting the Specification Language</a>
+				        	<strong>Next: </strong><a href="/documentation/terminology">Terminology</a>
 
 				        </span>
 			      	</nav>
@@ -145,7 +154,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -161,4 +170,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-

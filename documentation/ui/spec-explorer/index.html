@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,9 +10,9 @@
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -74,9 +74,9 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -88,11 +88,11 @@
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>The Specification Explorer<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/ui/spec-explorer.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>The Specification Explorer<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/ui/spec-explorer.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
@@ -100,74 +100,73 @@
 <!--Url:spec-explorer-->
 <p>The &quot;Specification Explorer&quot; is the main view of the Storyteller specification editor and provides a pretty typical tree view of all the specifications in the project. The suite nodes in the specification explorer can be expanded or collapsed by clicking the <i class="fa fa-fw fa-caret-down" data-reactid=".0.1.$1af4afe3-a926-4abe-bd27-c3ae23409a5e.1.1:$Embedded.0.0.0"></i> or <i class="fa fa-fw fa-caret-right" data-reactid=".0.1.$1af4afe3-a926-4abe-bd27-c3ae23409a5e.1.1:$Embedded.0.0.0"></i> icons.</p>
 <p>The specification explorer consists of a tree view component displaying all the suites and specifications and a vertical pane on the left that contains the controls to filter the specification tree or perform batched operations on the specifications shown on the tree.</p>
-<h5><strong>The Specification Explorer page</strong></h5>
-<img src="/content/images/spec-explorer.png" width="100%"/>
-<h2>Specification State</h2>
+<p><h5><strong>The Specification Explorer page</strong></h5>
+<img src="/content/images/spec-explorer.png" width="100%"/></p>
+<h2 id="specification-state">Specification State</h2>
 <p>The display of the specification leaves in the tree view will change to denote status. The table below demonstrates the different specification states:</p>
 <table class="table">
 <tr>
-    <th>Description</th>
-    <th>Display</th>
+	<th>Description</th>
+	<th>Display</th>
 </tr>
 <tr>
-    <td>No results, not running or queued</td>
-    <td><i class="fa fa-circle-o"></i> [Specification Name]</td>
+	<td>No results, not running or queued</td>
+	<td><i class="fa fa-circle-o"></i> [Specification Name]</td>
 </tr>
 <tr>
-    <td>Last execution succeeded</td>
-    <td><i class="fa fa-check text-success"></i> [Specification Name]</td>
+	<td>Last execution succeeded</td>
+	<td><i class="fa fa-check text-success"></i> [Specification Name]</td>
 </tr>
 <tr>
-    <td>Last execution failed</td>
-    <td><i class="fa fa-exclamation-circle text-danger"></i> [Specification Name]</td>
+	<td>Last execution failed</td>
+	<td><i class="fa fa-exclamation-circle text-danger"></i> [Specification Name]</td>
 </tr>
 <tr>
-    <td>Queued</td>
-    <td><i class="fa fa-circle-o"> [Specification Name]</i></td>
+	<td>Queued</td>
+	<td><i class="fa fa-circle-o"> [Specification Name]</i></td>
 </tr>
 <tr>
-    <td>Running with no conclusive results</td>
-    <td><i class="fa fa-spinner fa-spin"></i> <strong>[Specification Name]</strong></td>
+	<td>Running with no conclusive results</td>
+	<td><i class="fa fa-spinner fa-spin"></i> <strong>[Specification Name]</strong></td>
 </tr>
 <tr>
-    <td>Running successfully</td>
-    <td><i class="fa fa-spinner fa-spin text-success"></i> <strong>[Specification Name]</strong></td>
+	<td>Running successfully</td>
+	<td><i class="fa fa-spinner fa-spin text-success"></i> <strong>[Specification Name]</strong></td>
 </tr>
 <tr>
-    <td>Running with failures</td>
-    <td><i class="fa fa-spinner fa-spin text-danger"></i> <strong>[Specification Name]</strong></td>
+	<td>Running with failures</td>
+	<td><i class="fa fa-spinner fa-spin text-danger"></i> <strong>[Specification Name]</strong></td>
 </tr>
 </table>
-<h2>Filtering</h2>
+<h2 id="filtering">Filtering</h2>
 <p>The specification tree can be filtered by any combination of result state (none, any, successful, or failed) and specification lifecycle (any, acceptance, or regression) using the filter button groups in the left of the specification editor screen.</p>
-<h2>Adding a new Top Level Suite</h2>
+<h2 id="adding-a-new-top-level-suite">Adding a new Top Level Suite</h2>
 <p>To add a new top-level suite, click the &quot;new suite&quot; link just to the right of the title &quot;All Specifications&quot; at the top of the tree view to bring up the modal dialog for adding a suite. Note that you can only add top level suites when you are on the home page of the specification explorer.</p>
-<h5><strong>The add suite dialog</strong></h5>
-<img src="/content/images/new-suite.png" width="100%"/>
-<h2>Adding Child Suites</h2>
+<p><h5><strong>The add suite dialog</strong></h5>
+<img src="/content/images/new-suite.png" width="100%"/></p>
+<h2 id="adding-child-suites">Adding Child Suites</h2>
 <p>Click the &quot;new child suite&quot; link just to the right of any suite node in the tree view to open up the modal dialog for adding child suites.</p>
-<h5><strong>The add a child suite dialog</strong></h5>
-<img src="/content/images/new-child-suite.png" width="100%"/>
-<h2>Adding Specifications</h2>
+<p><h5><strong>The add a child suite dialog</strong></h5>
+<img src="/content/images/new-child-suite.png" width="100%"/></p>
+<h2 id="adding-specifications">Adding Specifications</h2>
 <p>Click the &quot;new spec&quot; link to the right of any suite node to bring up a modal dialog to add a specification to that suite.</p>
-<h5><strong>The new specification dialog</strong></h5>
-<img src="/content/images/new-specification.png" width="100%"/>
-<h2>Cloning an Existing Specification</h2>
+<p><h5><strong>The new specification dialog</strong></h5>
+<img src="/content/images/new-specification.png" width="100%"/></p>
+<h2 id="cloning-an-existing-specification">Cloning an Existing Specification</h2>
 <p>Clicking the &quot;clone&quot; link to the right of any Specification leaf in the tree will bring up a modal dialog to enter the name for the new Specification. When cloning a specification, Storyteller copies the entire structure of the original Specification but <em>always sets the lifecycle of the new specification to &quot;Acceptance&quot;</em>.</p>
-<h5><strong>Clone a specification dialog</strong></h5>
-<img src="/content/images/clone-specification.png" width="100%"/>
-<h2>Deleting Specifications</h2>
+<p><h5><strong>Clone a specification dialog</strong></h5>
+<img src="/content/images/clone-specification.png" width="100%"/></p>
+<h2 id="deleting-specifications">Deleting Specifications</h2>
 <p>Click the &quot;delete&quot; link to the right of any Specification to delete it.</p>
-<h2>Navigate to a Suite</h2>
+<h2 id="navigate-to-a-suite">Navigate to a Suite</h2>
 <p>In the tree view, click on the name of any suite to drill down into the specifications for only that suite.</p>
-<h2>Running Specifications</h2>
+<h2 id="running-specifications">Running Specifications</h2>
 <p>To run all the specifications shown in the tree view, click the &quot;Run All&quot; link at the top left of the specification explorer page. This command will only run the specifications that meet the currently selected filter.</p>
 <p>To run one specification at a time, just click the &quot;run&quot; link to the right of any specification leaf.</p>
-<h2>Navigating to a Specification</h2>
+<h2 id="navigating-to-a-specification">Navigating to a Specification</h2>
 <p>In the tree view, click on the name of any specification to navigate to the <a href="/documentation/ui/spec-editor">The Specification Editor</a> page for that specification.</p>
-<h2>Batch Changing Specification Lifecycle</h2>
+<h2 id="batch-changing-specification-lifecycle">Batch Changing Specification Lifecycle</h2>
 <p>At any point, you can change the lifecycle of all the specifications currently in the tree view by clicking either the &quot;Mark as Acceptance&quot; or the &quot;Mark as Regression&quot; buttons. These commands honor the current specification filter. Do note that you will still have to persist the changes to any specifications that are already loaded. Use the &quot;Save All Changes&quot; link at the top to persist all outstanding changes.</p>
-
 
 			      	</div>
 
@@ -209,7 +208,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -225,4 +224,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,9 +10,9 @@
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -74,9 +74,9 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -88,11 +88,11 @@
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Documentation Skinning<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/docs/theme.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>Documentation Skinning<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/docs/theme.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
@@ -102,38 +102,38 @@
 <p>For an example, see <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/layout.htm">the layout for this documentation website</a>.</p>
 <p>See <a href="/documentation/docs/linking">Linking to Other Topics</a> for an explanation of how to use the preprocessed directives for navigation elements.</p>
 <p>Also see <a href="/documentation/docs/images">Embedding Images</a> for working with images.</p>
-<h2>Inner Content</h2>
+<h2 id="inner-content">Inner Content</h2>
 <p>To place the actual content of a topic file within the layout, use this directive: <code>&lt;[inner]&gt;</code>.</p>
-<h2>Topic Title</h2>
+<h2 id="topic-title">Topic Title</h2>
 <p>To embed the title of the current topic, use <code>&lt;[title]&gt;</code></p>
-<h2>Version</h2>
-<p>To embed the version of the product passed to the <code>st doc-run</code> or <code>st doc-export</code> commands, use <code>&lt;[version]&gt;</code></p>
-<h2>Root Url</h2>
+<h2 id="version">Version</h2>
+<p>To embed the version of the product passed to the <code>st doc-run</code> or <code>st doc-export</code> commands, use <code>&lt;<a href="#version">version</a>&gt;</code></p>
+<h2 id="root-url">Root Url</h2>
 <p>To embed the url to the root of the documentation project, use <code>&lt;[RootUrl]&amp;gh;</code>.</p>
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The directives for images, styles, and scripts are only necessary for assets bundled directly into the documentation export. These directives are applied differently depending upon whether the documentation is running in the live preview, exported for website hosting, or exported for local file system browsing. If you are linking to assets from another website, you do not need these directives.
 </div>
-<h2>Edit on GitHub Link</h2>
+<h2 id="edit-on-github-link">Edit on GitHub Link</h2>
 <p>You can add a link to edit the current documentation topic in GitHub (or any other hosting provider) by using the <code>documentation/docs/theme.md</code> transform like this example shown below that is taken from the Storyteller documentation itself:</p>
 <pre>
-&lt;a 
-    href="https://github.com/storyteller/storyteller/blob/master/documentation/&lt;[FilePath]&gt;"  
-    class="text-muted fa fa-github" 
-    &gt; Edit on GitHub&lt;/a&gt;
+&lt;a
+	href="https://github.com/storyteller/storyteller/blob/master/documentation/&lt;[FilePath]&gt;"  
+	class="text-muted"&gt;
+	&lt;i class="fa fa-github"&gt;&lt;/i&gt; Edit on GitHub
+&lt;/a&gt;
 </pre>
 <p>This usage results in the following html:</p>
-<p><a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/docs/theme.md"  class="text-muted fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></p>
+<p><a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/docs/theme.md"  class="text-muted" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></p>
 <p>I used <a href="http://fortawesome.github.io/Font-Awesome/">font-awesome</a> for the icon above, but that is neither required nor in the box for the Storyteller documentation.</p>
-<h2>CSS Files</h2>
+<h2 id="css-files">CSS Files</h2>
 <p>To link to CSS files with Storyteller's pathing rules in exports, use this syntax:</p>
 <p><code>&lt;[css:content/bootstrap.min.css]&gt;</code></p>
 <p>The path in <code>css:[path]</code> should be relative to the root of the documentation directory.</p>
-<h2>Script Files</h2>
+<h2 id="script-files">Script Files</h2>
 <p>To link to script files with Storyteller's pathing rules in exports, use this syntax:</p>
 <p><code>&lt;[script:content/prism.js]&gt;</code></p>
-<h2>Topic Breadcrumbs</h2>
+<h2 id="topic-breadcrumbs">Topic Breadcrumbs</h2>
 <p>To use a breadcrumbs element from <a href="http://getbootstrap.com">Bootstrap</a>, use this syntax:</p>
 <p><code>&lt;[Breadcrumbs]&gt;</code></p>
-
 
 			      	</div>
 
@@ -175,7 +175,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -191,4 +191,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-

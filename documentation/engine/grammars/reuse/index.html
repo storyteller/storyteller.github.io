@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,9 +10,9 @@
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -74,9 +74,9 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -88,11 +88,11 @@
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Importing and Currying Grammars<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/currying.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>Importing and Currying Grammars<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/currying.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
@@ -105,53 +105,18 @@
 <li>Use <em>Currying</em> to use an existing grammar in a more specific way. Shown below.</li>
 <li>Use the <code>Fixture.Import()</code> method shown below</li>
 </ol>
-<h2>Currying for More Expressiveness</h2>
+<h2 id="currying-for-more-expressiveness">Currying for More Expressiveness</h2>
 <div class="alert alert-info" role="alert">What we're calling <i>Currying</i> in Storyteller is probably more accurately an example of <i>partial application</i> from Functional Programming. Mea culpa, but "curry" is shorter and we're keeping it for now. See <a href="http://raganwald.com/2013/03/07/currying-and-partial-application.html">Raganwald on the difference between currying and partial application.</a> </div>
 <p>Let's say that you're working on an invoicing system again. A common task in your Storyteller project will be to set up an <code>Invoice</code> object with all its various properties. In some cases you definitely want to explicitly specify all of the Invoice's properties. In other cases, the only thing that matters for the specification is that an Invoice is open or fulfilled. Since one of the Storyteller's deepest held ideas is that only information germane to a specification should be expressed in a specification, Storyteller provides a feature called <em>grammar currying</em> to allow you to supply less information to an existing grammar.</p>
 <p>The generic grammar for setting up an Invoice and a curried version to set up an open invoice.</p>
-<pre><code class="language-csharp">
-    public class CurryingFixture : Fixture
-    {
-        [FormatAs(&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;)]
-        public void CreateInvoice(string Id, DateTime DueDate, Boolean IsOpen)
-        {
-            
-        }
-
-        public IGrammar OpenInvoice()
-        {
-            return this[&quot;CreateInvoice&quot;].Curry()
-                .Template(&quot;Invoice {Id} is open&quot;)
-                .Defaults(&quot;DueDate:TODAY+2;IsOpen:true&quot;);
-        }
-    }
-</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public class CurryingFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    [FormatAs(&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;)]&#xD;&#xA;    public void CreateInvoice(string Id, DateTime DueDate, Boolean IsOpen)&#xD;&#xA;    {&#xD;&#xA;        &#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    public IGrammar OpenInvoice()&#xD;&#xA;    {&#xD;&#xA;        return this[&quot;CreateInvoice&quot;].Curry()&#xD;&#xA;            .Template(&quot;Invoice {Id} is open&quot;)&#xD;&#xA;            .Defaults(&quot;DueDate:TODAY&#x2B;2;IsOpen:true&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>In usage, you can see the difference between the more generic grammar and the specific, curried grammar.</p>
-<p data-path="Currying/Currying" data-spec="{&quot;title&quot;:&quot;Currying&quot;,&quot;path&quot;:&quot;Currying/Currying&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Friday, January 29, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;Currying&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Without currying and supplying all the information&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;1d9cdc91-5685-4bfa-9668-5a367d76883b&quot;},{&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#1&quot;,&quot;DueDate&quot;:&quot;TODAY+5&quot;,&quot;IsOpen&quot;:&quot;True&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;1e3d3a00-858e-4e9b-a558-2223e16e285a&quot;},{&quot;text&quot;:&quot;If all the spec cares about is that the invoice is open&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;abc2745e-0467-494d-b4ee-3ae3b0475694&quot;},{&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#2&quot;,&quot;DueDate&quot;:&quot;TODAY+2;IsOpen&quot;,&quot;IsOpen&quot;:&quot;False&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;62b59b9c-7c13-4420-8deb-2bf818c584a7&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;1d5fd235-cebf-4a97-a5c1-1ab15f74b95e&quot;}],&quot;id&quot;:&quot;93be7129-3144-4b0f-94b4-56707296b11f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Currying&quot;,&quot;key&quot;:&quot;Currying&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CurryingFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;,&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;DueDate&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null},{&quot;key&quot;:&quot;IsOpen&quot;,&quot;default&quot;:&quot;False&quot;,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:&quot;boolean&quot;,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Invoice {Id} is open&quot;,&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;Id&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p data-path="Currying/Currying" data-spec="{&quot;title&quot;:&quot;Currying&quot;,&quot;path&quot;:&quot;Currying/Currying&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Friday, October 14, 2016&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Currying&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Without currying and supplying all the information&quot;,&quot;id&quot;:&quot;3e918b77-fee2-4ec9-9672-c47e469836ed&quot;},{&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#1&quot;,&quot;DueDate&quot;:&quot;TODAY&#x2B;5&quot;,&quot;IsOpen&quot;:&quot;True&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;f85eb414-b0c9-46d1-8e1a-a50046687ba7&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;If all the spec cares about is that the invoice is open&quot;,&quot;id&quot;:&quot;8e7c3262-c77a-499c-ac55-7fb51fd867f3&quot;},{&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;#2&quot;,&quot;DueDate&quot;:&quot;TODAY&#x2B;2;IsOpen&quot;,&quot;IsOpen&quot;:&quot;False&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;aa9e4112-575e-4cda-bdef-0c813905c108&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;bdc67cc0-408d-474d-9482-f21bcd1b3d80&quot;}],&quot;id&quot;:&quot;93be7129-3144-4b0f-94b4-56707296b11f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Currying&quot;,&quot;key&quot;:&quot;Currying&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.CurryingFixture&quot;,&quot;type&quot;:&quot;fixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;message&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;Invoice {Id} is open {IsOpen} and due on {DueDate}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;Id&quot;,&quot;options&quot;:null,&quot;result&quot;:false},{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;DueDate&quot;,&quot;options&quot;:null,&quot;result&quot;:false},{&quot;default&quot;:&quot;False&quot;,&quot;editor&quot;:&quot;boolean&quot;,&quot;header&quot;:null,&quot;key&quot;:&quot;IsOpen&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;Invoice {Id} is open&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;Id&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false}],&quot;missingCount&quot;:0,&quot;missingCode&quot;:&quot;This fixture is fully implemented&quot;,&quot;sample&quot;:{&quot;title&quot;:&quot;Sample Specification for Currying&quot;,&quot;path&quot;:null,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Friday, February 03, 2017&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Currying&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Implemented by Samples.Fixtures.CurryingFixture&quot;,&quot;id&quot;:&quot;fab646f9-7255-4aa4-ae9b-542091cd7f42&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## CreateInvoice&quot;,&quot;id&quot;:&quot;1ff93849-a1e4-477b-a9a0-1d925d302b07&quot;},{&quot;key&quot;:&quot;CreateInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;Id&quot;,&quot;DueDate&quot;:&quot;DueDate&quot;,&quot;IsOpen&quot;:&quot;False&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;651a4847-a92c-4be8-aa43-88b793609b07&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## OpenInvoice&quot;,&quot;id&quot;:&quot;93e662c7-7bb5-4323-a275-5aad0837f023&quot;},{&quot;key&quot;:&quot;OpenInvoice&quot;,&quot;cells&quot;:{&quot;Id&quot;:&quot;Id&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;57abfeaa-608c-471e-ab8b-39c879eb5da4&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## TODO&quot;,&quot;id&quot;:&quot;6245378b-6f40-4d41-932c-cc66bf77436b&quot;},{&quot;key&quot;:&quot;TODO&quot;,&quot;cells&quot;:{&quot;message&quot;:&quot;message&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;20092f8a-0c87-44a6-a307-e2eb0c2403b6&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;efb3a2f5-2f99-4726-a770-3bc83028d58a&quot;}],&quot;id&quot;:&quot;39ae427d-796b-4ddb-99df-0893dbcbc013&quot;},&quot;sampleMarkdown&quot;:&quot;# Sample Specification for Currying\r\n\r\n-&gt; id = 64d3157c-a5ce-47fb-9c70-d258bd240e98\r\n-&gt; lifecycle = Acceptance\r\n-&gt; max-retries = 0\r\n-&gt; last-updated = 2017-02-03T14:42:31.1319339-06:00\r\n-&gt; tags = \r\n\r\n[Currying]\r\n|&gt; CreateInvoice Id=Id, DueDate=DueDate, IsOpen=False\r\n|&gt; OpenInvoice Id=Id\r\n|&gt; TODO message=message\r\n~~~\r\n&quot;,&quot;errors&quot;:[],&quot;missing&quot;:false}]" class="spec-preview"></p>
 <p>The goal of grammar currying was to make the expression of the specifications more declarative and easier to understand without requiring users to duplicate grammar code.</p>
-<h2>Importing Grammars</h2>
+<h2 id="importing-grammars">Importing Grammars</h2>
 <p>Storyteller also supports a mechanism to import a grammar from one fixture into another:</p>
-<pre><code class="language-csharp">
-    public class LogoutFixture : Fixture
-    {
-        [FormatAs(&quot;Log the user out&quot;)]
-        public void Logout()
-        {
-            // manipulate the system under test to 
-            // log the user out
-        }
-    }
-
-    public class AnotherFixture : Fixture
-    {
-        public AnotherFixture()
-        {
-            this[&quot;Logout&quot;] = Import&lt;LogoutFixture&gt;(&quot;Logout&quot;);
-        }
-    }
-</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public class LogoutFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    [FormatAs(&quot;Log the user out&quot;)]&#xD;&#xA;    public void Logout()&#xD;&#xA;    {&#xD;&#xA;        // manipulate the system under test to &#xD;&#xA;        // log the user out&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;public class AnotherFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    public AnotherFixture()&#xD;&#xA;    {&#xD;&#xA;        this[&quot;Logout&quot;] = Import&lt;LogoutFixture&gt;(&quot;Logout&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>When using an imported grammar, the <code>ISpecContext</code> for the current specification is available on the original Fixture object, but you <strong>cannot depend on the <code>SetUp()</code> and <code>TearDown()</code> methods to be called on the original Fixture.</strong></p>
-
 
 			      	</div>
 
@@ -193,7 +158,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -209,4 +174,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-

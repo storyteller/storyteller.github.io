@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,9 +10,9 @@
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -74,9 +74,9 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -88,11 +88,11 @@
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Carrying out Actions<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/actions.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>Carrying out Actions<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/actions.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
@@ -100,47 +100,19 @@
 <!--Url:actions-->
 <p>The classic strategy for completely self-contained specifications is <em><a href="http://c2.com/cgi/wiki?ArrangeActAssert">arrange, act, assert</a></em>.</p>
 <p>Let's say that you need to be write some specifications for a new batch process (hey, they do still exist and it was the first thing I thought of when I was writing this page). At some point in the specification you need to kick off the batch job and wait for it to complete before you execute any assertions against the outcome.</p>
-<h2>Explicit Actions</h2>
+<h2 id="explicit-actions">Explicit Actions</h2>
 <p>You can explicitly state when the action is happening in your specification with an explicit action method grammar like this below:</p>
-<pre><code class="language-csharp">
-    public class ExplicitExecutionFixture : Fixture
-    {
-        public ExplicitExecutionFixture()
-        {
-            Title = &quot;Batch Process #1&quot;;
-        }
-
-        [FormatAs(&quot;Start the Batch Process&quot;)]
-        public void StartTheBatchProcess()
-        {
-            // explicitly start the batch process here
-        }
-    }
-</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public class ExplicitExecutionFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    public ExplicitExecutionFixture()&#xD;&#xA;    {&#xD;&#xA;        Title = &quot;Batch Process #1&quot;;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    [FormatAs(&quot;Start the Batch Process&quot;)]&#xD;&#xA;    public void StartTheBatchProcess()&#xD;&#xA;    {&#xD;&#xA;        // explicitly start the batch process here&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>Which would lead to a specification like this:</p>
-<p data-path="Actions/Explicit Action" data-spec="{&quot;title&quot;:&quot;Explicit Action&quot;,&quot;path&quot;:&quot;Actions/Explicit Action&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Friday, January 29, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Kick off the batch process manually&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;b9e0ab0e-5aba-4a3a-ae8d-f51b7d656e11&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;b6f462c0-71fb-4430-8db7-c3fc0d85c9e2&quot;},{&quot;text&quot;:&quot;Do whatever assertions you need to verify the system behavior here.&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;4895cc9e-cffe-4e3d-9c47-b472397a4792&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;92d3e6a1-9851-4c93-b16e-920aa024359f&quot;}],&quot;id&quot;:&quot;84dbbfa8-14c7-4034-9b85-4bbb9504ba0f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Batch Process #1&quot;,&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]},{&quot;format&quot;:&quot;Start the Batch Process&quot;,&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
-<h2>Implicit Actions</h2>
+<p data-path="Actions/Explicit Action" data-spec="{&quot;title&quot;:&quot;Explicit Action&quot;,&quot;path&quot;:&quot;Actions/Explicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Friday, October 14, 2016&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Kick off the batch process manually&quot;,&quot;id&quot;:&quot;1720c41f-5353-4a0d-8e1e-693bd48fe4a8&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;87e85933-5824-423f-9a6f-3d0c3b04e05e&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Do whatever assertions you need to verify the system behavior here.&quot;,&quot;id&quot;:&quot;1829f381-d7a1-417f-b034-d074ef4f580b&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;f8ad78ea-81d6-48e9-9aeb-1f9bbd650f25&quot;}],&quot;id&quot;:&quot;84dbbfa8-14c7-4034-9b85-4bbb9504ba0f&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Batch Process #1&quot;,&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;type&quot;:&quot;fixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;message&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;Start the Batch Process&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[],&quot;errors&quot;:[],&quot;missing&quot;:false}],&quot;missingCount&quot;:0,&quot;missingCode&quot;:&quot;This fixture is fully implemented&quot;,&quot;sample&quot;:{&quot;title&quot;:&quot;Sample Specification for ExplicitExecution&quot;,&quot;path&quot;:null,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Friday, February 03, 2017&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;ExplicitExecution&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Implemented by Samples.Fixtures.Actions.ExplicitExecutionFixture&quot;,&quot;id&quot;:&quot;ed9fa667-96de-4246-adf9-b56938fbf132&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## StartTheBatchProcess&quot;,&quot;id&quot;:&quot;c89841e5-185e-465a-b944-9c324de7c908&quot;},{&quot;key&quot;:&quot;StartTheBatchProcess&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[],&quot;id&quot;:&quot;2acc7b05-47b4-4eb6-8772-5e0f2c5b0d45&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## TODO&quot;,&quot;id&quot;:&quot;d78de305-682d-48d4-96a9-8421a4d4af7d&quot;},{&quot;key&quot;:&quot;TODO&quot;,&quot;cells&quot;:{&quot;message&quot;:&quot;message&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;9c614bf4-5d76-451a-9b47-4dc411117673&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;58f72fc7-5440-4478-8ee8-ad8998980c14&quot;}],&quot;id&quot;:&quot;7d2bb66a-c203-4da3-a299-6c2d32c3c2db&quot;},&quot;sampleMarkdown&quot;:&quot;# Sample Specification for ExplicitExecution\r\n\r\n-&gt; id = 8ce0d2c6-de0f-4e8f-9450-9318e1a391e0\r\n-&gt; lifecycle = Acceptance\r\n-&gt; max-retries = 0\r\n-&gt; last-updated = 2017-02-03T14:42:30.9447723-06:00\r\n-&gt; tags = \r\n\r\n[ExplicitExecution]\r\n|&gt; StartTheBatchProcess\r\n|&gt; TODO message=message\r\n~~~\r\n&quot;,&quot;errors&quot;:[],&quot;missing&quot;:false}]" class="spec-preview"></p>
+<h2 id="implicit-actions">Implicit Actions</h2>
 <div class="alert alert-info" role="alert">Any exceptions thrown in the `SetUp()` or `TearDown()` methods would be surfaced into the generated results html. </div>
 <p>Quite frequently, our teams find that specications read much more cleanly if actions like kicking off a batch process or navigating a browser to a certain page or starting up an embedded web server are handled implicitly off stage.</p>
 <p>In the case of the batch process, you might opt to handle kicking off the batch process in the <code>SetUp()</code> method of your Fixture class like this:</p>
-<pre><code class="language-csharp">
-    public class BatchProcessFixture : Fixture
-    {
-        public BatchProcessFixture()
-        {
-            Title = &quot;After the batch process finishes&quot;;
-        }
-
-        public override void SetUp()
-        {
-           // Force the batch process to execute
-        }
-    }
-</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public class BatchProcessFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    public BatchProcessFixture()&#xD;&#xA;    {&#xD;&#xA;        Title = &quot;After the batch process finishes&quot;;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    public override void SetUp()&#xD;&#xA;    {&#xD;&#xA;       // Force the batch process to execute&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>Which leads to a specification like this below:</p>
-<p data-path="Actions/Implicit Action" data-spec="{&quot;title&quot;:&quot;Implicit Action&quot;,&quot;path&quot;:&quot;Actions/Implicit Action&quot;,&quot;max-retries&quot;:0,&quot;expiration-period&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;mode&quot;:&quot;full&quot;,&quot;tags&quot;:[],&quot;last-updated&quot;:&quot;Friday, January 29, 2016&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;BatchProcess&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;text&quot;:&quot;Do whatever assertions you need to do to verify that the batch process ran correctly&quot;,&quot;type&quot;:&quot;comment&quot;,&quot;id&quot;:&quot;c44a9e3f-b0f9-4294-9c93-fc6a95bd0d09&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;806cb1df-c29b-40bd-863f-2adf13e03b94&quot;}],&quot;id&quot;:&quot;c3805c4e-a83c-4fe7-8d81-1ac15f6d5f06&quot;}" data-fixtures="[{&quot;title&quot;:&quot;After the batch process finishes&quot;,&quot;key&quot;:&quot;BatchProcess&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.BatchProcessFixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;key&quot;:&quot;message&quot;,&quot;default&quot;:null,&quot;header&quot;:null,&quot;output&quot;:false,&quot;editor&quot;:null,&quot;options&quot;:null}],&quot;errors&quot;:[]}],&quot;type&quot;:&quot;fixture&quot;,&quot;errors&quot;:[]}]" class="spec-preview"></p>
+<p data-path="Actions/Implicit Action" data-spec="{&quot;title&quot;:&quot;Implicit Action&quot;,&quot;path&quot;:&quot;Actions/Implicit Action&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Friday, October 14, 2016&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;BatchProcess&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Do whatever assertions you need to do to verify that the batch process ran correctly&quot;,&quot;id&quot;:&quot;29ad21b2-4b44-4e87-aea2-a3ea7b98d183&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;25cbe8da-0e08-4dd5-adb0-dfb8593d5227&quot;}],&quot;id&quot;:&quot;c3805c4e-a83c-4fe7-8d81-1ac15f6d5f06&quot;}" data-fixtures="[{&quot;title&quot;:&quot;After the batch process finishes&quot;,&quot;key&quot;:&quot;BatchProcess&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Actions.BatchProcessFixture&quot;,&quot;type&quot;:&quot;fixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;message&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false}],&quot;missingCount&quot;:0,&quot;missingCode&quot;:&quot;This fixture is fully implemented&quot;,&quot;sample&quot;:{&quot;title&quot;:&quot;Sample Specification for BatchProcess&quot;,&quot;path&quot;:null,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Friday, February 03, 2017&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;BatchProcess&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Implemented by Samples.Fixtures.Actions.BatchProcessFixture&quot;,&quot;id&quot;:&quot;443fdca8-7874-444d-9359-0c95327f00b0&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## TODO&quot;,&quot;id&quot;:&quot;5d412106-06c3-4e91-a6d1-d587b19cd294&quot;},{&quot;key&quot;:&quot;TODO&quot;,&quot;cells&quot;:{&quot;message&quot;:&quot;message&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;abacc714-5e1f-4325-8829-7c6c7f570938&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;016bf73e-2996-4c43-8bc6-592a38867bb0&quot;}],&quot;id&quot;:&quot;a9c9c0b4-c28e-4126-9031-0ae70db8ee66&quot;},&quot;sampleMarkdown&quot;:&quot;# Sample Specification for BatchProcess\r\n\r\n-&gt; id = 112755ba-522f-4e2c-acc7-5d79c11215d7\r\n-&gt; lifecycle = Acceptance\r\n-&gt; max-retries = 0\r\n-&gt; last-updated = 2017-02-03T14:42:30.9447723-06:00\r\n-&gt; tags = \r\n\r\n[BatchProcess]\r\n|&gt; TODO message=message\r\n~~~\r\n&quot;,&quot;errors&quot;:[],&quot;missing&quot;:false}]" class="spec-preview"></p>
 <p>Storyteller supports both styles, but the Storyteller team recommends making your specifications as declarative as possible both to make the specifications quicker to author and easier to understand later. Don't fall into the trap of trying to use Storyteller like an xUnit tool.</p>
-
 
 			      	</div>
 
@@ -182,7 +154,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -198,4 +170,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-

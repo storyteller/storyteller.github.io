@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,9 +10,9 @@
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
 		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
-		
-		
-        
+
+
+
 
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
@@ -23,13 +23,13 @@
         <!-- CSS code from Bootply.com editor -->
         <link href="/content/affix.css" rel="stylesheet" type="text/css" />
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body  >
 
 <a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
 		    <div class="navbar-header">
@@ -50,7 +50,7 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/engine/system_under_test" title="Connecting Storyteller to the System under Test">Previous</a></li>
+		      	<li><a href="/documentation/engine/system_under_test" title="Connecting Storyteller to your System">Previous</a></li>
 		      	<li><a href="/documentation/engine/fixtures" title="Fixtures">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
@@ -74,9 +74,9 @@
 		<div class="container">
 			<div class="row">
 		      <!--left-->
-		      
+
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller </h3>
+		      	<h3>Storyteller 4.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -84,15 +84,15 @@
 		        </ul>
 
 		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/fixtures">Fixtures</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/system_under_test">Connecting Storyteller to the System under Test</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/system_under_test">Connecting Storyteller to your System</a></p>
 
 		        </ul>
 		      </div><!--/left-->
-		      
+
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Profiles<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/profiles.md"  class="text-muted small pull-right fa fa-github" style="margin-top: 10px"> Edit on GitHub</a></h1>
-			      
+			      	<h1>Profiles<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/profiles.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
 			      	<hr />
 
 			      	<div id="main-pane">
@@ -104,22 +104,13 @@
 <p>The Storyteller command line application allows you to pass an optional <em>Profile</em> as an optional flag when launching the application with usage like this:</p>
 <pre>
 st run src/Specifications --profile PhantomJS
-<p>-- or --</p>
-<p>st open src/Specifications --profile Firefox</p>
+
+-- or --
+
+st open src/Specifications --profile Firefox
 </pre>
-<p>In your own application code, either in a custom <a href="/documentation/engine/system_under_test">ISystem</a> or in <code>&lt;a href=&quot;/documentation/engine/fixtures&quot;&gt;Fixture&lt;/a&gt;</code>classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):</p>
-<pre><code class="language-csharp">
-    public class SometimesSlowFixture : Fixture
-    {
-        public void Slow()
-        {
-            if (Project.CurrentProfile == &quot;slow&quot;)
-            {
-                Thread.Sleep(1.Minutes());
-            }
-        } 
-    }
-</code></pre>
+<p>In your own application code, either in a custom <a href="/documentation/engine/system_under_test">ISystem</a> or in  <a href="/documentation/engine/fixtures">Fixture</a> classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):</p>
+<pre><code class="language-csharp">&#xD;&#xA;public class SometimesSlowFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    public void Slow()&#xD;&#xA;    {&#xD;&#xA;        if (Project.CurrentProfile == &quot;slow&quot;)&#xD;&#xA;        {&#xD;&#xA;            Thread.Sleep(1.Minutes());&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;    public void ReadText([Editor(&quot;big-text&quot;)]string text)&#xD;&#xA;    {&#xD;&#xA;        &#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>If you are running the interactive specification tool, the profile name will be shown in parantheses next to the system name in the top of the browser page.</p>
 <p>What might this be good for?</p>
 <ul>
@@ -128,14 +119,13 @@ st run src/Specifications --profile PhantomJS
 <li>Opting into heavier tracing for better debugging that might be too slow to run normally</li>
 </ul>
 
-
 			      	</div>
 
 			      	<hr />
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/engine/system_under_test">Connecting Storyteller to the System under Test</a>
+				        	<strong>Previous: </strong><a href="/documentation/engine/system_under_test">Connecting Storyteller to your System</a>
 
 				        </span>
 				        <span class="pull-right">
@@ -169,7 +159,7 @@ $('#search').keyup(function(e){
 
 
 
-}); 
+});
 
 </script>
     </body>
@@ -185,4 +175,3 @@ $('#search').keyup(function(e){
         <script type="text/javascript" src="/content/affix.js"></script>
     </foot>
 </html>
-
