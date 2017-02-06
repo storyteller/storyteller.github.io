@@ -28,7 +28,6 @@
 
     <body  >
 
-<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
@@ -159,7 +158,7 @@ watcher to watch for all changes to files with the <code>.dll</code>, <code>.exe
 <li>Spin up a new <code>AppDomain</code> to load the new system binaries</li>
 <li>Start the system under test again</li>
 </ol>
-<p>You can always explicitly tell Storyteller which <code>ISystem</code> class to use as a flag to the <a href="/documentation/ci">st run</a> or <a href="/documentation/ui">st open</a> commands. Otherwise, Storyteller uses these rules to determine the <code>ISytem</code> -- or punt.</p>
+<p>You can always explicitly tell Storyteller which <code>ISystem</code> class to use as a flag to the <a href="/documentation/using/ci">st run</a> or <a href="/documentation/ui">st open</a> commands. Otherwise, Storyteller uses these rules to determine the <code>ISytem</code> -- or punt.</p>
 <ol>
 <li>If there are no concrete <code>ISystem</code> classes in any assembly in the AppDomain, Storyteller uses a default, <em>nullo</em> system and happily loads all of your <code>Fixture</code> classes.</li>
 <li>If there is exactly one concrete <code>ISystem</code> class in the AppDomain, Storyteller uses that one.</li>

@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Storyteller - Troubleshooting Storyteller Problems</title>
+		<title>Storyteller - The Specification Lifecycle</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
@@ -28,7 +28,6 @@
 
     <body  >
 
-<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
@@ -50,8 +49,8 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/docs" title="Living Documentation Generation">Previous</a></li>
-		      	<li><a href="/documentation/fixturemarkdown" title="Working with the Fixture Markdown">Next</a></li>
+		      	<li><a href="/documentation/using/ci" title="Integration with Continuous Integration">Previous</a></li>
+		      	<li><a href="/documentation/using/validating" title="Troubleshooting Storyteller Problems">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -66,7 +65,7 @@
 
 		  <div class="container">
 		  	<nav class="navbar-inverse">
-		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Troubleshooting Storyteller Problems</li></ol>
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/using">Using Storyteller on Projects</a></li><li class="active">The Specification Lifecycle</li></ol>
 		  	</nav>
 		  </div>
 
@@ -83,40 +82,32 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/fixturemarkdown">Working with the Fixture Markdown</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/docs">Living Documentation Generation</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/using/validating">Troubleshooting Storyteller Problems</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/using/ci">Integration with Continuous Integration</a></p>
 
 		        </ul>
 		      </div><!--/left-->
 
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Troubleshooting Storyteller Problems<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/validating.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+			      	<h1>The Specification Lifecycle<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/using/lifecycle.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
 
 			      	<hr />
 
 			      	<div id="main-pane">
-			      		<!--title: Troubleshooting Storyteller Problems-->
-<h2 id="validating-specification-data">Validating Specification Data</h2>
-<p>To troubleshoot specifications that might be missing required information or have
-missing <a href="/documentation/engine/fixtures">Fixture's</a> or <a href="/documentation/engine/grammars">Grammar's</a>
-without actually executing the specifications, Storyteller 4.0 comes with a new extension to the old <code>run</code> command to documentation
-just that with the new <em>--validate</em> flag:</p>
-<pre><code>dotnet storyteller run --validate
-</code></pre>
-<p>If there are no missing fixtures, grammars, or cell values in any of your specifications, you'll
-get this message and the application will exit successfully:</p>
-<pre><code>No validation errors or missing data detected in this project
-</code></pre>
-<p>If Storyteller can detect any problems with the specifications, it will write out a textual report to
-the console output detailing all of the problems that it can find and the process will return and
-exit code of 1 to denote a failure.</p>
-<h2 id="system-startup-problems">System Startup Problems</h2>
-<p>Assuming that you're using Storyteller with the dotnet CLI, if Storyteller isn't able to start up your system (the dreaded &quot;Recycle Failure&quot; message in the UI),
-go to the command line at the root of your Storyteller specification project and type:</p>
-<pre><code>dotnet run -- test
-</code></pre>
-<p>The command above will try to bootstrap the system directly and report any problems to the console output.</p>
+			      		<!--Title:The Specification Lifecycle-->
+<div class="alert alert-info" role="alert">
+I grew up in the era of Saturday morning cartoons and I vividly remember the old Schoolhouse Rock videos. If you are of my generation, just think about a bill singing about becoming a law and I think you'll get the gist of this subject pretty well.
+</div>
+<div class="alert alert-warning" role="alert">
+This idea of a "lifecycle" and how it impacts Storyteller as a regression testing tool has confused and tripped up teams in the past. Please make sure you understand why and how this is used within Storyteller.
+</div>
+<p>Years ago I worked in a shop that was one of the pioneers of Extreme Programming. One of the processes we used on some projects was to treat our business facing automated acceptance tests as having two states in the iteration lifecycle:</p>
+<ol>
+<li><em>Acceptance</em> -- the specification is a declaration of what is supposed to happen, but may be a work in progress.</li>
+<li><em>Regression</em> -- the work described in the specification is supposed to be complete and should never fail.</li>
+</ol>
+<p>Today, Storyteller formalizes this lifecyle in its <a href="/documentation/using/ci">continuous integration support</a>. When specifications are first created in the editing tool, a specification will have its lifecycle set to <em>Acceptance</em> to mark it as a work in progress that will not cause build failures when the Storyteller specifications are executed in the batch mode. When the development team is satisfied that the functionality of a specification is &quot;done,&quot; the team should mark that specification as <em>Regression</em> so that Storyteller treats that specification as a mandatory check in the system.</p>
 
 			      	</div>
 
@@ -124,12 +115,12 @@ go to the command line at the root of your Storyteller specification project and
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/docs">Living Documentation Generation</a>
+				        	<strong>Previous: </strong><a href="/documentation/using/ci">Integration with Continuous Integration</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/fixturemarkdown">Working with the Fixture Markdown</a>
+				        	<strong>Next: </strong><a href="/documentation/using/validating">Troubleshooting Storyteller Problems</a>
 
 				        </span>
 			      	</nav>

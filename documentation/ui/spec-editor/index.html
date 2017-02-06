@@ -28,7 +28,6 @@
 
     <body  >
 
-<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
@@ -50,7 +49,7 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/ui/language" title="Working with the Fixture and Grammar Language">Previous</a></li>
+		      	<li><a href="/documentation/ui/spec-explorer" title="The Specification Explorer">Previous</a></li>
 		      	<li><a href="/documentation/ui/fixtures" title="Fixture & Grammar Explorer">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
@@ -84,7 +83,7 @@
 		        </ul>
 
 		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/ui/fixtures">Fixture & Grammar Explorer</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/ui/language">Working with the Fixture and Grammar Language</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/ui/spec-explorer">The Specification Explorer</a></p>
 
 		        </ul>
 		      </div><!--/left-->
@@ -100,11 +99,11 @@
 <!--Url:spec-editor-->
 <p>Individual specifications can be reviewed, edited, and executed from the Specification Editor page. The page is layed out as a title and command bar at top, and a representation of the specification below in one of three modes:</p>
 <ol>
-<li><p>Preview -- a read only view rendering of a specification perfect for reviewing and documenting a specification. Accessed by either clicking the &quot;Preview&quot; button at the top right or by the <code>ctrl + 1</code> keyboard shortcut</p>
+<li><p>Preview -- a read only view rendering of a specification perfect for reviewing and documenting a specification. Accessed by either clicking the &quot;Preview&quot; button at the top right.</p>
 </li>
-<li><p>Editor -- an editable rendering of the specification. Accessed by clicking the &quot;Editor&quot; button at the top right or by the <code>ctrl + 2</code> keyboard shortcut</p>
+<li><p>Editor -- an editable rendering of the specification. Accessed by clicking the &quot;Editor&quot; button at the top right.</p>
 </li>
-<li><p>Results -- A rendering of the specification with any results. Accessed by clicking the &quot;Results&quot; button at the top right or by the <code>ctrl + 3</code> keyboard shortcut.</p>
+<li><p>Results -- A rendering of the specification with any results. Accessed by clicking the &quot;Results&quot; button at the top right.</p>
 </li>
 </ol>
 <p>When you access a specification from the <a href="/documentation/ui/spec-explorer">The Specification Explorer</a> screen, you will be taken to the results view for the specification if it exists, or otherwise to the editor view.</p>
@@ -113,12 +112,18 @@
 <p><h5><strong>Status Bar with Failures</strong></h5><img src="/content/images/editing/status-bar.png" style="max-width:100%" /></p>
 <p><h5><strong>Status Bar with a Success</strong></h5><img src="/content/images/editing/status-bar-success.png" style="max-width:100%" /></p>
 <p>The status bar tells you the resulting counts if any, and when the specification was last executed in local machine time.</p>
+<h2 id="useful-keyboard-shortcuts">Useful Keyboard shortcuts</h2>
+<p>There are several keyboard shortcuts available in the specification editor screen to run specifications,
+stepthrough specifications, save, undo &amp; redo, and navigate within the specification. See the <em>Help</em> link in
+the top of the UI to see a list of the available shortcuts.</p>
 <h2 id="running-saving-undoredo-changes-and-opening-the-file">Running, Saving, Undo/Redo Changes, and Opening the File</h2>
 <p>At the top left of the screen, just below the specification title, is a series of buttons providing contextual actions on a specification.</p>
 <p><h5><strong>The Command Bar</strong></h5><img src="/content/images/editing/spec-commands.png" style="max-width:100%" /></p>
 <p>From left to right, the buttons are:</p>
 <ol>
 <li><p>The &quot;Play&quot; button queues the specification for execution. This button is disabled if the specification is executing or queued.</p>
+</li>
+<li><p>The second play button queues the specification up for the new <a href="/documentation/ui/stepthrough">Stepthrough Mode for Debugging</a></p>
 </li>
 <li><p>The save button is enabled if there are any outstanding changes to the specification. When the specification is saved, an alert will momentarily appear below the specification title.</p>
 </li>
@@ -139,7 +144,8 @@ been known to be slow sometimes. <strong>It's freqently quicker to make large sc
 <li>Unsuccessful facts, assertions, and set matches in red</li>
 <li>Errors in yellow</li>
 </ol>
-<p>At the bottom of the specification results is a table for the performance timings of the specification execution, the <code>Debug.WriteLine()</code> tracing from .Net, and any custom logging output. See <a href="/documentation/instrumentation">Instrumenting and Performance Logging</a> for more information on using this feature.</p>
+<p>At the bottom of the specification results is a table for the performance timings of the specification execution, the <code>Debug.WriteLine()</code> tracing from .Net, and any custom logging output.
+See <a href="/documentation/using/instrumentation">Instrumenting and Performance Logging</a> for more information on using this feature.</p>
 <p><h5><strong>The Results View</strong></h5><img src="/content/images/editing/results.png" style="max-width:100%" /></p>
 <p>If the specification is currently executing, the results view updates incrementally to reflect the status of the current execution.</p>
 <h2 id="changing-the-lifecycle">Changing the Lifecycle</h2>
@@ -152,9 +158,6 @@ been known to be slow sometimes. <strong>It's freqently quicker to make large sc
 <p>The maximum retry count for the specification can be edited by changing the textbox at the top left of the contextual pane.</p>
 <p>Individual cells in the specification are edited by either textbox's, checkbox's, or select box's depending on the type of cell. Only the active cell is shown in an editable form. All other cells are in a &quot;preview&quot; mode to enhance the legibility of the specification while editing (this was a major shortcoming in Storyteller 1-2).</p>
 <p><h5><strong>Editing Cells</strong></h5><img src="/content/images/editing/editing-cells.png" style="max-width:100%" /></p>
-<h2 id="specification-expiration">Specification Expiration</h2>
-<p>At the top left of the specification editor is a small control to review and edit the specification expiration date for this specification.</p>
-<p>See <p class="bg-warning" style="padding:5px"><b>Unknown topic key 'documentation/expiration'</b><small> -- CTRL+SHIFT+R to force refresh the topic tree</small></p> for more information.</p>
 <h2 id="the-specification-outline-and-step-containers">The Specification Outline and Step &quot;Containers&quot;</h2>
 <p>The specification itself, top level sections, tables, and embedded sections can all act as &quot;containers&quot; that are composed of simpler steps. Inside the specification editor, only one container can be active at any one time. The contextual controls in the left pane of the editor are dependent upon the active container:</p>
 <ul>
@@ -219,7 +222,7 @@ been known to be slow sometimes. <strong>It's freqently quicker to make large sc
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/ui/language">Working with the Fixture and Grammar Language</a>
+				        	<strong>Previous: </strong><a href="/documentation/ui/spec-explorer">The Specification Explorer</a>
 
 				        </span>
 				        <span class="pull-right">

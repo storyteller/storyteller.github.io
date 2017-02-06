@@ -28,7 +28,6 @@
 
     <body  >
 
-<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
@@ -97,7 +96,68 @@
 
 			      	<div id="main-pane">
 			      		<!--title: Fixture & Grammar Explorer-->
-<p>TODO -- write something here</p>
+<div class="alert alert-info"><b>Note!</b> This feature was completely rewritten in Storyteller 4.0
+with quite a bit more useful functionality</div>
+<p>The <em>Fixture &amp; Grammar Explorer</em> gives you a one stop shop for previewing, editing, and generating <a href="/documentation/engine/fixtures">Fixtures</a>
+and <a href="/documentation/engine/grammars">Grammars</a>. You can navigate directly to this page with the &quot;Fixtures and Grammars&quot; link
+in the top bar of the UI:</p>
+<p><h5><strong>Navigation to the Fixture &amp; Grammar Explorer</strong></h5><img src="/content/images/fixtures/navigate.png" style="max-width:100%" /></p>
+<h2 id="fixtures">Fixtures</h2>
+<p>The fixture &amp; grammar explorer shows a table of all the known Fixture's in the system. This is in effect,
+a union of the <a href="/documentation/language/fixturemarkdown">Fixture's described by markdown</a> and the coded Fixture classes.</p>
+<p><h5><strong>The fixture explorer</strong></h5><img src="/content/images/fixtures/fixture-explorer.png" style="max-width:100%" /></p>
+<p>From left to right, the columns in the grid shown above:</p>
+<ol>
+<li>The <em>Errors</em> column shows a count of how many grammars are malformed or misconfigured.</li>
+<li>The <em>Missing</em> column shows a count of how many grammars are specified in the markdown, but not implemented in the code</li>
+<li>The <em>Fixture Title</em> column is the heading for the Fixture. Click on this column to drill into the details of each Fixture.</li>
+<li><em>Implementation</em> is the full name of the .Net class for the Fixture if one exists</li>
+<li>In the <em>Commands</em> column, the <em>Edit</em> link attempts to open up the existing markdown file for the Fixture in your default
+editor for markdown. The <em>Export</em> link will tell Storyteller to export a new markdown file for the Fixture that
+represents a merged union of the coded Fixture and any markdown overrides.</li>
+</ol>
+<p><h5><strong>A fixture with missing grammars</strong></h5><img src="/content/images/fixtures/missing-code-number.png" style="max-width:100%" /></p>
+<h2 id="create-a-new-fixture">Create a New Fixture</h2>
+<p>New in Storyteller 4.0 is a small utility to start designing a brand new <code>Fixture</code> in markdown. To trigger this,
+use the <em>New Fixture</em> button in the top of the UI:</p>
+<p><h5><strong>New Fixture</strong></h5><img src="/content/images/fixtures/new-fixture.png" style="max-width:100%" /></p>
+<p>That link will bring up this dialog:</p>
+<p><h5><strong>New Fixture Dialog</strong></h5><img src="/content/images/fixtures/new-fixture-dialog.png" style="max-width:100%" /></p>
+<p>Enter either the key you want to use for your new Fixture like &quot;CreateInvoice,&quot; or the desired title
+of the Fixture like &quot;Create an Invoice&quot; and let Storyteller derive the fixture key it uses
+internally from the title. After clicking &quot;Ok,&quot; Storyteller will create a new markdown file and attempt to
+open that with your default editor for markdown files. If you used &quot;Create an Invoice&quot; as the title,
+you'd get a new file called <code>/Fixtures/CreateAnInvoice.md</code> under the root of your Storyteller specification
+project with the title specified like so:</p>
+<pre><code># Create an Invoice
+</code></pre>
+<h2 id="exporting-and-reloading-fixtures">Exporting and Reloading Fixtures</h2>
+<p>Storyteller tries hard to watch the relevant files in a Storyteller project to know when to reload
+the Fixture markdown files. If things are working perfectly, you can edit the Fixture markdown files
+and see the Storyteller UI update in near real time. That being said, there are plenty of times when you'll
+need to kickstart Storyteller into reloading Fixture files or to export all the existing Fixture classes
+into their markdown representation for easy editing:</p>
+<p><h5><strong>Commands for reloading or exporting Fixture's</strong></h5><img src="/content/images/fixtures/fixture-commands.png" style="max-width:100%" /></p>
+<p>In order from top to bottom,</p>
+<ol>
+<li><em>Reload/Recycle Everything!</em> recycles the entire system and reloads the Fixture markdown files</li>
+<li><em>Reload Fixtures</em> forces Storyteller to reload all the Fixture markdown files to apply any outstanding changes</li>
+<li><em>Export Fixture Language</em> exports all known Fixture's to markdown files in the <code>/Fixtures</code> folder</li>
+</ol>
+<h2 id="fixture-explorer">Fixture Explorer</h2>
+<p>If you click through to the Fixture page from the Fixture Explorer grid, you can review how all the grammars in
+the Fixture will be rendered in the specification preview:</p>
+<p><h5><strong>Fixture usage in the specification preview</strong></h5><img src="/content/images/fixtures/preview.png" style="max-width:100%" /></p>
+<p>Preview how the grammars will be rendered in the specification editor pages:</p>
+<p><h5><strong>Fixture usage in the editor page</strong></h5><img src="/content/images/fixtures/editor-preview.png" style="max-width:100%" /></p>
+<p>If there are any grammars defined in the Fixture markdown file, you will see skeleton code to implement those
+grammars in the <em>Missing Code</em> tab:</p>
+<p><h5><strong>Skeleton code to generate Fixture classes</strong></h5><img src="/content/images/fixtures/missing-code-preview.png" style="max-width:100%" /></p>
+<p>Or if there are no missing grammars, you'll see this:</p>
+<p><h5><strong>No missing grammars</strong></h5><img src="/content/images/fixtures/missing-code.png" style="max-width:100%" /></p>
+<p>Finally, you can see what the grammar usage would be within the <a href="/documentation/language/markdown">specification markdown files</a>
+with a sample specification:</p>
+<p><h5><strong>Sample usage of this Fixture in markdown</strong></h5><img src="/content/images/fixtures/markdown-sample.png" style="max-width:100%" /></p>
 
 			      	</div>
 

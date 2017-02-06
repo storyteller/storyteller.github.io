@@ -28,7 +28,6 @@
 
     <body  >
 
-<a href="https://github.com/storyteller/storyteller"><img style="z-index: 5000; position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
         <nav class="navbar navbar-default navbar-fixed-top" role="banner">
 		  <div class="container">
@@ -106,7 +105,7 @@ using Storyteller 4.0 with "classic" csproj files. There is a separate section f
 have changed</div>
 <p>This document describes how to install and intialize your Storyteller specfication project. For more specific documentation, see:</p>
 <ul>
-<li><a href="/documentation/ci">Integration with Continuous Integration</a></li>
+<li><a href="/documentation/using/ci">Integration with Continuous Integration</a></li>
 <li><a href="/documentation/ui">The Specification Editor and Interactive Runner</a></li>
 </ul>
 <p>If you prefer to just see working code, take a look at the <a href="https://github.com/storyteller/quickstarts">Storyteller Quickstart repository</a> to see minimal
@@ -176,7 +175,7 @@ for that project is this:</p>
 <p>Once the steps above are complete, you're ready to start writing <a href="/documentation/engine/fixtures">Fixtures</a> and specifications. To launch the Storyteller
 specification runner, open up the command prompt tool of your choice, change the directory to the root of your Storyteller specification project,
 and type <code>dotnet storyteller open</code> and go to town.</p>
-<p>See <a href="/documentation/ci">Integration with Continuous Integration</a> for more information on using <code>dotnet storyteller</code>.</p>
+<p>See <a href="/documentation/using/ci">Integration with Continuous Integration</a> for more information on using <code>dotnet storyteller</code>.</p>
 <h2 id="storyteller-4.0-with-classic-msbuild-projects">Storyteller 4.0 with &quot;classic&quot; MSBuild Projects</h2>
 <p>You can still use Storyteller 4.0 without the dotnet CLI. In this case, the setup steps are to:</p>
 <ol>
@@ -258,7 +257,7 @@ generally follows Unix idioms for command line usage that tools like <code>git</
 <p>You can also query the exact usage of a single command with the syntax like <code>st ? run</code> to display the usage of the <code>st run</code> command.</p>
 <h2 id="how-storyteller-persists-specifications">How Storyteller Persists Specifications</h2>
 <p>Storyteller 4.0 introduces a new (hopefully human readable and editable) markdown based persistence mechanism in place of the old Xml format from Storyteller &lt;= 3.0.
-See <a href="/documentation/converting">Converting from Storyteller 3.0 to 4.0</a> or <p class="bg-warning" style="padding:5px"><b>Unknown topic key 'documentation/engine/markdown'</b><small> -- CTRL+SHIFT+R to force refresh the topic tree</small></p> for more information.</p>
+See <a href="/documentation/converting">Converting from Storyteller 3.0 to 4.0</a> or <a href="/documentation/language/markdown">Working with the Specification Markdown</a> for more information.</p>
 <p>Storyteller 4.0 persists specifications as markdown files in the <code>/Specs</code> folder directly under the root of your Storyteller project, with subfolders to represent the suite structure. Storyteller will create this directory on demand if it does not already exist the first time it needs to persist a new specification or top level suite. Storyteller will happily create this folder for you if it does not already exist.</p>
 
 			      	</div>
