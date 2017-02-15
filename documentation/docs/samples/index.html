@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
 		<title>Storyteller - Embedding Code Samples</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
@@ -97,6 +98,8 @@
 			      	<div id="main-pane">
 			      		<!--Title:Embedding Code Samples-->
 <!--Url:samples-->
+<div class="alert alert-success"><b>Note!</b> StorytellerDocGen "levels" the indention of the code samples
+now, so there's no need to override how your IDE formats the code to look decent in the documentation.</div>
 <p>The primary author of Storyteller once had a very bad experience when a huge technical documentation effort failed to keep pace with an evolving codebase. To eliminate that issue permanently, Storyteller supports a feature where you can pull code samples from the actual codebase at documentation generation time to <em>keep the documentation in sync with a changing API</em>.</p>
 <h2 id="how-it-works">How it Works</h2>
 <p>Storyteller simply scans code files looking for comments that match this basic pattern (for C#):</p>

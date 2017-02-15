@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
 		<title>Storyteller - Getting Started with Documentation Generation</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
@@ -96,8 +97,46 @@
 
 			      	<div id="main-pane">
 			      		<!--Title: Getting Started with Documentation Generation-->
-<p>See <a href="/documentation/getting_started">Getting Started</a> for instructions on downloading and running Storyteller.</p>
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The command line approach in Storyteller generally assumes that you will be executing the commands from the root directory of your code repository. </div>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> When the native compilation story in .Net CoreCLR matures, we will also look to distribute
+StorytellerDocGen as standalone executables per platform. </div>
+<p>The <em>StorytellerDocGen</em> tool lives in the <code>dotnet stdocs</code> extension to the .Net CLI. Today, the easiest way to consume that
+is to create a small project at the root of your codebase repository like <a href="https://github.com/JasperFx/marten/blob/master/project.json">this example taken from the Marten project</a>
+using the project.json format:</p>
+<pre><code>{
+	&quot;name&quot;: &quot;Documentation&quot;,
+	&quot;frameworks&quot;:{
+	    &quot;netcoreapp1.0&quot;: {
+			  &quot;dependencies&quot;: {
+				  &quot;NETStandard.Library&quot;: &quot;1.6.0&quot;,
+				  &quot;Microsoft.NETCore.App&quot;: {
+					  &quot;type&quot;: &quot;platform&quot;,
+					  &quot;version&quot;: &quot;1.0.0&quot;
+				  }
+			  },
+			  &quot;imports&quot;: [
+				  &quot;dnxcore50&quot;
+			  ]
+      }
+    },
+	
+	&quot;tools&quot;:{
+		&quot;dotnet-stdocs&quot;: {
+			&quot;version&quot;:  &quot;1.0.0&quot;,
+			&quot;imports&quot;: [&quot;dnxcore50&quot;]
+		}
+	}
+}
+</code></pre>
+<p>Once that's in place, you can run the <code>dotnet stdocs new</code> command to seed the very basic structure that
+StorytellerDocGen needs:</p>
+<ul>
+<li><code>layout.htm</code> - Establishes the standard layout for the topic pages in your documentation website. See <a href="/documentation/docs/theme">Documentation Skinning</a>.</li>
+<li><code>splash.htm</code> - The home page for the website. You can opt to delete this and replace it with an <code>index.md</code> file
+to just take advantage of your standard layout</li>
+<li><code>/content</code> - Several css and js files for layout. Nothing here is absolutely necessary</li>
+</ul>
+<h2 id="setting-up-storytellerdocgen-by-hand">Setting up StorytellerDocGen by Hand</h2>
 <p>As a concrete example, the source files for this documentation <a href="https://github.com/storyteller/Storyteller/tree/master/documentation">is on GitHub</a>.</p>
 <p>To get started with the living documentation generation, create a file structure in your code repository like this below:</p>
 <ul>

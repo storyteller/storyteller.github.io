@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
 		<title>Storyteller - Living Documentation Generation</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
@@ -97,19 +98,29 @@
 			      	<div id="main-pane">
 			      		<!--Title:Living Documentation Generation-->
 <!--Url:docs-->
-<p>The secondary feature set of Storyteller is the means to author and publish &quot;Living Documentation&quot; for code-centric projects. The documentation authoring and publishing is somewhat inspired by <a href="http://readthedocs.org">Read The Docs</a>. The primary philosophy guiding this tooling has been to make it as easy as possible to keep the documentation synchronized with the API it documents and quick to update.</p>
-<p>The Storyteller documentation consists of three small applications:</p>
+<div class="alert alert-info"><b>Note!</b> This functionality used to reside in the ST.exe tool in Storyteller 3.0, 
+but was separated out in the Storyteller 4 release cycle</div>
+<p><em>StorytellerDocGen</em> is a separate tool that provides the means to author and
+publish &quot;Living Documentation&quot; for code-centric projects. The documentation authoring and publishing is somewhat
+inspired by <a href="http://readthedocs.org">Read The Docs</a>. The primary philosophy guiding this tooling has been to
+make it as easy as possible to keep the documentation synchronized with the API it documents and quick to update.</p>
+<p>StorytellerDocGen is distributed in the <code>dotnet_stdocs</code> Nuget package.</p>
+<p>See <a href="https://jeremydmiller.com/2016/01/05/how-im-documenting-oss-projects/">How I’m Documenting OSS Projects</a>
+from Jeremy's blog.</p>
+<p>The Storyteller documentation consists of four small applications:</p>
 <ol>
-<li><p>An embedded web application in the <code>ST.exe</code> tool (<code>st doc-run</code>) distributed with Storyteller that provides an auto-reloading preview of the documentation.</p>
+<li><p>An embedded web application in the <code>dotnet stdocs</code> tool (<code>dotnet stdocs run</code>) distributed with StorytellerDocGen that provides an auto-reloading preview of the documentation.</p>
 </li>
-<li><p>A command line tool (<code>st doc-export</code>) bundled into <code>ST.exe</code> that generates static html from your raw documentation that can be published on the web (the Storyteller documentation is hosted in <a href="https://pages.github.com">GitHub Pages</a>) or in a form that is browsable from the file system so that the content could be included in downloadable packages.</p>
+<li><p>A command line tool (<code>dotnet stdocs export</code>) bundled into <code>dotnet stdocs</code> that generates static html from your raw documentation that can be published on the web (the Storyteller documentation is hosted in <a href="https://pages.github.com">GitHub Pages</a>) or in a form that is browsable from the file system so that the content could be included in downloadable packages.</p>
 </li>
-<li><p>A command line tool (<code>st doc-seed</code>) bundled into <code>ST.exe</code> to quickly generate the shell of a documentation structure.</p>
+<li><p>A command line tool (<code>dotnet stdocs seed</code>) bundled into <code>dotnet stdocs</code> to quickly generate the shell of a documentation structure.</p>
+</li>
+<li><p>A simplistic command to write out the skeleton of a new documentation project at <code>dotnet stdocs new</code>.</p>
 </li>
 </ol>
 <p>Documentation content is written the the popular <a href="http://daringfireball.net/projects/markdown/syntax">Markdown syntax</a> with some Storyteller specific customizations for navigation elements, embedding code samples, or Storyteller specifications.</p>
 <p>To learn more about what the documentation generation capabilities of Storyteller are, see these topics:</p>
-<ul class="table-of-contents"><li><a href="/documentation/docs/getting_started">Getting Started with Documentation Generation</a></li><li><a href="/documentation/docs/running">Running the Documentation Website Locally</a></li><li><a href="/documentation/docs/export">Exporting the Documentation</a></li><li><a href="/documentation/docs/theme">Documentation Skinning</a></li><li><a href="/documentation/docs/authoring">Authoring Topics</a></li><li><a href="/documentation/docs/navigation">Creating a Navigation Structure</a></li><li><a href="/documentation/docs/linking">Linking to Other Topics</a></li><li><a href="/documentation/docs/samples">Embedding Code Samples</a></li><li><a href="/documentation/docs/images">Embedding Images</a></li><li><a href="/documentation/docs/outlines">Topic Outlines</a></li></ul>
+<ul class="table-of-contents"><li><a href="/documentation/docs/getting_started">Getting Started with Documentation Generation</a></li><li><a href="/documentation/docs/running">Running the Documentation Website Locally</a></li><li><a href="/documentation/docs/export">Exporting the Documentation</a></li><li><a href="/documentation/docs/theme">Documentation Skinning</a></li><li><a href="/documentation/docs/authoring">Authoring Topics</a></li><li><a href="/documentation/docs/navigation">Creating a Navigation Structure</a></li><li><a href="/documentation/docs/linking">Linking to Other Topics</a></li><li><a href="/documentation/docs/samples">Embedding Code Samples</a></li><li><a href="/documentation/docs/images">Embedding Images</a></li><li><a href="/documentation/docs/outlines">Topic Outlines</a></li><li><a href="/documentation/docs/embedding">Embedding Storyteller Specifications</a></li></ul>
 
 			      	</div>
 

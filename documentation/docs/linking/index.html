@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
 		<title>Storyteller - Linking to Other Topics</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
@@ -102,6 +103,12 @@
 <p><code>&lt;[linkto:documentation/docs/authoring]&gt;</code></p>
 <p>Which will render this: <a href="/documentation/docs/authoring">Authoring Topics</a>. The default output will be a link to that topic with the proper Url and using that topic's title as the link text.</p>
 <p>The path after the colon is effectively the relative path from the documentation root to the topic file, minus the <code>.md</code> extension. <code>index.md</code> files are referenced by just its parent directory.</p>
+<h2 id="relative-links">Relative Links</h2>
+<p>You can also relative links in the <code>&lt;p class=&quot;bg-warning&quot; style=&quot;padding:5px&quot;&gt;&lt;b&gt;Unknown topic key &amp;#x27;path&amp;#x27;&lt;/b&gt;&lt;small&gt; -- CTRL&amp;#x2B;SHIFT&amp;#x2B;R to force refresh the topic tree&lt;/small&gt;&lt;/p&gt;</code> structure. If the path starts with a forward slash
+like this:</p>
+<p><code>&lt;[linkto:/authoring]&gt;</code>.</p>
+<p>Assuming that there is another topic with the file name <code>authoring.md</code> in the same directory as the current topic file,
+you'll get the same link. StorytellerDocGen can respond to paths like <code>/../other</code> as well.</p>
 <h2 id="override-the-link-title">Override the Link Title</h2>
 <p>To override the link text, use a format like this:</p>
 <p><code>&lt;[linkto:documentation/docs/authoring;title=A different link description]&gt;</code>, which renders: <a href="/documentation/docs/authoring">A different link description</a>.</p>
