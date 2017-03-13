@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.0.0</h3>
+		      	<h3>Storyteller 4.1.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -109,6 +109,17 @@ overload of <code>StorytellerAssert.Fail()</code> as markdown.</div>
 <p>While you can always just throw an exception in a grammar to provide more information about invalid conditions, using this functionality will allow you to add readable contextual error messages into the html results to help explain failures without adding an ugly .Net stacktrace.</p>
 <p>A classic example of using <code>StoryTellerAssert</code> is if you have a grammar that is supposed to select a given value in a select box on the screen. If the element is hidden, does not exist, or the desired value is not part of the options, use <code>StoryTellerAssert</code> to make the normally quiet grammar fail with some kind of contextual explanation of why that action is invalid for easier debugging later.</p>
 <p>Try not to use <code>StoryTellerAssert</code> in place of <a href="/documentation/engine/grammars/assertions">assertions</a> or <a href="/documentation/engine/grammars/facts">facts</a> -- especially when that results in much more work on your part.</p>
+<h2 id="performance-tracing">Performance Tracing</h2>
+<p>Out of the box, Storyteller tracks the runtime of each grammar and silent action within the Fixture classes. If you want
+to add your own timing records to the performance tracing, you can use the new <code>ISpecRecord.Timings.Record()</code> method
+introduced in Storyteller 4.1:</p>
+<pre><code class="language-csharp">&#xD;&#xA;[FormatAs(&quot;Open the browser to {url}&quot;)]&#xD;&#xA;public void OpenUrl(string url)&#xD;&#xA;{&#xD;&#xA;    var corrected = correctUrl(url);&#xD;&#xA;&#xD;&#xA;    // This records the amount of time it takes to&#xD;&#xA;    // open a Url in a WebDriver controlled browser&#xD;&#xA;    using (Context.Timings.Record(&quot;Navigation&quot;, url))&#xD;&#xA;    {&#xD;&#xA;        Driver.Navigate().GoToUrl(corrected);&#xD;&#xA;    }            &#xD;&#xA;}&#xD;&#xA;</code></pre>
+<p>In the past, this functionality has been used to record:</p>
+<ul>
+<li>HTTP requests handled by the application during a specification</li>
+<li>Messages handled by a service bus</li>
+<li>Page navigations when using Selenium/WebDriver</li>
+</ul>
 <h2 id="exception-formatters">Exception Formatters</h2>
 <p>New to Storyteller 4.0 is the ability to tell Storyteller how to format the display of an exception that is caught during the
 execution of the specification. The default is still to just dump the full stacktrace, but if you want to get better results, you

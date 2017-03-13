@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
+		<title>Storyteller - Running Specs from your IDE</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+
+
+
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <!-- HTML code from Bootply.com editor -->
+
+    <body  >
+
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/async" title="Asynchronous Grammars">Previous</a></li>
+		      	<li><a href="/documentation/language" title="Crafting the Specification Language">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li class="active">Running Specs from your IDE</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller 4.1.0</h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/language">Crafting the Specification Language</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/async">Asynchronous Grammars</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Running Specs from your IDE<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/storyteller_runner.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--title:Running Specs from your IDE-->
+<div class="alert alert-info">There will be a "dotnet test" adapter for Storyteller in the VS 2017 timeframe that will make the following samples mostly unnecessary, but we're waiting for more VS 2017 adoption and stabilization.</div>
+<p>Storyteller specifications will fail and there will be times when you're really going to want to be able to debug through your code while a Storyteller specification is running. While you can always attach a debugger to the running system under test when
+the Storyteller UI is running, it's a faster feedback cycle to be able to just start and run your specification from whatever IDE you are using.</p>
+<div class="alert alert-info">In all cases, the code shown in this topic must be contained within your Storyteller specification project.</div>
+<p>To that end, Storyteller 4.1 (re)introduces the <code>StorytellerRunner</code> class that you can use to execute Storyteller specifications from the IDE. If your Storyteller specification project does not have any kind of custom <code>ISystem</code> (i.e., you kick it off with <code>StorytellerAgent.Run(args)</code>), you can use this syntax:</p>
+<pre><code class="language-csharp">&#xD;&#xA;public void run_spec()&#xD;&#xA;{&#xD;&#xA;    // There is an optional argument in this method to give&#xD;&#xA;    // Storyteller a hint about where the project root folder&#xD;&#xA;    // is, but in most cases it should be able to figure that&#xD;&#xA;    // out on its own&#xD;&#xA;    using (var runner = StorytellerRunner.Basic())&#xD;&#xA;    {&#xD;&#xA;        // run one spec by its path as shown in the UI.&#xD;&#xA;        // You can just copy/paste the full spec path&#xD;&#xA;        // from the spec editor page in the UI&#xD;&#xA;        var results = runner.Run(&quot;Arrays / Use an array argument&quot;);&#xD;&#xA;        Console.WriteLine(results.Counts);&#xD;&#xA;&#xD;&#xA;        // You can open the results in a browser window&#xD;&#xA;        runner.OpenResultsInBrowser();&#xD;&#xA;&#xD;&#xA;        // You can write the results to a file&#xD;&#xA;        runner.WriteResultsDocument(&quot;results.htm&quot;);&#xD;&#xA;&#xD;&#xA;        // Run all the specifications in the project&#xD;&#xA;        runner.RunAll(TimeSpan.FromMinutes(2));&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<p>I use the venerable <a href="http://www.testdriven.net/">TestDriven.Net</a> tool to run unit tests inside of Visual Studio.Net. One of its nifty
+features is the ability to run any arbitrary method in your code as well as run the method in the debugger. You may instead opt to add a unit testing tool like <a href="http://xunit.github.io/">xUnit</a> and kick off Storyteller specifications from a unit test where you have many more options for running the code.</p>
+<p>If you are using a custom <code>ISystem</code>, use the syntax shown below to bootstrap the runner:</p>
+<pre><code class="language-csharp">&#xD;&#xA;public static void Debug()&#xD;&#xA;{&#xD;&#xA;    using (var runner = StorytellerRunner.For&lt;SpecificationSystem&gt;())&#xD;&#xA;    {&#xD;&#xA;        runner.Run(&quot;path to the spec&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/async">Asynchronous Grammars</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/language">Crafting the Specification Language</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+});
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>

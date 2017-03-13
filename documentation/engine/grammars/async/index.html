@@ -6,7 +6,7 @@
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 				<link rel=icon href=/content/images/favicon.ico>
-		<title>Storyteller - Converting from Storyteller 3.0 to 4.0</title>
+		<title>Storyteller - Async Grammars</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
@@ -50,8 +50,8 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/getting_started" title="Getting Started">Previous</a></li>
-		      	<li><a href="/documentation/terminology" title="Terminology">Next</a></li>
+		      	<li><a href="/documentation/engine/grammars/verify_object" title="Verifying Object Properties">Previous</a></li>
+		      	<li><a href="/documentation/engine/state" title="Managing State during Execution">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -66,7 +66,7 @@
 
 		  <div class="container">
 		  	<nav class="navbar-inverse">
-		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li class="active">Converting from Storyteller 3.0 to 4.0</li></ol>
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Async Grammars</li></ol>
 		  	</nav>
 		  </div>
 
@@ -83,36 +83,33 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/terminology">Terminology</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/getting_started">Getting Started</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/state">Managing State during Execution</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/verify_object">Verifying Object Properties</a></p>
 
 		        </ul>
 		      </div><!--/left-->
 
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Converting from Storyteller 3.0 to 4.0<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/converting.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+			      	<h1>Async Grammars<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/async.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
 
 			      	<hr />
 
 			      	<div id="main-pane">
-			      		<!--title:Converting from Storyteller 3.0 to 4.0-->
-<h2 id="converting-3.0-xml-spec-files-to-4.0-markdown-spec-files">Converting 3.0 Xml Spec Files to 4.0 Markdown Spec Files</h2>
-<p>Storyteller 4.0 introduces a new standard, text based format for persisting specifications that
-can roughly be described as &quot;Markdown with some Storyteller-specific stuff mixed in.&quot; See
-<a href="/documentation/language/markdown">Working with the Specification Markdown</a> for specifics on the new file format.</p>
-<p>To convert your 3.0 specs to the new 4.0 format, run this command from the root of your
-Storyteller project:</p>
-<pre><code>dotnet storyteller convert
-</code></pre>
-<p>Or run the <code>convert</code> command from the <code>StorytellerRunner.exe</code> tool in the <code>StorytellerRunnerCsproj</code>
-Nuget if you're not using the dotnet CLI.</p>
-<p>See <a href="/documentation/getting_started">Getting Started</a> for more information on setting up the <code>dotnet storyteller</code> tool
-for your project.</p>
-<h2 id="breaking-changes">Breaking Changes</h2>
-<p>Right now the only breaking API change is that Storyteller is using the <a href="https://github.com/JasperFx/baseline">Baseline</a> version
-of <code>Conversions</code>, and the Storyteller <code>IRuntimeConverter</code>'s are now registered against <code>CellHandling</code>. See
-<a href="/documentation/engine/cells/conversion">Data Conversion within Specifications</a> for more information.</p>
+			      		<!--title: Async Grammars -->
+<p>Storyteller was originally conceived and built in that more innocent time where most of your code was completely synchronous and multi-threading was somewhat rare. Flash forward to today, and we're all writing a lot more asynchronous code than ever before and it was time for Storyteller to get with the program.</p>
+<p>To that end, Storyteller now allows you to build grammars that return <code>Task</code> objects, and Storyteller will take care
+of handling the Task within the execution pipeline so you don't have to. Right now the only options for asynchronous grammars are
+<a href="/documentation/engine/grammars/sentences">Sentence grammars</a>.</p>
+<p>Below is a sample from the forthcoming ASP.Net Core application extensions for Storyteller that exercises a &quot;Hello, World&quot;
+HTTP endpoint:</p>
+<pre><code class="language-csharp">&#xD;&#xA;public class FakeFixture : AspNetCoreFixture&#xD;&#xA;{&#xD;&#xA;    [FormatAs(&quot;The response text from {url} should be &#x27;{contents}&#x27;&quot;)]&#xD;&#xA;    public async Task&lt;string&gt; TheContentsShouldBe(string url)&#xD;&#xA;    {&#xD;&#xA;        var result = await Scenario(_ =&gt;&#xD;&#xA;        {&#xD;&#xA;            _.Get.Url(url);&#xD;&#xA;        });&#xD;&#xA;&#xD;&#xA;        return result.ResponseBody.ReadAsText().Trim();&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<p>As of right now (4.0), Storyteller supports methods that return:</p>
+<ul>
+<li><code>Task</code> to perform an action asynchronously</li>
+<li><code>Task&lt;bool&gt;</code> for asynchronous <a href="/documentation/engine/grammars/facts">Fact grammars</a></li>
+<li><code>Task&lt;T&gt;</code> where &quot;T&quot; is an expected value that you want to assert upon</li>
+</ul>
 
 			      	</div>
 
@@ -120,12 +117,12 @@ of <code>Conversions</code>, and the Storyteller <code>IRuntimeConverter</code>'
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/getting_started">Getting Started</a>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/verify_object">Verifying Object Properties</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/terminology">Terminology</a>
+				        	<strong>Next: </strong><a href="/documentation/engine/state">Managing State during Execution</a>
 
 				        </span>
 			      	</nav>

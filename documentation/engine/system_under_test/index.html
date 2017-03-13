@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.0.0</h3>
+		      	<h3>Storyteller 4.1.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -129,12 +129,15 @@ to use Storyteller against codebases that don't require any kind of bootstrappin
 <p>Use the <code>Dispose()</code> method to do any kind of global state cleanup between specification runs. The <code>BeforeExecution(ISpecContext)</code> and <code>AfterExecution(ISpecContext)</code> methods can be used to do any kind of per specification set up, clean up, or even to log additional errors and failures for non-functional concerns like performance.</p>
 <div class="alert alert-info" role="warning"><strong>Note!</strong> Make sure that the <code>Dispose()</code> method for your <code>ISystem</code> is thorough in how it shuts down the system to release resources like file locks, database connections, or network ports. Failing to do this when Storyteller tries to reload the system under test for new changes will cause you no end of grief. And yes, that's the voice of experience talking.
 </div>
+<h2 id="writing-a-custom-isystem-for-your-application">Writing a Custom ISystem for your Application</h2>
+<p>You <em>can</em> just implement the <code>ISystem</code> and <code>IExecutionContext</code> interfaces shown above, but as of Storyteller 4.1 you can also subclass the <code>SimpleSystem</code> class and override any of the methods shown below:</p>
+<pre><code class="language-csharp">&#xD;&#xA;public class MySystem : SimpleSystem&#xD;&#xA;{&#xD;&#xA;    protected override void configureCellHandling(CellHandling handling)&#xD;&#xA;    {&#xD;&#xA;        // Allows you to apply customizations to CellHandling&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    public override void BeforeEach(SimpleExecutionContext execution, ISpecContext context)&#xD;&#xA;    {&#xD;&#xA;        // Executes before each specification run&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    public override void AfterEach(ISpecContext context)&#xD;&#xA;    {&#xD;&#xA;        // Executes after each specification run&#xD;&#xA;        // Handy for state cleanup&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    public override Task Warmup()&#xD;&#xA;    {&#xD;&#xA;        // do any necessary bootstrapping work to get&#xD;&#xA;        // your system ready to use&#xD;&#xA;        return Task.CompletedTask;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    public override void Dispose()&#xD;&#xA;    {&#xD;&#xA;        // any kind of system cleanup when Storyteller is shutting down&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <h2 id="using-the-separate-process-approach">Using the Separate Process Approach</h2>
 <p><code>AppDomain</code>'s were dropped from the CoreCLR and won't make a reappearance until Netstandard 2.0. Rather than wait for that
 release, Storyteller 4.0 adopted a new default strategy to run the system under test in a separate process triggered from
 the <code>dotnet run</code> command. To use this approach, you need to make your Storyteller project a console application, and in
 your <code>Program.Main()</code> entry point, delegate to the new <code>StorytellerAgent</code> class like this:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public static class Program&#xD;&#xA;{&#xD;&#xA;    public static void Main(string[] args)&#xD;&#xA;    {&#xD;&#xA;        // If you do not need a custom &#xD;&#xA;        StorytellerAgent.Run(args);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public static class Program&#xD;&#xA;{&#xD;&#xA;    public static void Main(string[] args)&#xD;&#xA;    {&#xD;&#xA;        // If you do not need a custom ISystem&#xD;&#xA;        StorytellerAgent.Run(args);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>If you had a custom <code>ISystem</code> for your application (named <code>GrammarSystem</code> in this case),
 bootstrapping your application would look like this:</p>
 <pre><code class="language-csharp">&#xD;&#xA;public static class Program&#xD;&#xA;{&#xD;&#xA;    public static void Main(string[] args)&#xD;&#xA;    {&#xD;&#xA;        // GrammarSystem is a custom ISystem&#xD;&#xA;        // that &quot;knows&quot; how to bootstrap and&#xD;&#xA;        // gracefully shut down the system under test&#xD;&#xA;        StorytellerAgent.Run(args, new GrammarSystem());&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>

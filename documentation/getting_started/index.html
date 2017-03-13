@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.0.0</h3>
+		      	<h3>Storyteller 4.1.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -135,7 +135,7 @@ project files or the new MSBuild file formats with Visual Studio 2017. This sect
 <li>In the <code>Program.Main()</code> entry point of your Storyteller specification project, use the <code>StorytellerAgent</code> class to connect
 your system under test to the Storyteller engine with code like this:</li>
 </ol>
-<pre><code class="language-csharp">&#xD;&#xA;public static class Program&#xD;&#xA;{&#xD;&#xA;    public static void Main(string[] args)&#xD;&#xA;    {&#xD;&#xA;        // If you do not need a custom &#xD;&#xA;        StorytellerAgent.Run(args);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public static class Program&#xD;&#xA;{&#xD;&#xA;    public static void Main(string[] args)&#xD;&#xA;    {&#xD;&#xA;        // If you do not need a custom ISystem&#xD;&#xA;        StorytellerAgent.Run(args);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>For more complex <a href="https://en.wikipedia.org/wiki/System_under_test">system under test's</a>, you will probably want to use a custom <code>ISystem</code> like this:</p>
 <pre><code class="language-csharp">&#xD;&#xA;public static class Program&#xD;&#xA;{&#xD;&#xA;    public static void Main(string[] args)&#xD;&#xA;    {&#xD;&#xA;        // GrammarSystem is a custom ISystem&#xD;&#xA;        // that &quot;knows&quot; how to bootstrap and&#xD;&#xA;        // gracefully shut down the system under test&#xD;&#xA;        StorytellerAgent.Run(args, new GrammarSystem());&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>See <a href="/documentation/engine/system_under_test">Connecting Storyteller to your System</a> for more information.</p>

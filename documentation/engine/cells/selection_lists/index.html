@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.0.0</h3>
+		      	<h3>Storyteller 4.1.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -107,6 +107,13 @@
 <pre><code class="language-csharp">&#xD;&#xA;public void DoSomething(&#xD;&#xA;    [SelectionValues(&quot;Tom&quot;, &quot;Todd&quot;)] string name, &#xD;&#xA;    [SelectionList(&quot;Numbers&quot;)]int x, int y)&#xD;&#xA;{&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>You can also use the <code>SelectionList()</code> and <code>SelectionValues()</code> methods on <code>ICellExpression</code> to add selection values to other kinds of grammars:</p>
 <pre><code class="language-csharp">&#xD;&#xA;public IGrammar OrderedDetailsAre()&#xD;&#xA;{&#xD;&#xA;    return VerifySetOf(getDetails)&#xD;&#xA;        .Titled(&quot;The Ordered details should be&quot;)&#xD;&#xA;        .Ordered()&#xD;&#xA;&#xD;&#xA;        // Use this syntax if you want to customize&#xD;&#xA;        // the cells in this SetVerification grammar&#xD;&#xA;        .Comparisons(_ =&gt;&#xD;&#xA;        {&#xD;&#xA;            _.Compare(o =&gt; o.Amount).DefaultValue(&quot;100&quot;).Header(&quot;The Amount&quot;);&#xD;&#xA;&#xD;&#xA;            _.Compare(o =&gt; o.Date)&#xD;&#xA;&#xD;&#xA;                // Adding a selection list by display/value&#xD;&#xA;                .SelectionOptions(&#xD;&#xA;                    new Option(&quot;Today&quot;, &quot;TODAY&quot;), &#xD;&#xA;                    new Option(&quot;Yesterday&quot;, &quot;TODAY-1&quot;), &#xD;&#xA;                    new Option(&quot;Tomorrow&quot;, &quot;TODAY&#x2B;1&quot;)&#xD;&#xA;                );&#xD;&#xA;&#xD;&#xA;            _.Compare(o =&gt; o.Name)&#xD;&#xA;                .Header(&quot;The Name&quot;)&#xD;&#xA;&#xD;&#xA;                // Simple value list&#xD;&#xA;                .SelectionValues(&quot;Hank&quot;, &quot;Tom&quot;, &quot;Alice&quot;);&#xD;&#xA;&#xD;&#xA;            // Simply refer to a selection list &#xD;&#xA;            // defined elsewhere by name&#xD;&#xA;            _.Compare(o =&gt; o.Part)&#xD;&#xA;                .SelectionList(&quot;Parts&quot;);&#xD;&#xA;        });&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<p>As of Storyteller 4.1, you can also add any of the attributes on the Type of an argument being passed to a grammar.</p>
+<p>Here's an example from the Storyteler.Selenium addon (may still be forthcoming when you read this):</p>
+<pre><code class="language-csharp">&#xD;&#xA;[SelectionList(ScreenFixture.ElementsListName)]&#xD;&#xA;public class NamedElement&#xD;&#xA;{&#xD;&#xA;    public string Name { get; }&#xD;&#xA;&#xD;&#xA;    public NamedElement(string name)&#xD;&#xA;    {&#xD;&#xA;        Name = name;&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<p>In the case above, <code>NamedElement</code> refers to a Selenium element in a list in each selenium-aware Fixture class. To make the selection list for the Fixture appear in the editor, I added the <code>[SelectionList]</code> attribute directly to the
+<code>NamedElement</code> class.</p>
+<p>A grammar that uses this is shown below:</p>
+<pre><code class="language-csharp">&#xD;&#xA;[FormatAs(&quot;Click {element}&quot;)]&#xD;&#xA;public void Click(NamedElement element)&#xD;&#xA;{&#xD;&#xA;    forElement(element).Click();&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <h2 id="fixture-wide-lists">Fixture Wide Lists</h2>
 <p>You can also define named option lists to a Fixture class like this:</p>
 <pre><code class="language-csharp">&#xD;&#xA;public SelectionValuesFixture()&#xD;&#xA;{&#xD;&#xA;    AddSelectionValues(&quot;Names&quot;, &quot;Jeremy&quot;, &quot;Monte&quot;, &quot;Max&quot;);&#xD;&#xA;}&#xD;&#xA;</code></pre>
