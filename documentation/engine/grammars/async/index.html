@@ -50,7 +50,7 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/engine/grammars/verify_object" title="Verifying Object Properties">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/apifixture" title="Model In, Model Out Operations with ApiFixture">Previous</a></li>
 		      	<li><a href="/documentation/engine/state" title="Managing State during Execution">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.1.0</h3>
+		      	<h3>Storyteller 4.2.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -84,7 +84,7 @@
 		        </ul>
 
 		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/state">Managing State during Execution</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/verify_object">Verifying Object Properties</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/apifixture">Model In, Model Out Operations with ApiFixture</a></p>
 
 		        </ul>
 		      </div><!--/left-->
@@ -103,7 +103,7 @@ of handling the Task within the execution pipeline so you don't have to. Right n
 <a href="/documentation/engine/grammars/sentences">Sentence grammars</a>.</p>
 <p>Below is a sample from the forthcoming ASP.Net Core application extensions for Storyteller that exercises a &quot;Hello, World&quot;
 HTTP endpoint:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public class FakeFixture : AspNetCoreFixture&#xD;&#xA;{&#xD;&#xA;    [FormatAs(&quot;The response text from {url} should be &#x27;{contents}&#x27;&quot;)]&#xD;&#xA;    public async Task&lt;string&gt; TheContentsShouldBe(string url)&#xD;&#xA;    {&#xD;&#xA;        var result = await Scenario(_ =&gt;&#xD;&#xA;        {&#xD;&#xA;            _.Get.Url(url);&#xD;&#xA;        });&#xD;&#xA;&#xD;&#xA;        return result.ResponseBody.ReadAsText().Trim();&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;[FormatAs(&quot;The response text from {url} should be &#x27;{contents}&#x27;&quot;)]&#xA;public async Task&lt;string&gt; TheContentsShouldBe(string url)&#xA;{&#xA;    // Execute an Alba &quot;Scenario&quot;&#xA;    var result = await Scenario(_ =&gt;&#xA;    {&#xA;        _.Get.Url(url);&#xA;    });&#xA;&#xA;    return result.ResponseBody.ReadAsText().Trim();&#xA;}&#xA;</code></pre>
 <p>As of right now (4.0), Storyteller supports methods that return:</p>
 <ul>
 <li><code>Task</code> to perform an action asynchronously</li>
@@ -117,7 +117,7 @@ HTTP endpoint:</p>
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/verify_object">Verifying Object Properties</a>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/apifixture">Model In, Model Out Operations with ApiFixture</a>
 
 				        </span>
 				        <span class="pull-right">

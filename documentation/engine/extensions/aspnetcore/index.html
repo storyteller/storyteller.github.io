@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
+		<title>Storyteller - ASP.Net Core Systems</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+
+
+
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <!-- HTML code from Bootply.com editor -->
+
+    <body  >
+
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/extensions" title="Extensions">Previous</a></li>
+		      	<li><a href="/documentation/engine/extensions/databases" title="Relational Databases">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/extensions">Extensions</a></li><li class="active">ASP.Net Core Systems</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller 4.2.0</h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/extensions/databases">Relational Databases</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/extensions">Extensions</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>ASP.Net Core Systems<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/extensions/aspnetcore.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--title: ASP.Net Core Systems -->
+<p><code>Storyteller.AspNetCore</code> is an addon Nuget library you can use to quickly add bootstrapping and system lifecycle
+management for ASP.Net Core applications. See <a href="https://jeremydmiller.com/2017/04/18/using-storyteller-with-asp-net-core-systems/">Using Storyteller with ASP.Net Core Systems</a> for a blog post that lays out the vision for this Nuget. This library heavily uses the <a href="http://jasperfx.github.io/alba/">Alba</a> library for bootstrapping and running requests through the ASP.Net Core system.</p>
+<h2 id="bootstrapping-an-asp.net-core-system">Bootstrapping an ASP.Net Core System</h2>
+<p>The <code>Storyteller.AspNetCore</code> library contains a new base class called <code>AspNetCoreSystem</code> to simplify using Storyteller against ASP.Net Core systems. Here's a very simple, &quot;Hello, World&quot; level example:</p>
+<pre><code class="language-csharp">&#xA;public class HelloWorldSystem : AspNetCoreSystem&#xA;{&#xA;    public HelloWorldSystem()&#xA;    {&#xA;&#xA;        UseStartup&lt;Startup&gt;();&#xA;&#xA;        // No request should take longer than 250 milliseconds&#xA;        RequestPerformanceThresholdIs(250);&#xA;&#xA;        // You can directly configure the CellHandling property to add lists,&#xA;        // custom conversions, or extensions&#xA;        CellHandling&#xA;            .AddSystemLevelList(&quot;states&quot;, new []{&quot;Texas&quot;, &quot;Missouri&quot;, &quot;Arkansas&quot;});&#xA;    }&#xA;}&#xA;</code></pre>
+<p>You can apply additional configuration of your ASP.Net Core system beyond or in addition to a <code>Startup</code> class by
+using the <a href="http://jasperfx.github.io/alba/documentation/bootstrapping/">Alba functionality</a> for bootstrapping and configuring
+a running ASP.Net Core. For example, you might add additional middleware for detailed logging or override services
+in the application's IoC container.</p>
+<h2 id="ioc-container-integration">IoC Container Integration</h2>
+<p>Within any <code>Fixture</code> in a specifications project that uses <code>AspNetCoreSystem</code>, the calls to <code>Fixture.Retrieve&lt;T&gt;()</code> delegates
+to the underlying application's IoC container.</p>
+<h2 id="specification-lifecycle-hooks">Specification Lifecycle Hooks</h2>
+<p>In addition, there are template methods that can be overridden in a subclasses of <code>AspNetCoreSystem</code> for specification lifecycle
+events:</p>
+<pre><code class="language-csharp">&#xA;/// &lt;summary&gt;&#xA;/// Executes once before any specifications are run&#xA;/// &lt;/summary&gt;&#xA;protected virtual void beforeAll()&#xA;{&#xA;    // Nothing&#xA;}&#xA;&#xA;/// &lt;summary&gt;&#xA;/// Executes immediately before a specification is executed&#xA;/// &lt;/summary&gt;&#xA;/// &lt;param name=&quot;sut&quot;&gt;&lt;/param&gt;&#xA;/// &lt;param name=&quot;context&quot;&gt;&lt;/param&gt;&#xA;protected virtual void beforeEach(ISystemUnderTest sut, ISpecContext context)&#xA;{&#xA;    // nothing&#xA;}&#xA;&#xA;/// &lt;summary&gt;&#xA;/// Executes immediately after a specification is executed&#xA;/// &lt;/summary&gt;&#xA;/// &lt;param name=&quot;sut&quot;&gt;&lt;/param&gt;&#xA;/// &lt;param name=&quot;context&quot;&gt;&lt;/param&gt;&#xA;protected virtual void afterEach(ISystemUnderTest sut, ISpecContext context)&#xA;{&#xA;    // nothing&#xA;}&#xA;</code></pre>
+<h2 id="using-aspnetcorefixture">Using AspNetCoreFixture</h2>
+<p>While you can always spin up an <a href="https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.118).aspx">HttpClient</a> instance in a Storyteller <code>Fixture</code> to exercise your HTTP endpoints, you can instead use <a href="http://jasperfx.github.io/alba/documentation/bootstrapping/">Alba's Scenario</a> support to programmatically execute HTTP requests without hitting the actual server and using its functionality to work with the response.</p>
+<p>Let's say that we've built the obligatory &quot;Hello, World&quot; ASP.Net Core application. To drive that system in a Storyteller specification, we might have this method within a class that inherits from <code>AspNetCoreFixture</code>:</p>
+<pre><code class="language-csharp">&#xA;[FormatAs(&quot;The response text from {url} should be &#x27;{contents}&#x27;&quot;)]&#xA;public async Task&lt;string&gt; TheContentsShouldBe(string url)&#xA;{&#xA;    // Execute an Alba &quot;Scenario&quot;&#xA;    var result = await Scenario(_ =&gt;&#xA;    {&#xA;        _.Get.Url(url);&#xA;    });&#xA;&#xA;    return result.ResponseBody.ReadAsText().Trim();&#xA;}&#xA;</code></pre>
+<h2 id="instrumentation-and-logging">Instrumentation and Logging</h2>
+<p>The <code>AspNetCoreSystem</code> adds some additional middleware to your configured ASP.Net Core system to record information about HTTP requests being executed during specifications. This information is exposed both in the <em>Performance</em> tab in the Storyteller HTML
+results and on an additional tab called <em>Http Requests</em> where more information about the request is displayed.</p>
+<p>See Jeremy's blog post <a href="https://jeremydmiller.com/2017/04/18/using-storyteller-with-asp-net-core-systems/">Using Storyteller with ASP.Net Core Systems</a> for examples of this functionality, including a recipe for defining <a href="/documentation/using/performance">performance criteria</a> against
+HTTP requests.</p>
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/extensions">Extensions</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/extensions/databases">Relational Databases</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+});
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>

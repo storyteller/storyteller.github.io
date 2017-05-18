@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.1.0</h3>
+		      	<h3>Storyteller 4.2.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -115,7 +115,7 @@ Some C# CODE
 <p>As part of the <a href="/documentation/docs/authoring">topic generation</a>, code samples are embedded into the markdown files like this:</p>
 <p><code>&lt;[sample:registering-custom-runtime-converter]&gt;</code></p>
 <p>That code above is rendered into a topic page using the <a href="http://prismjs.com">Prism.js</a> library to look like this:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public CellHandling Start()&#xD;&#xA;{&#xD;&#xA;    var handling = CellHandling.Basic();&#xD;&#xA;&#xD;&#xA;    // Adding a system wide list. &#xD;&#xA;    handling.AddSystemLevelList(&quot;positions&quot;, new[] {&quot;LB&quot;, &quot;OL&quot;, &quot;DL&quot;, &quot;WR&quot;, &quot;RB&quot;});&#xD;&#xA;&#xD;&#xA;    // This is where you can register a custom runtime conversion&#xD;&#xA;    handling.RegisterRuntimeConversion&lt;PlayerConverter&gt;();&#xD;&#xA;&#xD;&#xA;    return handling;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public CellHandling Start()&#xA;{&#xA;    var handling = CellHandling.Basic();&#xA;&#xA;    // Adding a system wide list. &#xA;    handling.AddSystemLevelList(&quot;positions&quot;, new[] {&quot;LB&quot;, &quot;OL&quot;, &quot;DL&quot;, &quot;WR&quot;, &quot;RB&quot;});&#xA;&#xA;    // This is where you can register a custom runtime conversion&#xA;    handling.RegisterRuntimeConversion&lt;PlayerConverter&gt;();&#xA;&#xA;    return handling;&#xA;}&#xA;&#xA;</code></pre>
 <h2 id="enabling-samples-in-your-project">Enabling Samples in your Project</h2>
 <p>To enable the code sample formatting with Prism.js, you need to reference both prism.js and prism.css. See the <a href="http://prismjs.com">Prism.js</a> website to build out your own version or grab <a href="https://github.com/storyteller/Storyteller/tree/master/documentation/content">the ones from Storyteller</a> to use the same theme shown above.</p>
 <h2 id="language-support">Language Support</h2>

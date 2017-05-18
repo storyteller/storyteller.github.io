@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.1.0</h3>
+		      	<h3>Storyteller 4.2.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -127,6 +127,10 @@
 <h2 id="results">Results</h2>
 <p>The specification execution results are written to a single html file with <strong>no other file dependencies</strong>. In continuous integration scenarios, you would want to have this file written to a place where your CI server will save this file as an artifact tagged to the build. For example, my teams write the Storyteller results to an <code>/artifacts</code> folder and configure our TeamCity build server to automatically store any file written to that directory as build artifacts. Most CI servers today will allow you to expose this html file from the build server website to browse the results.</p>
 <p>The results page is a single page application with a tabular summary view of all the specifications executed, how long each took to execute, the high level result counts, and the number of retries. From the summary, you can drill into individual specifications by clicking on the specification name.</p>
+<h2 id="appveyor-integration">AppVeyor Integration</h2>
+<div class="alert alert-info"><b>Note!</b> This was added in Storyteller 4.2</div>
+<p>For better AppVeyor results, use the <code>dotnet storyteller run --appveyor</code> flag to direct Storyteller to output the Console logging
+that AppVeyor expects.</p>
 <h2 id="command-usage">Command Usage</h2>
 <section class="command-section"><h4><span id="run" class="section-header">st run</span><i class="command-description">Run a suite of StoryTeller tests</i></h4></section>
 The `st run` command allows you to run specifications from an optimized batch mode from the command line. This command will also optionally dump out a couple additional  reports about the specifications that executed that may be useful for custom reporting or performance optimization. The CSV option is a dump of the performance tracing across all the specifications. The JSON dump is a raw dump of the Storyteller runtime model for the specifications. 

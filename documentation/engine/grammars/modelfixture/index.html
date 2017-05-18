@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
+		<title>Storyteller - Configuring Input Models with ModelFixture</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+
+
+
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <!-- HTML code from Bootply.com editor -->
+
+    <body  >
+
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/grammars/create_object" title="Creating Complex Objects">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/verify_object" title="Verifying Object State">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Configuring Input Models with ModelFixture</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller 4.2.0</h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/verify_object">Verifying Object State</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Configuring Input Models with ModelFixture<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/modelfixture.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--title: Configuring Input Models with ModelFixture -->
+<p>Storyteller 4.2 added a new <code>Fixture</code> type called <code>ModelFixture&lt;T&gt;</code> that can be used to set up complex object models
+necessary for test data input in your specifications. This feature is closely related to <a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a> (and shares some code).</p>
+<p>Using the inevitable <code>Address</code> model, we might have a fixture like this:</p>
+<pre><code class="language-csharp">&#xA;public class AddressModelFixture : ModelFixture&lt;Address&gt;&#xA;{&#xA;    public AddressModelFixture()&#xA;    {&#xA;        Title = &quot;Address Model Setup&quot;;&#xA;&#xA;        // The For() statement is a helper to customize the editing&#xA;        // or rendering of the Cell&#x27;s for the public properties or fields&#xA;        For(x =&gt; x.City)&#xA;            .SelectionValues(&quot;Austin&quot;, &quot;Round Rock&quot;, &quot;Cedar Park&quot;);&#xA;    }&#xA;}&#xA;</code></pre>
+<p>By default, the <code>ModelFixture&lt;T&gt;</code> class will generate grammars to set the values of all public properties or fields where
+Storyteller &quot;knows&quot; how to convert a raw string into that type. If a property or field type is another model object,
+<code>ModelFixture&lt;T&gt;</code> will add grammars for the deeper properties. To make that concrete, say you have an <code>Address</code> model like
+this:</p>
+<pre><code class="language-csharp">&#xA;public class Address&#xA;{&#xA;    public string Address1 { get; set; }&#xA;    public string Address2 { get; set; }&#xA;    public string City { get; set; }&#xA;    public string StateOrProvince { get; set; }&#xA;    public string Country { get; set; }&#xA;    public string PostalCode { get; set; }&#xA;    public string TimeZone { get; set; }&#xA;&#xA;    public double DistanceFromOffice { get; set; }&#xA;&#xA;    public string[] Names { get; set; }&#xA;&#xA;    public string County;&#xA;&#xA;    public Area Area { get; set; }&#xA;}&#xA;&#xA;public class Area&#xA;{&#xA;    public string Name;&#xA;}&#xA;</code></pre>
+<p>In the case above, <code>ModelFixture&lt;Address&gt;</code> would add a grammar to set the value of the <code>Address.Area.Name</code> property.</p>
+<p>Do note that you can add any other kind of grammar to your <code>ModelFixture&lt;T&gt;</code> for more complex object setup.</p>
+<h2 id="attaching-the-model">Attaching the Model</h2>
+<p><code>ModelFixture&lt;T&gt;</code> has a property named <code>Model</code> that stores the model object being configured. If your model type has a
+public, no argument constructor, <code>ModelFixture&lt;T&gt;</code> will automatically create one at the beginning of each usage of that
+fixture. Otherwise, you would need an additional grammar to attach the model:</p>
+<pre><code class="language-csharp">&#xA;public class SpecialModel&#xA;{&#xA;    public string Name { get; }&#xA;&#xA;    public SpecialModel(string name)&#xA;    {&#xA;        Name = name;&#xA;    }&#xA;}&#xA;&#xA;public class SpecialModelFixture : ModelFixture&lt;SpecialModel&gt;&#xA;{&#xA;    [FormatAs(&quot;For the name {name}&quot;)]&#xA;    public void ForName(string name)&#xA;    {&#xA;        Model = new SpecialModel(name);&#xA;    }&#xA;}&#xA;</code></pre>
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/create_object">Creating Complex Objects</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/verify_object">Verifying Object State</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+});
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>

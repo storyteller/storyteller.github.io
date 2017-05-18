@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+				<link rel=icon href=/content/images/favicon.ico>
+		<title>Storyteller - Model In, Model Out Operations with ApiFixture</title>
+		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
+		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
+		<link href="/content/theme.css" rel="stylesheet" type="text/css" />
+
+
+
+
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+        <!-- CSS code from Bootply.com editor -->
+        <link href="/content/affix.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <!-- HTML code from Bootply.com editor -->
+
+    <body  >
+
+
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a href="/" class="navbar-brand">Storyteller</a>
+		    </div>
+		    <nav class="collapse navbar-collapse" role="navigation">
+		      <ul class="nav navbar-nav pull-right">
+            <li>
+              <a href="/tutorial">Tutorial</a>
+            </li>
+		        <li>
+		          <a href="/documentation/getting_started">Getting Started</a>
+		        </li>
+		        <li>
+		          <a href="/documentation">Documentation</a>
+		        </li>
+		        <li>
+		        <li>
+<a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
+		        </li>
+		      	<li><a href="/documentation/engine/grammars/verify_object" title="Verifying Object State">Previous</a></li>
+		      	<li><a href="/documentation/engine/grammars/async" title="Async Grammars">Next</a></li>
+		      </ul>
+      <div class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input id="search" type="search" class="form-control" placeholder="Search">
+        </div>
+      </div>
+
+		    </nav>
+
+		  </div>
+		</nav>
+
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/grammars">Grammars</a></li><li class="active">Model In, Model Out Operations with ApiFixture</li></ol>
+		  	</nav>
+		  </div>
+
+		<!--main-->
+		<div class="container">
+			<div class="row">
+		      <!--left-->
+
+		      <div class="col-md-3" id="leftCol">
+		      	<h3>Storyteller 4.2.0</h3>
+		      	<br />
+
+				<ul class="nav nav-stacked affix" id="sidebar">
+
+		        </ul>
+
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/grammars/async">Async Grammars</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/grammars/verify_object">Verifying Object State</a></p>
+
+		        </ul>
+		      </div><!--/left-->
+
+		      <!--right-->
+		      <div class="col-md-9">
+			      	<h1>Model In, Model Out Operations with ApiFixture<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/grammars/apifixture.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+
+			      	<hr />
+
+			      	<div id="main-pane">
+			      		<!--title: Model In, Model Out Operations with ApiFixture-->
+<p>New in Storyteller 4.2 is a helper <code>Fixture</code> class called <code>ApiFixture</code> that helps for testing API's in your code that take in
+an input model as an argument and produce a separate resource model. This feature was built for testing HTTP API's and &quot;request/reply&quot; functionality in service bus applications.</p>
+<pre><code class="language-csharp">&#xA;public class NumbersInput&#xA;{&#xA;    public int X;&#xA;    public int Y;&#xA;}&#xA;&#xA;public class NumbersOutput&#xA;{&#xA;    public int Multiplied;&#xA;    public int Added;&#xA;}&#xA;&#xA;// This is the simplest possible usage that uses the default ModelFixture&lt;NumbersInput&gt;&#xA;// to build up the input model&#xA;public class SampleApiFixture : ApiFixture&lt;NumbersInput, NumbersOutput&gt;&#xA;{&#xA;    public SampleApiFixture()&#xA;    {&#xA;        Title = &quot;Sample Api Fixture&quot;;&#xA;        InputTitle = &quot;If the numbers are&quot;;&#xA;    }&#xA;&#xA;    // This template method has to be implemented to exercise whatever the&#xA;    // underlying API is&#xA;    protected override Task&lt;NumbersOutput&gt; execute(NumbersInput input)&#xA;    {&#xA;        var output = new NumbersOutput&#xA;        {&#xA;            Added = input.X &#x2B; input.Y,&#xA;            Multiplied = input.X * input.Y&#xA;        };&#xA;&#xA;        return Task.FromResult(output);&#xA;    }&#xA;}&#xA;</code></pre>
+<p>In usage, a specification using <code>SampleApiFixture</code> looks like this:</p>
+<p data-path="Model In Model Out API/Using ApiFixture" data-spec="{&quot;title&quot;:&quot;Using ApiFixture&quot;,&quot;path&quot;:&quot;Model In Model Out API/Using ApiFixture&quot;,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Wednesday, May 17, 2017&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;SampleApi&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;InputIs&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Model`1&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;key&quot;:&quot;X&quot;,&quot;cells&quot;:{&quot;X&quot;:&quot;3&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;f812d91d-cff8-4f07-aa80-56770dd0dd7d&quot;},{&quot;key&quot;:&quot;Y&quot;,&quot;cells&quot;:{&quot;Y&quot;:&quot;4&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;2eed6e2d-a204-4722-bd03-42819bb734ad&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;6f7d6d0f-9a0c-4d38-b430-a47a03425be2&quot;}],&quot;id&quot;:&quot;4aef191f-184b-4b18-b814-3b69cc512b83&quot;},{&quot;key&quot;:&quot;Added&quot;,&quot;cells&quot;:{&quot;Added&quot;:&quot;7&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;ab142d78-a027-4094-b034-f8c4fae68f92&quot;},{&quot;key&quot;:&quot;Multiplied&quot;,&quot;cells&quot;:{&quot;Multiplied&quot;:&quot;12&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;6a6b3782-7369-467b-8eba-d8c6a9318cb5&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;3a76520b-9871-4882-8fc9-4f949f861197&quot;}],&quot;id&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;}" data-fixtures="[{&quot;title&quot;:&quot;Sample Api Fixture&quot;,&quot;key&quot;:&quot;SampleApi&quot;,&quot;implementation&quot;:&quot;Samples.Fixtures.Api.SampleApiFixture&quot;,&quot;type&quot;:&quot;fixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;message&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;Multiplied should be {Multiplied}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;Multiplied&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:&quot;Multiplied&quot;,&quot;key&quot;:&quot;Multiplied&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;Added should be {Added}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;Added&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:&quot;Added&quot;,&quot;key&quot;:&quot;Added&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;fixture&quot;:{&quot;title&quot;:&quot;If the numbers are&quot;,&quot;key&quot;:&quot;Model`1&quot;,&quot;implementation&quot;:&quot;StoryTeller.Grammars.API.ModelFixture`1[[Samples.Fixtures.Api.NumbersInput, Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]&quot;,&quot;type&quot;:&quot;fixture&quot;,&quot;grammars&quot;:[{&quot;format&quot;:&quot;TODO: {message}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;TODO&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:null,&quot;key&quot;:&quot;message&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;X is {X}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;X&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:&quot;X&quot;,&quot;key&quot;:&quot;X&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false},{&quot;format&quot;:&quot;Y is {Y}&quot;,&quot;fact&quot;:false,&quot;key&quot;:&quot;Y&quot;,&quot;type&quot;:&quot;sentence&quot;,&quot;cells&quot;:[{&quot;default&quot;:null,&quot;editor&quot;:null,&quot;header&quot;:&quot;Y&quot;,&quot;key&quot;:&quot;Y&quot;,&quot;options&quot;:null,&quot;result&quot;:false}],&quot;errors&quot;:[],&quot;missing&quot;:false}],&quot;missingCount&quot;:0,&quot;missingCode&quot;:&quot;This fixture is fully implemented&quot;,&quot;sample&quot;:{&quot;title&quot;:&quot;Sample Specification for Model`1&quot;,&quot;path&quot;:null,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Thursday, May 18, 2017&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;Model`1&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Implemented by StoryTeller.Grammars.API.ModelFixture`1[[Samples.Fixtures.Api.NumbersInput, Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]&quot;,&quot;id&quot;:&quot;ef33dac8-b0ee-41f3-96c0-9dac7d764aaa&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## TODO&quot;,&quot;id&quot;:&quot;fb9c7dbd-fa8f-42f4-b377-b830e1711cd4&quot;},{&quot;key&quot;:&quot;TODO&quot;,&quot;cells&quot;:{&quot;message&quot;:&quot;message&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;e2a009a4-39fa-4095-942f-4ff6652a625d&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## X&quot;,&quot;id&quot;:&quot;d61ec7ee-b3a0-4090-8a6f-5d562cdd81ca&quot;},{&quot;key&quot;:&quot;X&quot;,&quot;cells&quot;:{&quot;X&quot;:&quot;X&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;006c0eb1-5702-4a98-8d91-b1eb4a307de3&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## Y&quot;,&quot;id&quot;:&quot;aca7efeb-8d86-4e5c-9b12-120a1397c581&quot;},{&quot;key&quot;:&quot;Y&quot;,&quot;cells&quot;:{&quot;Y&quot;:&quot;Y&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;bc1c4fb5-8f31-4227-8bbb-32b5e8ff1b5d&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;8d2ab0b4-4cdd-43de-bb07-d01f6550fbba&quot;}],&quot;id&quot;:&quot;057db987-3087-4907-9539-f0ddf347bf36&quot;},&quot;sampleMarkdown&quot;:&quot;# Sample Specification for Model`1\n\n-&gt; id = 79213920-9063-4453-a5c8-470fe128925c\n-&gt; lifecycle = Acceptance\n-&gt; max-retries = 0\n-&gt; last-updated = 2017-05-18T12:50:34.4032830-05:00\n-&gt; tags = \n\n[Model`1]\n|&gt; TODO message=message\n|&gt; X X=X\n|&gt; Y Y=Y\n~~~\n&quot;,&quot;errors&quot;:[],&quot;missing&quot;:false},&quot;title&quot;:&quot;If the numbers are&quot;,&quot;collection&quot;:&quot;Model`1&quot;,&quot;hasBeforeStep&quot;:false,&quot;hasAfterStep&quot;:true,&quot;key&quot;:&quot;InputIs&quot;,&quot;type&quot;:&quot;embedded-section&quot;,&quot;errors&quot;:[],&quot;missing&quot;:false}],&quot;missingCount&quot;:0,&quot;missingCode&quot;:&quot;This fixture is fully implemented&quot;,&quot;sample&quot;:{&quot;title&quot;:&quot;Sample Specification for SampleApi&quot;,&quot;path&quot;:null,&quot;max-retries&quot;:0,&quot;lifecycle&quot;:&quot;Acceptance&quot;,&quot;tags&quot;:[],&quot;errors&quot;:[],&quot;last-updated&quot;:&quot;Thursday, May 18, 2017&quot;,&quot;breakpoints&quot;:[],&quot;steps&quot;:[{&quot;key&quot;:&quot;SampleApi&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Implemented by Samples.Fixtures.Api.SampleApiFixture&quot;,&quot;id&quot;:&quot;ea185475-9e6b-4269-854c-6c548edcca5a&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## Added&quot;,&quot;id&quot;:&quot;5d26ebca-9879-439e-8b56-0e6b83fef579&quot;},{&quot;key&quot;:&quot;Added&quot;,&quot;cells&quot;:{&quot;Added&quot;:&quot;Added&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;22046b61-7312-4a2e-b426-ac09f25da4e7&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## InputIs&quot;,&quot;id&quot;:&quot;97bd0436-39d6-49c3-b695-b4ce53c3f837&quot;},{&quot;key&quot;:&quot;InputIs&quot;,&quot;cells&quot;:{},&quot;collections&quot;:[{&quot;key&quot;:&quot;Model`1&quot;,&quot;type&quot;:&quot;section&quot;,&quot;steps&quot;:[{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;Implemented by StoryTeller.Grammars.API.ModelFixture`1[[Samples.Fixtures.Api.NumbersInput, Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]&quot;,&quot;id&quot;:&quot;28d558f5-d03a-4a3a-a526-3db6fd6a1159&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## TODO&quot;,&quot;id&quot;:&quot;6b5f7b68-bf3b-44b8-8a04-831758d0c805&quot;},{&quot;key&quot;:&quot;TODO&quot;,&quot;cells&quot;:{&quot;message&quot;:&quot;message&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;d3b8a131-5118-4ae3-9b51-bb77540c5aa5&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## X&quot;,&quot;id&quot;:&quot;fcc4cf01-626e-4866-947d-19796434cd57&quot;},{&quot;key&quot;:&quot;X&quot;,&quot;cells&quot;:{&quot;X&quot;:&quot;X&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c48688c3-4068-42be-86ae-432086fb3832&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## Y&quot;,&quot;id&quot;:&quot;423a8773-2676-4413-be06-48ecfc4d9bfe&quot;},{&quot;key&quot;:&quot;Y&quot;,&quot;cells&quot;:{&quot;Y&quot;:&quot;Y&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;87d8948b-2be4-49b0-899e-d17db80e2bb0&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;7ad25273-35d2-4d44-ac60-b42aa80c1dcd&quot;}],&quot;id&quot;:&quot;4c304fa2-cf2c-41ea-b561-4d09a8ea34d8&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## Multiplied&quot;,&quot;id&quot;:&quot;12576719-86c0-4fdf-a70e-24e261c9e952&quot;},{&quot;key&quot;:&quot;Multiplied&quot;,&quot;cells&quot;:{&quot;Multiplied&quot;:&quot;Multiplied&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;c65c159d-1c26-4683-a9c1-99bdebdbee27&quot;},{&quot;type&quot;:&quot;comment&quot;,&quot;text&quot;:&quot;## TODO&quot;,&quot;id&quot;:&quot;66c6a0a5-a7da-4175-b396-a19d98a37c58&quot;},{&quot;key&quot;:&quot;TODO&quot;,&quot;cells&quot;:{&quot;message&quot;:&quot;message&quot;},&quot;collections&quot;:[],&quot;id&quot;:&quot;e5ea8cdf-598f-489a-b83a-5fef1af5991c&quot;}],&quot;activeCells&quot;:{},&quot;id&quot;:&quot;e9c6ab4e-f479-4cb0-a808-9fdd95fe7e51&quot;}],&quot;id&quot;:&quot;bcaf4c1f-6c40-4090-9b30-3d366c803a07&quot;},&quot;sampleMarkdown&quot;:&quot;# Sample Specification for SampleApi\n\n-&gt; id = c19b4df2-0126-4669-adfe-78f3f770ac2c\n-&gt; lifecycle = Acceptance\n-&gt; max-retries = 0\n-&gt; last-updated = 2017-05-18T12:50:34.4034770-05:00\n-&gt; tags = \n\n[SampleApi]\n|&gt; Added Added=Added\n|&gt; InputIs\n    [Model`1]\n\n    Implemented by StoryTeller.Grammars.API.ModelFixture`1[[Samples.Fixtures.Api.NumbersInput, Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]\n\n\n    ## TODO\n\n    |&gt; TODO message=message\n\n    ## X\n\n    |&gt; X X=X\n\n    ## Y\n\n    |&gt; Y Y=Y\n\n|&gt; Multiplied Multiplied=Multiplied\n|&gt; TODO message=message\n~~~\n&quot;,&quot;errors&quot;:[],&quot;missing&quot;:false}]" data-results="[{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;3a76520b-9871-4882-8fc9-4f949f861197&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:&quot;setup&quot;,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;6f7d6d0f-9a0c-4d38-b430-a47a03425be2&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:&quot;setup&quot;,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:1},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;f812d91d-cff8-4f07-aa80-56770dd0dd7d&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;2eed6e2d-a204-4722-bd03-42819bb734ad&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;6f7d6d0f-9a0c-4d38-b430-a47a03425be2&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:&quot;teardown&quot;,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;6f7d6d0f-9a0c-4d38-b430-a47a03425be2&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:&quot;after&quot;,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:2},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;Added&quot;,&quot;errorDisplay&quot;:&quot;text&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;ab142d78-a027-4094-b034-f8c4fae68f92&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[{&quot;actual&quot;:null,&quot;error&quot;:null,&quot;cell&quot;:&quot;Multiplied&quot;,&quot;errorDisplay&quot;:&quot;text&quot;,&quot;id&quot;:null,&quot;status&quot;:&quot;success&quot;}],&quot;id&quot;:&quot;6a6b3782-7369-467b-8eba-d8c6a9318cb5&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:null,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0},{&quot;errorDisplay&quot;:&quot;text&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;error&quot;:null,&quot;cells&quot;:[],&quot;id&quot;:&quot;3a76520b-9871-4882-8fc9-4f949f861197&quot;,&quot;spec&quot;:&quot;8829bef7-1485-4fb7-ad24-f769201674b1&quot;,&quot;position&quot;:&quot;teardown&quot;,&quot;type&quot;:&quot;step-result&quot;,&quot;duration&quot;:0}]" class="spec-result"></p>
+<p>So there's a couple things going on under the covers. First, <code>ApiFixture</code> uses the <a href="/documentation/engine/grammars/modelfixture">ModelFixture</a> functionality
+to build the input model in an <a href="/documentation/engine/grammars/embedded_section">embedded section</a> and
+automatically transfer that input back to the containing <code>ApiFixture.Model</code> property. From there,
+<code>ApiFixture</code> itself is a <a href="/documentation/engine/grammars/verify_object">CheckModelFixture</a> that automatically adds grammars
+to verify public properties and fields on the resource or output type.</p>
+<p><code>ApiFixture</code> comes in two flavors. Using a custom <code>ModelFixture&lt;TInput&gt;</code> like this:</p>
+<pre><code class="language-csharp">&#xA;public abstract class ApiFixture&lt;TInput, TOutput, TModelFixture&gt; : CheckModelFixture&lt;TOutput&gt;&#xA;    where TModelFixture : ModelFixture&lt;TInput&gt;, new()&#xA;    where TInput : class&#xA;    where TOutput : class&#xA;</code></pre>
+<p>And a simpler version for cases where the default <code>ModelFixture&lt;TInput&gt;</code> is sufficient:</p>
+<pre><code class="language-csharp">&#xA;public abstract class ApiFixture&lt;TInput, TOutput&gt; : ApiFixture&lt;TInput, TOutput, ModelFixture&lt;TInput&gt;&gt;&#xA;    where TInput : class&#xA;    where TOutput : class&#xA;{&#xA;    &#xA;}&#xA;</code></pre>
+
+			      	</div>
+
+			      	<hr />
+
+			      	<nav>
+				        <span>
+				        	<strong>Previous: </strong><a href="/documentation/engine/grammars/verify_object">Verifying Object State</a>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<strong>Next: </strong><a href="/documentation/engine/grammars/async">Async Grammars</a>
+
+				        </span>
+			      	</nav>
+
+		      </div><!--/right-->
+		  	</div><!--/row-->
+		</div><!--/container-->
+
+<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#search').keyup(function(e){
+  if(e.keyCode == 13) {
+    var search = $('#search').val();
+
+    var url = 'https://www.google.com/#q=site:storyteller.github.io ' + search;
+    url = encodeURI(url);
+
+    //alert(url);
+
+    window.location.href = url;
+
+    e.stopPropagation();
+    if (e.cancelBubble!=null) e.cancelBubble = true;
+    return false;
+  }
+
+
+
+});
+
+</script>
+    </body>
+
+
+    <foot>
+        <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/content/embed.js"></script>
+        <script type="text/javascript" src="/content/prism.js"></script>
+        <script type="text/javascript" src="/content/sidebar.js"></script>
+        <script type="text/javascript" src="/content/affix.js"></script>
+    </foot>
+</html>

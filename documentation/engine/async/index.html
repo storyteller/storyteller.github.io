@@ -50,7 +50,7 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/engine/state" title="Managing State during Execution">Previous</a></li>
+		      	<li><a href="/documentation/engine/extensions" title="Extensions">Previous</a></li>
 		      	<li><a href="/documentation/engine/storyteller_runner" title="Running Specs from your IDE">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.1.0</h3>
+		      	<h3>Storyteller 4.2.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -84,7 +84,7 @@
 		        </ul>
 
 		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/storyteller_runner">Running Specs from your IDE</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/state">Managing State during Execution</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/extensions">Extensions</a></p>
 
 		        </ul>
 		      </div><!--/left-->
@@ -100,7 +100,7 @@
 <p>Storyteller 4.0 adds <em>some</em> ability to use asynchronous methods as grammars. As asynchronous programming
 continues to become so much more prevalant, Storyteller will adapt and add more capabilities. For now,
 you have these options:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public class AsyncOperationsFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    [FormatAs(&quot;Perform a task asynchronously&quot;)]&#xD;&#xA;    public Task PerformTask()&#xD;&#xA;    {&#xD;&#xA;        // do something with a method that returns a Task&#xD;&#xA;        return Task.CompletedTask;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    [FormatAs(&quot;The current name should be {name}&quot;)]&#xD;&#xA;    public Task&lt;string&gt; CheckName()&#xD;&#xA;    {&#xD;&#xA;        // Use an ansynchronous method&#xD;&#xA;        return Task.FromResult(&quot;Jeremy&quot;);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    [FormatAs(&quot;This condition should be true&quot;)]&#xD;&#xA;    public Task&lt;bool&gt; IsConditionTrue()&#xD;&#xA;    {&#xD;&#xA;        // Use an asynchronous result&#xD;&#xA;        return Task.FromResult(true);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public class AsyncOperationsFixture : Fixture&#xA;{&#xA;    [FormatAs(&quot;Perform a task asynchronously&quot;)]&#xA;    public Task PerformTask()&#xA;    {&#xA;        // do something with a method that returns a Task&#xA;        return Task.CompletedTask;&#xA;    }&#xA;&#xA;    [FormatAs(&quot;The current name should be {name}&quot;)]&#xA;    public Task&lt;string&gt; CheckName()&#xA;    {&#xA;        // Use an ansynchronous method&#xA;        return Task.FromResult(&quot;Jeremy&quot;);&#xA;    }&#xA;&#xA;    [FormatAs(&quot;This condition should be true&quot;)]&#xA;    public Task&lt;bool&gt; IsConditionTrue()&#xA;    {&#xA;        // Use an asynchronous result&#xA;        return Task.FromResult(true);&#xA;    }&#xA;&#xA;}&#xA;</code></pre>
 <p>Effectively, all you're doing is allowing Storyteller to worry about the <code>Task</code>'s much the same way testing
 tools like xUnit or mocha do for you today.</p>
 
@@ -110,7 +110,7 @@ tools like xUnit or mocha do for you today.</p>
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/engine/state">Managing State during Execution</a>
+				        	<strong>Previous: </strong><a href="/documentation/engine/extensions">Extensions</a>
 
 				        </span>
 				        <span class="pull-right">
