@@ -6,7 +6,7 @@
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 				<link rel=icon href=/content/images/favicon.ico>
-		<title>Storyteller - Embedding Images</title>
+		<title>Storyteller - TestRail</title>
 		<link href="/content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="/content/storyteller.css" rel="stylesheet" type="text/css" />
 		<link href="/content/prism.css" rel="stylesheet" type="text/css" />
@@ -50,8 +50,8 @@
 		        <li>
 <a href="https://gitter.im/storyteller/storyteller?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/storyteller/storyteller" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
-		      	<li><a href="/documentation/docs/samples" title="Embedding Code Samples">Previous</a></li>
-		      	<li><a href="/documentation/docs/outlines" title="Topic Outlines">Next</a></li>
+		      	<li><a href="/documentation/engine/extensions/redux" title="Subcutaneous Testing against Redux Applications">Previous</a></li>
+		      	<li><a href="/documentation/engine/async" title="Asynchronous Grammars">Next</a></li>
 		      </ul>
       <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -66,7 +66,7 @@
 
 		  <div class="container">
 		  	<nav class="navbar-inverse">
-		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/docs">Living Documentation Generation</a></li><li class="active">Embedding Images</li></ol>
+		  		<ol class="breadcrumb"><li><a href="/">Storyteller</a></li><li><a href="/documentation">Documentation</a></li><li><a href="/documentation/engine">The .Net Engine</a></li><li><a href="/documentation/engine/extensions">Extensions</a></li><li class="active">TestRail</li></ol>
 		  	</nav>
 		  </div>
 
@@ -83,26 +83,37 @@
 
 		        </ul>
 
-		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/docs/outlines">Topic Outlines</a></p>
-		        	<h3 class="no-margin">Previous</h3><a href="/documentation/docs/samples">Embedding Code Samples</a></p>
+		        	<h3 class="no-margin">Next</h3><p><a href="/documentation/engine/async">Asynchronous Grammars</a></p>
+		        	<h3 class="no-margin">Previous</h3><a href="/documentation/engine/extensions/redux">Subcutaneous Testing against Redux Applications</a></p>
 
 		        </ul>
 		      </div><!--/left-->
 
 		      <!--right-->
 		      <div class="col-md-9">
-			      	<h1>Embedding Images<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/docs/images.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
+			      	<h1>TestRail<a href="https://github.com/storyteller/storyteller/blob/master/documentation/documentation/engine/extensions/testrail.md"  class="text-muted small pull-right" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a></h1>
 
 			      	<hr />
 
 			      	<div id="main-pane">
-			      		<!--Title: Embedding Images-->
-<p>Images can be hosted from the <code>/content</code> folder in your documentation project.</p>
-<p>To write just the url of an image when you want full control of the html, use <code>&lt;[url:content/images/spec-explorer.png]&gt;</code>.</p>
-<p>To write the image tag with a header capture, use the syntax:</p>
-<p><code>&lt;[img:content/images/editing/status-bar-success.png;Status Bar with a Success]&gt;</code></p>
-<p>The syntax inside the brackets is [relative path to the image file];[caption title].</p>
-<p>See the topic files for the Storyteller user interface <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/documentation/ui/spec-editor.md">here</a> and <a href="https://github.com/storyteller/Storyteller/blob/master/documentation/documentation/ui/spec-explorer.md">here</a> for example usages.</p>
+			      		<!--title: TestRail -->
+<p>The <code>Storyteller.TestRail</code> library is available on Nuget. The integration is currently very basic.</p>
+<p>Following the steps below will result in a Jira style experience where you can link your specs to Test Cases in TestRail simply by putting their Test Case ID (aka &quot;C&quot; Number) into the names of your specifications. The integration will run only when kicked off from the CLI's <code>run</code> command and will result in a &quot;Test Run&quot; being generated in TestRail for all specs in the batch that are linked to a Test Case. As the specs execute their status will be updated in TestRail with a simple pass/fail.</p>
+<h3 id="integrating-testrail-w-your-spec-suite">Integrating TestRail w/ Your Spec Suite</h3>
+<p>The package contains a few classes you'll need to integrated with TestRail. The first is the <code>TestRailClient</code> which is used to interact with the TestRail API. It requires you to pass the Url of the TestRail server along with credentials:</p>
+<pre><code>var testRailClient = new TestRailClient(url, username, password);
+</code></pre>
+<p>The second is a <code>TestRailRunLogger</code> which will create the &quot;Test Run&quot; in TestRail at the beginning of a batch run. It requires you to pass in an <code>ITestRailClient</code> instance along with some settings. The TestRail Project ID is required in order for it to create the Test Run. It needs to be registered as a event listener which can be done in the constructor of your <code>ISystem</code> implementation:</p>
+<pre><code>var testRailRunLogger = new TestRailRunLogger(testRailClient, new TestRailRunLoggerSettings(projectId));
+EventAggregator.Messaging.AddListener(testRailRunLogger);
+</code></pre>
+<p>The last part is the <code>TestRailCaseResultLoggingExtension</code> which will add results to the Test Run for the tests cases as their corresponding spec executes. This needs registered as an extension in the <code>ISystem.Start()</code> method:</p>
+<pre><code>var handling = CellHandling.Basic();
+handling.Extensions.Add(new TestRailCaseResultLoggingExtension(testRailClient));
+</code></pre>
+<p>At this point you can begin establishing links between the your specs and test cases in TestRail by adding the corresponding &quot;C&quot; number to the name of the specs. For example, &quot;My First Spec C1&quot; will link to the &quot;C1&quot; test case in TestRail. If no test cases are found in the batch run then no Run will be created in TestRail.</p>
+<h3 id="customization">Customization</h3>
+<p>Currently there is one customization hook for this extension. When you create the <code>TestRailRunLoggerSettings</code> you can pass in your own implementation of <code>ITestRailRunNameGenerator</code> which is used to generate the name of the Test Run that will be created in TestRail. The default implementation simply uses the current date. For example, &quot;8/8/2017 12:57:13 PM&quot;.</p>
 
 			      	</div>
 
@@ -110,12 +121,12 @@
 
 			      	<nav>
 				        <span>
-				        	<strong>Previous: </strong><a href="/documentation/docs/samples">Embedding Code Samples</a>
+				        	<strong>Previous: </strong><a href="/documentation/engine/extensions/redux">Subcutaneous Testing against Redux Applications</a>
 
 				        </span>
 				        <span class="pull-right">
 
-				        	<strong>Next: </strong><a href="/documentation/docs/outlines">Topic Outlines</a>
+				        	<strong>Next: </strong><a href="/documentation/engine/async">Asynchronous Grammars</a>
 
 				        </span>
 			      	</nav>

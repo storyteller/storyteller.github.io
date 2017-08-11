@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.2.0</h3>
+		      	<h3>Storyteller 4.3.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -110,7 +110,7 @@ st run src/Specifications --profile PhantomJS
 st open src/Specifications --profile Firefox
 </pre>
 <p>In your own application code, either in a custom <a href="/documentation/engine/system_under_test">ISystem</a> or in  <a href="/documentation/engine/fixtures">Fixture</a> classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):</p>
-<pre><code class="language-csharp">&#xA;public class SometimesSlowFixture : Fixture&#xA;{&#xA;    public void Slow()&#xA;    {&#xA;        if (Project.CurrentProfile == &quot;slow&quot;)&#xA;        {&#xA;            Thread.Sleep(1.Minutes());&#xA;        }&#xA;    }&#xA;&#xA;&#xA;    public void ReadText([Editor(&quot;big-text&quot;)]string text)&#xA;    {&#xA;        &#xA;    }&#xA;}&#xA;</code></pre>
+<pre><code class="language-csharp">&#xD;&#xA;public class SometimesSlowFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    public void Slow()&#xD;&#xA;    {&#xD;&#xA;        if (Project.CurrentProfile == &quot;slow&quot;)&#xD;&#xA;        {&#xD;&#xA;            Thread.Sleep(1.Minutes());&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;    public void ReadText([Editor(&quot;big-text&quot;)]string text)&#xD;&#xA;    {&#xD;&#xA;        &#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
 <p>If you are running the interactive specification tool, the profile name will be shown in parantheses next to the system name in the top of the browser page.</p>
 <p>What might this be good for?</p>
 <ul>

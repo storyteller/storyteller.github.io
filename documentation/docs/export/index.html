@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.2.0</h3>
+		      	<h3>Storyteller 4.3.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -100,9 +100,9 @@
 <!--Url:export-->
 <p>Storyteller provides the <code>dotnet stdocs export</code> (<code>st doc-export</code> in Storyteller 3.*) command to generate static html content from your documentation project and persist the files to a directory of your choosing. The documentation can be generated in one of two styles:</p>
 <ol>
-<li><p><em>Website</em> - Designed for <a href="https://pages.github.com">GitHub Pages</a> hosting using <strong>organization websites</strong> that resolve to a root URL like <em>http://storyteller.github.io</em>. Asset file links for images, stylesheets, and scripts are absolute urls assuming that the documentation is hosted at the root of a url. Topic files are saved as <code>index.html</code> under a folder structure reflecting the desired url. See this very documentation published in <a href="https://github.com/storyteller/storyteller.github.io">storyteller.github.io</a> for an example.</p>
+<li><p><em>Website</em> - Designed for <a href="https://pages.github.com">GitHub Pages</a> hosting using <strong>organization websites</strong> that resolve to a root URL like <em><a href="http://storyteller.github.io">http://storyteller.github.io</a></em>. Asset file links for images, stylesheets, and scripts are absolute urls assuming that the documentation is hosted at the root of a url. Topic files are saved as <code>index.html</code> under a folder structure reflecting the desired url. See this very documentation published in <a href="https://github.com/storyteller/storyteller.github.io">storyteller.github.io</a> for an example.</p>
 </li>
-<li><p><em>ProjectWebsite</em> - Designed for <a href="https://pages.github.com">GitHub Pages</a> hosting using <strong>project websites</strong> that resolve to a root URL like <em>http://jasperfx.github.io/marten</em>. If you use this mode, you will also have to provide the GitHub project name for the Url construction using the <code>--project</code> flag (<code>dotnet stdocs export ProjectWebsite --project marten</code>). <strong>Do watch that the project URL for gh-pages is case sensitive!</strong> Asset file links for images, stylesheets, and scripts are absolute urls assuming that the documentation is hosted at rooted at the location &quot;/[project name]&quot;.</p>
+<li><p><em>ProjectWebsite</em> - Designed for <a href="https://pages.github.com">GitHub Pages</a> hosting using <strong>project websites</strong> that resolve to a root URL like <em><a href="http://jasperfx.github.io/marten">http://jasperfx.github.io/marten</a></em>. If you use this mode, you will also have to provide the GitHub project name for the Url construction using the <code>--project</code> flag (<code>dotnet stdocs export ProjectWebsite --project marten</code>). <strong>Do watch that the project URL for gh-pages is case sensitive!</strong> Asset file links for images, stylesheets, and scripts are absolute urls assuming that the documentation is hosted at rooted at the location &quot;/[project name]&quot;.</p>
 </li>
 <li><p><em>FileDump</em> - Designed to make the generated documentation navigable directly on the file system. This mode was designed for file downloads and possibly embedding the documentation inside a Nuget package. Client asset links are all relative.</p>
 </li>

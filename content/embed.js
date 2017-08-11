@@ -4113,12 +4113,12 @@
 
 /***/ },
 /* 455 */
-/*!*************************************!*\
-  !*** ./~/buffer/~/isarray/index.js ***!
-  \*************************************/
+/*!****************************!*\
+  !*** ./~/isarray/index.js ***!
+  \****************************/
 /***/ function(module, exports) {
 
-	eval("var toString = {}.toString;\n\nmodule.exports = Array.isArray || function (arr) {\n  return toString.call(arr) == '[object Array]';\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./~/buffer/~/isarray/index.js\n ** module id = 455\n ** module chunks = 0 1 2\n **/\n//# sourceURL=webpack:///./~/buffer/~/isarray/index.js?");
+	eval("var toString = {}.toString;\n\nmodule.exports = Array.isArray || function (arr) {\n  return toString.call(arr) == '[object Array]';\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./~/isarray/index.js\n ** module id = 455\n ** module chunks = 0 1 2\n **/\n//# sourceURL=webpack:///./~/isarray/index.js?");
 
 /***/ },
 /* 456 */
