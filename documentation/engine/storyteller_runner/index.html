@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.3.0</h3>
+		      	<h3>Storyteller 4.4.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -102,11 +102,11 @@
 the Storyteller UI is running, it's a faster feedback cycle to be able to just start and run your specification from whatever IDE you are using.</p>
 <div class="alert alert-info">In all cases, the code shown in this topic must be contained within your Storyteller specification project.</div>
 <p>To that end, Storyteller 4.1 (re)introduces the <code>StorytellerRunner</code> class that you can use to execute Storyteller specifications from the IDE. If your Storyteller specification project does not have any kind of custom <code>ISystem</code> (i.e., you kick it off with <code>StorytellerAgent.Run(args)</code>), you can use this syntax:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public void run_spec()&#xD;&#xA;{&#xD;&#xA;    // There is an optional argument in this method to give&#xD;&#xA;    // Storyteller a hint about where the project root folder&#xD;&#xA;    // is, but in most cases it should be able to figure that&#xD;&#xA;    // out on its own&#xD;&#xA;    using (var runner = StorytellerRunner.Basic())&#xD;&#xA;    {&#xD;&#xA;        // run one spec by its path as shown in the UI.&#xD;&#xA;        // You can just copy/paste the full spec path&#xD;&#xA;        // from the spec editor page in the UI&#xD;&#xA;        var results = runner.Run(&quot;Arrays / Use an array argument&quot;);&#xD;&#xA;        Console.WriteLine(results.Counts);&#xD;&#xA;&#xD;&#xA;        // You can open the results in a browser window&#xD;&#xA;        runner.OpenResultsInBrowser();&#xD;&#xA;&#xD;&#xA;        // You can write the results to a file&#xD;&#xA;        runner.WriteResultsDocument(&quot;results.htm&quot;);&#xD;&#xA;&#xD;&#xA;        // Run all the specifications in the project&#xD;&#xA;        runner.RunAll(TimeSpan.FromMinutes(2));&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public void run_spec()&#xA;{&#xA;    // There is an optional argument in this method to give&#xA;    // Storyteller a hint about where the project root folder&#xA;    // is, but in most cases it should be able to figure that&#xA;    // out on its own&#xA;    using (var runner = StorytellerRunner.Basic())&#xA;    {&#xA;        // run one spec by its path as shown in the UI.&#xA;        // You can just copy/paste the full spec path&#xA;        // from the spec editor page in the UI&#xA;        var results = runner.Run(&quot;Arrays / Use an array argument&quot;);&#xA;        Console.WriteLine(results.Counts);&#xA;&#xA;        // You can open the results in a browser window&#xA;        runner.OpenResultsInBrowser();&#xA;&#xA;        // You can write the results to a file&#xA;        runner.WriteResultsDocument(&quot;results.htm&quot;);&#xA;&#xA;        // Run all the specifications in the project&#xA;        runner.RunAll(TimeSpan.FromMinutes(2));&#xA;    }&#xA;}&#xA;</code></pre>
 <p>I use the venerable <a href="http://www.testdriven.net/">TestDriven.Net</a> tool to run unit tests inside of Visual Studio.Net. One of its nifty
 features is the ability to run any arbitrary method in your code as well as run the method in the debugger. You may instead opt to add a unit testing tool like <a href="http://xunit.github.io/">xUnit</a> and kick off Storyteller specifications from a unit test where you have many more options for running the code.</p>
 <p>If you are using a custom <code>ISystem</code>, use the syntax shown below to bootstrap the runner:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public static void Debug()&#xD;&#xA;{&#xD;&#xA;    using (var runner = StorytellerRunner.For&lt;SpecificationSystem&gt;())&#xD;&#xA;    {&#xD;&#xA;        runner.Run(&quot;path to the spec&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public static void Debug()&#xA;{&#xA;    using (var runner = StorytellerRunner.For&lt;SpecificationSystem&gt;())&#xA;    {&#xA;        runner.Run(&quot;path to the spec&quot;);&#xA;    }&#xA;}&#xA;</code></pre>
 
 			      	</div>
 

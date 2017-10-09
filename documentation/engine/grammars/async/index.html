@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.3.0</h3>
+		      	<h3>Storyteller 4.4.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -103,7 +103,7 @@ of handling the Task within the execution pipeline so you don't have to. Right n
 <a href="/documentation/engine/grammars/sentences">Sentence grammars</a>.</p>
 <p>Below is a sample from the forthcoming ASP.Net Core application extensions for Storyteller that exercises a &quot;Hello, World&quot;
 HTTP endpoint:</p>
-<pre><code class="language-csharp">&#xD;&#xA;[FormatAs(&quot;The response text from {url} should be &#x27;{contents}&#x27;&quot;)]&#xD;&#xA;public async Task&lt;string&gt; TheContentsShouldBe(string url)&#xD;&#xA;{&#xD;&#xA;    // Execute an Alba &quot;Scenario&quot;&#xD;&#xA;    var result = await Scenario(_ =&gt;&#xD;&#xA;    {&#xD;&#xA;        _.Get.Url(url);&#xD;&#xA;    });&#xD;&#xA;&#xD;&#xA;    return result.ResponseBody.ReadAsText().Trim();&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;[FormatAs(&quot;The response text from {url} should be &#x27;{contents}&#x27;&quot;)]&#xA;public async Task&lt;string&gt; TheContentsShouldBe(string url)&#xA;{&#xA;    // Execute an Alba &quot;Scenario&quot;&#xA;    var result = await Scenario(_ =&gt;&#xA;    {&#xA;        _.Get.Url(url);&#xA;    });&#xA;&#xA;    return result.ResponseBody.ReadAsText().Trim();&#xA;}&#xA;</code></pre>
 <p>As of right now (4.0), Storyteller supports methods that return:</p>
 <ul>
 <li><code>Task</code> to perform an action asynchronously</li>

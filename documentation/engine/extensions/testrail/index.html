@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.3.0</h3>
+		      	<h3>Storyteller 4.4.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -111,9 +111,11 @@ EventAggregator.Messaging.AddListener(testRailRunLogger);
 <pre><code>var handling = CellHandling.Basic();
 handling.Extensions.Add(new TestRailCaseResultLoggingExtension(testRailClient));
 </code></pre>
-<p>At this point you can begin establishing links between the your specs and test cases in TestRail by adding the corresponding &quot;C&quot; number to the name of the specs. For example, &quot;My First Spec C1&quot; will link to the &quot;C1&quot; test case in TestRail. If no test cases are found in the batch run then no Run will be created in TestRail.</p>
+<p>At this point you can begin establishing links between the your specs and test cases in TestRail by adding the corresponding &quot;C#&quot; in the name of the spec in the following format: &quot;[C#]&quot;. For example, &quot;My Spec [C1]&quot; would link to Case C1 in TestRail. If no test cases are found in the batch run then no Run will be created in TestRail.</p>
 <h3 id="customization">Customization</h3>
 <p>Currently there is one customization hook for this extension. When you create the <code>TestRailRunLoggerSettings</code> you can pass in your own implementation of <code>ITestRailRunNameGenerator</code> which is used to generate the name of the Test Run that will be created in TestRail. The default implementation simply uses the current date. For example, &quot;8/8/2017 12:57:13 PM&quot;.</p>
+<h3 id="getting-your-specs-into-testrail">Getting your specs into TestRail</h3>
+<p>Getting your specs, especially if you have a lot of them, into TestRail can be a pain. To assist with this migration there is a small utility called <a href="%22https://github.com/JarrodJ83/StoryTeller.TestRail.Sync%22">StoryTeller.TestRail.Sync</a> to sync your specs to TestRail.</p>
 
 			      	</div>
 

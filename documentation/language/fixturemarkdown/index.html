@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.3.0</h3>
+		      	<h3>Storyteller 4.4.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -113,7 +113,7 @@ grammars that are not yet implemented</li>
 <p>The Fixture markdown files are persisted in the <code>/Fixtures</code> folder directly under your project root directory with the <code>*.md</code>
 file extension.</p>
 <p>Say you have a Fixture class like this one:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public class SimpleFixture : Fixture&#xD;&#xA;{&#xD;&#xA;    public SimpleFixture()&#xD;&#xA;    {&#xD;&#xA;        Title = &quot;This is the title that will be shown in the specs&quot;;&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public class SimpleFixture : Fixture&#xA;{&#xA;    public SimpleFixture()&#xA;    {&#xA;        Title = &quot;This is the title that will be shown in the specs&quot;;&#xA;    }&#xA;}&#xA;</code></pre>
 <p>The naming convention for the files is [Fixture key].md, so if you exported the markdown for the Fixture above, you'd get the following in a file named
 <code>Simple.md</code> like this:</p>
 <pre><code># This is the title that will be shown in the specs
@@ -131,7 +131,7 @@ calculator window. In markdown, that would look something like:</p>
 </code></pre>
 <p>If you previewed the &quot;missing&quot; code for that Fixture in the <a href="/documentation/ui/fixtures">Fixtures and Grammars</a> page,
 you'd see generated code like this:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public class CalculatorFixture : StoryTeller.Fixture&#xD;&#xA;{&#xD;&#xA;    public void StartWith(string number)&#xD;&#xA;    {&#xD;&#xA;        throw new System.NotImplementedException();&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public class CalculatorFixture : StoryTeller.Fixture&#xA;{&#xA;    public void StartWith(string number)&#xA;    {&#xA;        throw new System.NotImplementedException();&#xA;    }&#xA;}&#xA;</code></pre>
 <p>A couple notes about the markdown and the generated code:</p>
 <ul>
 <li>The <code>##</code> header is read as the key of a <a href="/documentation/engine/grammars">grammar</a></li>
@@ -199,7 +199,7 @@ should be treated as expected results:</p>
 |result  |false|false|true       |
 </code></pre>
 <p>The default is &quot;false.&quot; The generated code would be:</p>
-<pre><code class="language-csharp">&#xD;&#xA;[return: StoryTeller.AliasAs(&quot;sum&quot;)]&#xD;&#xA;public string AddNumbers(string x, string y)&#xD;&#xA;{&#xD;&#xA;    throw new System.NotImplementedException();&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;[return: StoryTeller.AliasAs(&quot;sum&quot;)]&#xA;public string AddNumbers(string x, string y)&#xA;{&#xA;    throw new System.NotImplementedException();&#xA;}&#xA;</code></pre>
 <p>If there is more than one result cell, Storyteller will use &quot;out&quot; parameters instead of a return value.</p>
 <h2 id="sentence-grammars">Sentence Grammars</h2>
 <p><a href="/documentation/engine/grammars/sentences">Sentences</a> are described by the pattern:</p>
@@ -218,7 +218,7 @@ fact
 </code></pre>
 <p>The presence of the line &quot;fact&quot; right underneath the key and title tells Storyteller to treat this as a &quot;Fact&quot; grammer.</p>
 <p>The generated code would be:</p>
-<pre><code class="language-csharp">&#xD;&#xA;public bool TheConfirmationEmailWasSent()&#xD;&#xA;{&#xD;&#xA;    throw new System.NotImplementedException();&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public bool TheConfirmationEmailWasSent()&#xA;{&#xA;    throw new System.NotImplementedException();&#xA;}&#xA;</code></pre>
 <h2 id="table-grammars">Table Grammars</h2>
 <p>To design a <a href="/documentation/engine/grammars/tables">Table grammar</a>, use this markdown syntax:</p>
 <pre><code>## NumberTable
@@ -232,7 +232,7 @@ fact
 |5  |5  |10 |25 |
 |2  |3  |5  |6  |</p>
 <p>The generated code for the grammar above would be:</p>
-<pre><code class="language-csharp">&#xD;&#xA;[StoryTeller.Grammars.Tables.ExposeAsTable(&quot;Adding some numbers together&quot;)]&#xD;&#xA;public void NumberTable(string x, string y, out string sum, out string product)&#xD;&#xA;{&#xD;&#xA;    throw new System.NotImplementedException();&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;[StoryTeller.Grammars.Tables.ExposeAsTable(&quot;Adding some numbers together&quot;)]&#xA;public void NumberTable(string x, string y, out string sum, out string product)&#xA;{&#xA;    throw new System.NotImplementedException();&#xA;}&#xA;</code></pre>
 <h2 id="set-verifications">Set Verifications</h2>
 <p><a href="/documentation/engine/grammars/sets">Set Verification grammars</a> are defined just like Table's in the section above,
 but the top left cell would read either &quot;set&quot; or &quot;ordered-set&quot; depending on the grammar.</p>
@@ -242,7 +242,7 @@ but the top left cell would read either &quot;set&quot; or &quot;ordered-set&quo
 |ordered-set|number|
 </code></pre>
 <p>Which would result in this skeleton code:</p>
-<pre><code class="language-csharp">&#xD;&#xA;// Implementation of a SetVerification grammar for &#x27;TheFirst5PrimeNumbersShouldBe&#x27;&#xD;&#xA;public class TheFirst5PrimeNumbersShouldBeRow&#xD;&#xA;{&#xD;&#xA;    public string number{get; set;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;private IEnumerable&lt;TheFirst5PrimeNumbersShouldBeRow&gt; getTheFirst5PrimeNumbersShouldBeRows(StoryTeller.ISpecContext context)&#xD;&#xA;{&#xD;&#xA;    throw new System.NotImplementedException();&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;public StoryTeller.IGrammar TheFirst5PrimeNumbersShouldBe()&#xD;&#xA;{&#xD;&#xA;    return VerifySetOf(getTheFirst5PrimeNumbersShouldBeRows)&#xD;&#xA;        .Titled(&quot;The first 5 prime numbers should be&quot;).Ordered()&#xD;&#xA;        .MatchOn(x =&gt; x.number);&#xD;&#xA;}&#xD;&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;// Implementation of a SetVerification grammar for &#x27;TheFirst5PrimeNumbersShouldBe&#x27;&#xA;public class TheFirst5PrimeNumbersShouldBeRow&#xA;{&#xA;    public string number{get; set;}&#xA;}&#xA;&#xA;private IEnumerable&lt;TheFirst5PrimeNumbersShouldBeRow&gt; getTheFirst5PrimeNumbersShouldBeRows(StoryTeller.ISpecContext context)&#xA;{&#xA;    throw new System.NotImplementedException();&#xA;}&#xA;&#xA;&#xA;public StoryTeller.IGrammar TheFirst5PrimeNumbersShouldBe()&#xA;{&#xA;    return VerifySetOf(getTheFirst5PrimeNumbersShouldBeRows)&#xA;        .Titled(&quot;The first 5 prime numbers should be&quot;).Ordered()&#xA;        .MatchOn(x =&gt; x.number);&#xA;}&#xA;</code></pre>
 <p><em>I know the code above is ugly as sin, but hey, it's better than having to write it all out by hand!</em></p>
 <h2 id="embedded-sections">Embedded Sections</h2>
 <p>This one is easy. <a href="/documentation/engine/grammars/embedded_section">Embedded Section grammars</a> can be defined as just:</p>
