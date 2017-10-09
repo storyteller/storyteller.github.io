@@ -128,6 +128,23 @@ using the project.json format:</p>
 	}
 }
 </code></pre>
+<p>or in the new VS2017 format:</p>
+<pre><code>&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;netcoreapp1.0&lt;/TargetFramework&gt;
+    &lt;AssemblyName&gt;Documentation&lt;/AssemblyName&gt;
+    &lt;PackageTargetFallback&gt;$(PackageTargetFallback);dnxcore50&lt;/PackageTargetFallback&gt;
+    &lt;NetStandardImplicitPackageVersion&gt;1.6.0&lt;/NetStandardImplicitPackageVersion&gt;
+    &lt;RuntimeFrameworkVersion&gt;1.0.4&lt;/RuntimeFrameworkVersion&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;DotNetCliToolReference Include=&quot;dotnet-stdocs&quot; Version=&quot;1.0.0-alpha-442&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
 <p>Once that's in place, you can run the <code>dotnet stdocs new</code> command to seed the very basic structure that
 StorytellerDocGen needs:</p>
 <ul>
