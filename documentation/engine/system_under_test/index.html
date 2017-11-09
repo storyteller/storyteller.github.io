@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.4.0</h3>
+		      	<h3>Storyteller 5.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -137,7 +137,7 @@ to use Storyteller against codebases that don't require any kind of bootstrappin
 release, Storyteller 4.0 adopted a new default strategy to run the system under test in a separate process triggered from
 the <code>dotnet run</code> command. To use this approach, you need to make your Storyteller project a console application, and in
 your <code>Program.Main()</code> entry point, delegate to the new <code>StorytellerAgent</code> class like this:</p>
-<pre><code class="language-csharp">&#xA;public static class Program&#xA;{&#xA;    public static void Main(string[] args)&#xA;    {&#xA;        // If you do not need a custom ISystem&#xA;        StorytellerAgent.Run(args);&#xA;    }&#xA;}&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public static class Program&#xA;{&#xA;    public static int Main(string[] args)&#xA;    {&#xA;        // If you do not need a custom ISystem&#xA;        return StorytellerAgent.Run(args);&#xA;    }&#xA;}&#xA;</code></pre>
 <p>If you had a custom <code>ISystem</code> for your application (named <code>GrammarSystem</code> in this case),
 bootstrapping your application would look like this:</p>
 <pre><code class="language-csharp">&#xA;public static class Program&#xA;{&#xA;    public static void Main(string[] args)&#xA;    {&#xA;        DateTime time = DateTime.MinValue;&#xA;        DateTime.TryParse(&quot;anything&quot;, out time);&#xA;        Console.WriteLine(time);&#xA;&#xA;        DependencyContext.Default.RuntimeLibraries.Each(x =&gt;&#xA;        {&#xA;            Console.WriteLine($&quot;{x.Name}: {x.Version}&quot;);&#xA;        });&#xA;&#xA;&#xA;        // GrammarSystem is a custom ISystem&#xA;        // that &quot;knows&quot; how to bootstrap and&#xA;        // gracefully shut down the system under test&#xA;        StorytellerAgent.Run(args, new GrammarSystem());&#xA;    }&#xA;}&#xA;</code></pre>

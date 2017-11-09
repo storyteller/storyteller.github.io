@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.4.0</h3>
+		      	<h3>Storyteller 5.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -135,7 +135,7 @@
 <pre><code class="language-csharp">&#xA;public interface IConversionProvider&#xA;{&#xA;    // Given the type argument, either return a&#xA;    // Func that can parse a string into that Type&#xA;    // or return null to let another IConversionProvider&#xA;    // handle this type&#xA;    Func&lt;string, object&gt; ConverterFor(Type type);&#xA;}&#xA;</code></pre>
 <p>Internally, Storyteller treats all the conversion providers as a <a href="http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">chain of responsibility</a> such that the first provider that &quot;knows&quot; how to handle a type provides the actual conversion strategy as a simple <code>Func&lt;string, object&gt;</code> func. User supplied providers are evaluated before the built in providers.</p>
 <p>A sample provider is the <code>EnumerationConversion</code> taken from the Storyteller code itself that handles any .Net Enumeration type:</p>
-<pre><code class="language-csharp">&#xA;public class EnumerationConversion : IConversionProvider&#xA;{&#xA;    public Func&lt;string, object&gt; ConverterFor(Type type)&#xA;    {&#xA;        if (type.IsEnum)&#xA;        {&#xA;            return x =&gt; Enum.Parse(type, x);&#xA;        }&#xA;&#xA;        return null;&#xA;    }&#xA;}&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public class EnumerationConversion : IConversionProvider&#xA;{&#xA;    public Func&lt;string, object&gt; ConverterFor(Type type)&#xA;    {&#xA;        if (type.GetTypeInfo().IsEnum)&#xA;        {&#xA;            return x =&gt; Enum.Parse(type, x);&#xA;        }&#xA;&#xA;        return null;&#xA;    }&#xA;}&#xA;</code></pre>
 <h2 id="runtime-conversions">Runtime Conversions</h2>
 <div class="alert alert-info" role="alert">
 <p>Internally, Storyteller can apply the non-runtime conversions as a kind of &quot;warmup&quot; task to get a specification ready to execute before passing control to the actual specification engine. This was done as a performance optimization in the 3.0 release because of throughput issues in a very large project using an older version. Runtime conversions have to be delayed until the specification is executing, so there is a small performance penalty.</p>

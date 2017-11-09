@@ -76,7 +76,7 @@
 		      <!--left-->
 
 		      <div class="col-md-3" id="leftCol">
-		      	<h3>Storyteller 4.4.0</h3>
+		      	<h3>Storyteller 5.0.0</h3>
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
@@ -135,7 +135,7 @@ project files or the new MSBuild file formats with Visual Studio 2017. This sect
 <li>In the <code>Program.Main()</code> entry point of your Storyteller specification project, use the <code>StorytellerAgent</code> class to connect
 your system under test to the Storyteller engine with code like this:</li>
 </ol>
-<pre><code class="language-csharp">&#xA;public static class Program&#xA;{&#xA;    public static void Main(string[] args)&#xA;    {&#xA;        // If you do not need a custom ISystem&#xA;        StorytellerAgent.Run(args);&#xA;    }&#xA;}&#xA;</code></pre>
+<pre><code class="language-csharp">&#xA;public static class Program&#xA;{&#xA;    public static int Main(string[] args)&#xA;    {&#xA;        // If you do not need a custom ISystem&#xA;        return StorytellerAgent.Run(args);&#xA;    }&#xA;}&#xA;</code></pre>
 <p>For more complex <a href="https://en.wikipedia.org/wiki/System_under_test">system under test's</a>, you will probably want to use a custom <code>ISystem</code> like this:</p>
 <pre><code class="language-csharp">&#xA;public static class Program&#xA;{&#xA;    public static void Main(string[] args)&#xA;    {&#xA;        DateTime time = DateTime.MinValue;&#xA;        DateTime.TryParse(&quot;anything&quot;, out time);&#xA;        Console.WriteLine(time);&#xA;&#xA;        DependencyContext.Default.RuntimeLibraries.Each(x =&gt;&#xA;        {&#xA;            Console.WriteLine($&quot;{x.Name}: {x.Version}&quot;);&#xA;        });&#xA;&#xA;&#xA;        // GrammarSystem is a custom ISystem&#xA;        // that &quot;knows&quot; how to bootstrap and&#xA;        // gracefully shut down the system under test&#xA;        StorytellerAgent.Run(args, new GrammarSystem());&#xA;    }&#xA;}&#xA;</code></pre>
 <p>See <a href="/documentation/engine/system_under_test">Connecting Storyteller to your System</a> for more information.</p>
