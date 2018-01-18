@@ -100,6 +100,14 @@
 <div class="alert alert-info">There will be a "dotnet test" adapter for Storyteller in the VS 2017 timeframe that will make the following samples mostly unnecessary, but we're waiting for more VS 2017 adoption and stabilization.</div>
 <p>Storyteller specifications will fail and there will be times when you're really going to want to be able to debug through your code while a Storyteller specification is running. While you can always attach a debugger to the running system under test when
 the Storyteller UI is running, it's a faster feedback cycle to be able to just start and run your specification from whatever IDE you are using.</p>
+<h2 id="run-single-spec-in-storyteller-5.0">Run Single Spec in Storyteller 5.0</h2>
+<p>If you're developing with Visual Studio.Net or JetBrains Rider, you can pass the full path of the specification copied from
+the Specification editor and use that as an argument to the console app to run a single specification or suite:</p>
+<pre><code>dotnet run -- run &quot;suite / specification&quot;
+</code></pre>
+<p>Do note that the specification path can accept spaces around the &quot;/&quot; characters, so you can copy and paste the specification path
+directly from the specification editor.</p>
+<h2 id="storytellerrunner">StorytellerRunner</h2>
 <div class="alert alert-info">In all cases, the code shown in this topic must be contained within your Storyteller specification project.</div>
 <p>To that end, Storyteller 4.1 (re)introduces the <code>StorytellerRunner</code> class that you can use to execute Storyteller specifications from the IDE. If your Storyteller specification project does not have any kind of custom <code>ISystem</code> (i.e., you kick it off with <code>StorytellerAgent.Run(args)</code>), you can use this syntax:</p>
 <pre><code class="language-csharp">&#xA;public void run_spec()&#xA;{&#xA;    // There is an optional argument in this method to give&#xA;    // Storyteller a hint about where the project root folder&#xA;    // is, but in most cases it should be able to figure that&#xA;    // out on its own&#xA;    using (var runner = StorytellerRunner.Basic())&#xA;    {&#xA;        // run one spec by its path as shown in the UI.&#xA;        // You can just copy/paste the full spec path&#xA;        // from the spec editor page in the UI&#xA;        var results = runner.Run(&quot;Arrays / Use an array argument&quot;);&#xA;        Console.WriteLine(results.Counts);&#xA;&#xA;        // You can open the results in a browser window&#xA;        runner.OpenResultsInBrowser();&#xA;&#xA;        // You can write the results to a file&#xA;        runner.WriteResultsDocument(&quot;results.htm&quot;);&#xA;&#xA;        // Run all the specifications in the project&#xA;        runner.RunAll(TimeSpan.FromMinutes(2));&#xA;    }&#xA;}&#xA;</code></pre>

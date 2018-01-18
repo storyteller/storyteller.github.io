@@ -110,13 +110,40 @@ have changed</div>
 <li><a href="/documentation/ui">The Specification Editor and Interactive Runner</a></li>
 </ul>
 <p>If you prefer to just see working code, take a look at the <a href="https://github.com/storyteller/quickstarts">Storyteller Quickstart repository</a> to see minimal
-Storyteller setups for projects using the <a href="https://docs.microsoft.com/en-us/dotnet/articles/core/tools/">dotnet CLI</a> or .Net 4.6 projects using the classic *.csproj file format.</p>
+Storyteller setups for projects using Netstandard2 applications with the <a href="https://docs.microsoft.com/en-us/dotnet/articles/core/tools/">dotnet CLI</a> or .Net 4.6 projects using the classic *.csproj file format.</p>
+<p>You can find Storyteller 5 used in the <a href="http://github.com/jasperfx/jasper">Jasper open source project</a>.</p>
 <p>You can also find Storyteller 4 used in these open source projects:</p>
 <ul>
 <li><a href="https://github.com/JasperFx/marten">Marten</a></li>
 <li><a href="https://github.com/JasperFx/alba">Alba</a></li>
 </ul>
-<p>In all cases, Storyteller consists of two logical parts:</p>
+<h2 id="storyteller-5.0">Storyteller 5.0</h2>
+<p>For Netstandard 2 projects using Visual Studio.Net 2017 and the dotnet cli, we strongly recommend using Storyteller 5.0.</p>
+<p>To get started on a new Storyteller 5.0 specification project, this is the minimal csproj file with the correct references
+and the <code>dotnet storyteller</code> command line setup. Just save exactly this text as <code>MYPROJECT.csproj</code> where &quot;MYPROJECT&quot; is the name
+you want to use for your new Storyteller specification project.</p>
+<pre><code>&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;netcoreapp2.0&lt;/TargetFramework&gt;
+    &lt;OutputType&gt;EXE&lt;/OutputType&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;DotNetCliToolReference Include=&quot;dotnet-storyteller&quot; Version=&quot;5.0.0&quot; /&gt;
+  &lt;/ItemGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;StoryTeller&quot; Version=&quot;5.0.0&quot; /&gt;
+  &lt;/ItemGroup&gt;
+&lt;/Project&gt;
+</code></pre>
+<p>See the <a href="https://github.com/storyteller/quickstarts/tree/master/dotnet-cli">updated quickstart project for dotnet cli usage</a> as well.</p>
+<p>From the command line in your project directory, you now have two commands (after running <code>dotnet restore</code> at least once):</p>
+<ol>
+<li><code>dotnet run</code> -- runs all the specifications in the console. This is what you'll
+use in your continuous integration builds. See <a href="/documentation/using/ci">Integration with Continuous Integration</a> for more information on all the sub commands.</li>
+<li><code>dotnet storyteller</code> -- opens the Storyteller specification editor application for your project. See <a href="/documentation/ui">The Specification Editor and Interactive Runner</a> for more information</li>
+</ol>
+<h2 id="storyteller-3-4">Storyteller 3 &amp; 4</h2>
+<p>In Storyteller 3.0 and 4.0, it consists of two logical parts:</p>
 <ol>
 <li>The actual Storyteller library you need to reference in order to write specifications</li>
 <li>A command line tool that runs Storyteller specifications and provides the interactive specification website tool
